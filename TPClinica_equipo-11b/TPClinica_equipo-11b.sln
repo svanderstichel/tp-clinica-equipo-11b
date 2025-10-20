@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-clinica", "web-clinica\web-clinica.csproj", "{936C8C35-A7BC-4B65-8CE4-86279AEFFDDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dominio", "dominio\dominio.csproj", "{A3CDE7FD-62BF-49E5-8961-4A7D297317F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "negocio", "negocio\negocio.csproj", "{D0128786-35D7-46AA-BB4A-A1BB82CE2AEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{936C8C35-A7BC-4B65-8CE4-86279AEFFDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{936C8C35-A7BC-4B65-8CE4-86279AEFFDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{936C8C35-A7BC-4B65-8CE4-86279AEFFDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{936C8C35-A7BC-4B65-8CE4-86279AEFFDDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CDE7FD-62BF-49E5-8961-4A7D297317F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CDE7FD-62BF-49E5-8961-4A7D297317F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CDE7FD-62BF-49E5-8961-4A7D297317F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CDE7FD-62BF-49E5-8961-4A7D297317F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0128786-35D7-46AA-BB4A-A1BB82CE2AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0128786-35D7-46AA-BB4A-A1BB82CE2AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0128786-35D7-46AA-BB4A-A1BB82CE2AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0128786-35D7-46AA-BB4A-A1BB82CE2AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDD16E1D-A46A-4E87-900A-68C18F0CA1D2}
+	EndGlobalSection
+EndGlobal
