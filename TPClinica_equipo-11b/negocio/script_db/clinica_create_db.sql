@@ -9,7 +9,7 @@ CREATE TABLE Paciente (
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
-    Documento VARCHAR(20) NOT NULL,
+    DNI VARCHAR(20) NOT NULL,
     Telefono VARCHAR(20),
     FechaNacimiento DATE
 );
@@ -30,7 +30,12 @@ CREATE TABLE Especialidad (
     Nombre VARCHAR(100) NOT NULL,
     Descripcion VARCHAR(200)
 );
-
+-- ObraSocial
+CREATE TABLE ObraSocial (
+    IdObraSocial INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(200)
+);
 -- MedicoEspecialidad (relación muchos a muchos)
 CREATE TABLE MedicoEspecialidad (
     IdMedicoEspecialidad INT PRIMARY KEY IDENTITY(1,1),
@@ -43,11 +48,9 @@ CREATE TABLE MedicoEspecialidad (
 -- TurnoTrabajo
 CREATE TABLE TurnoTrabajo (
     IdTurnoTrabajo INT PRIMARY KEY IDENTITY(1,1),
-    IdMedico INT NOT NULL,
-    DiaSemana VARCHAR(20) NOT NULL,
+    DiasLaborales VARCHAR(100) NOT NULL,
     HoraEntrada TIME NOT NULL,
     HoraSalida TIME NOT NULL,
-    FOREIGN KEY (IdMedico) REFERENCES Medico(IdMedico)
 );
 
 

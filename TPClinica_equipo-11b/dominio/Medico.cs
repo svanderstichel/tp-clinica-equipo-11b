@@ -14,9 +14,7 @@ namespace dominio
         public string Email { get; set; }
         public string Matricula { get; set; }
         public string Telefono { get; set; }
-        public string Email { get; set; }
-       
-
-
+        public List<Especialidad> Especialidad { get; set; }
+        public TurnoTrabajo TurnoTrabajo { get; set; }
     }
 }
