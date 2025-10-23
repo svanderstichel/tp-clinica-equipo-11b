@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class Especialidad
+    public class ObraSocial
     {
-        public int IdEspecialidad { get; set; }
+        public int IdObraSocial { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
     }
