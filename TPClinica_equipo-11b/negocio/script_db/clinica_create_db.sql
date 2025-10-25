@@ -25,17 +25,10 @@ CREATE TABLE Paciente (
 -- TurnoTrabajo
 CREATE TABLE TurnoTrabajo (
     IdTurnoTrabajo INT PRIMARY KEY IDENTITY(1,1),
---    DiasLaborales VARCHAR(100) NOT NULL,
+    DiasLaborales VARCHAR(100) NOT NULL, -- En la capa de dominio los dias de la semana se representan como un array de int. Ejemplo: lunes a viernes [1,2,3,4,5];
     HoraEntrada TIME NOT NULL,
     HoraSalida TIME NOT NULL,
-        CONSTRAINT CK_TurnoTrabajo_Horario CHECK (HoraSalida > HoraEntrada)
-);
-
-CREATE TABLE TurnoTrabajoDias (
-    IdTurnoTrabajo INT NOT NULL,
-    DiaSemana      TINYINT NOT NULL CHECK (DiaSemana BETWEEN 1 AND 7),
-    PRIMARY KEY (IdTurnoTrabajo, DiaSemana),
-    CONSTRAINT FK_TurnoTrabajoDias_TT FOREIGN KEY (IdTurnoTrabajo) REFERENCES dbo.TurnoTrabajo(IdTurnoTrabajo)
+    CONSTRAINT CK_TurnoTrabajo_Horario CHECK (HoraSalida > HoraEntrada)
 );
 
 -- Especialidad
@@ -66,11 +59,6 @@ CREATE TABLE MedicoEspecialidad (
     CONSTRAINT UQ_MedicoEspecialidad UNIQUE (IdMedico, IdEspecialidad)
 );
 
-CREATE TABLE EstadoTurno (
-    IdEstado INT PRIMARY KEY IDENTITY(1,1),
-    Nombre VARCHAR(20) NOT NULL UNIQUE
-);
-
 -- Turno
 CREATE TABLE Turno (
     IdTurno INT PRIMARY KEY IDENTITY(1,1),
@@ -80,12 +68,11 @@ CREATE TABLE Turno (
     Fecha DATE NOT NULL,
     Hora TIME NOT NULL,
     IdEstado INT NOT NULL,
-    --Estado VARCHAR(20) NOT NULL, -- Nuevo, Reprogramado, Cancelado, NoAsistió, Cerrado
+    Estado INT NOT NULL, -- Nuevo, Reprogramado, Cancelado, NoAsistió, Cerrado
     Observaciones VARCHAR(500),
     CONSTRAINT FK_Turno_Paciente FOREIGN KEY (IdPaciente) REFERENCES Paciente(IdPaciente),
     CONSTRAINT FK_Turno_Medico FOREIGN KEY (IdMedico) REFERENCES Medico(IdMedico),
     CONSTRAINT FK_Turno_Especialidad FOREIGN KEY (IdEspecialidad) REFERENCES Especialidad(IdEspecialidad),
-    CONSTRAINT FK_IdEstado_EstadoTurno FOREIGN KEY (IdEstado) REFERENCES EstadoTurno(IdEstado)
 );
 
 -- Foreign Keys
@@ -95,18 +82,12 @@ FOREIGN KEY (IdObraSocial) REFERENCES ObraSocial(IdObraSocial);
 ALTER TABLE Medico ADD CONSTRAINT FK_Medico_TurnoTrabajo
 FOREIGN KEY (IdTurnoTrabajo) REFERENCES TurnoTrabajo(IdTurnoTrabajo);
 
--- Rol de Usuario
-CREATE TABLE Rol(
-    IdRol INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL UNIQUE
-);
 -- Usuarios del sistema
 CREATE TABLE Usuario (
     IdUsuario INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(20) NOT NULL,
     Pass VARCHAR(20) NOT NULL,
-    IdRol          INT NOT NULL,
-    CONSTRAINT FK_Usuario_Rol FOREIGN KEY (IdRol) REFERENCES Rol(IdRol)
+    Tipo INT NOT NULL
 );
 
 
