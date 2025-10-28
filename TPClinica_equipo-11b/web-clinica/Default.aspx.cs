@@ -13,5 +13,15 @@ namespace web_clinica
         {
 
         }
+
+        protected void btnIngresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Perfil.aspx");
+        }
+
+        protected void btnRegistro_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registro.aspx");
+        }
     }
 }
