@@ -16,12 +16,12 @@ namespace web_clinica
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Perfil.aspx");
+            Response.Redirect("Perfil.aspx",false);
         }
 
         protected void btnRegistro_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Registro.aspx");
+            Response.Redirect("Registro.aspx",false);
         }
     }
 }
