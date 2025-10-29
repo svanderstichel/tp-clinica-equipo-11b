@@ -7,16 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace web_clinica
 {
-    public partial class Registro : System.Web.UI.Page
+    public partial class Error : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnRegistrarse_Click(object sender, EventArgs e)
-        {
-
+            if (Session["Error"] != null) 
+                lblError.Text = Session["Error"].ToString();
         }
     }
 }
