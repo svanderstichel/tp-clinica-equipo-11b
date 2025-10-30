@@ -66,7 +66,7 @@ Posee acceso restringido. Puede:
 > *(Agregar imagen o enlace al DER aquí)*  
 > Ejemplo:
 > ```md
-> ![DER - Clínica](./docs/der-clinica.png)
+> <img width="404" height="710" alt="image" src="https://github.com/user-attachments/assets/f4b18ee3-3358-47dd-9604-5dd74eea4949" />
 > ```
 
 ---
