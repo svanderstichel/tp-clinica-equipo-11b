@@ -16,7 +16,7 @@ namespace web_clinica
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Perfil.aspx", false);
         }
     }
 }
