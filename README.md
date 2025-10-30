@@ -62,12 +62,7 @@ Posee acceso restringido. Puede:
 ---
 
 ## 🗂️ DER (Diagrama Entidad-Relación)
-
-> *(Agregar imagen o enlace al DER aquí)*  
-> Ejemplo:
-> ```md
-> ![DER - Clínica](./docs/der-clinica.png)
-> ```
+<img width="404" height="710" alt="image" src="https://github.com/user-attachments/assets/d043393b-8c0c-421b-b6c5-b113c06f53f7" />
 
 ---
 
