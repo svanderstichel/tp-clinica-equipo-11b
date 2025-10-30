@@ -11,43 +11,34 @@ namespace web_clinica
 {
 
 
-    public partial class ObrasSociales
+    public partial class FormListaObrasSociales
     {
 
         /// <summary>
-        /// txtNombre control.
+        /// dgvObraSocial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.GridView dgvObraSocial;
 
         /// <summary>
-        /// txtDescripcion control.
+        /// btnAgregarOS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.Button btnAgregarOS;
 
         /// <summary>
-        /// btnGuardar control.
+        /// btnRegresar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
-
-        /// <summary>
-        /// btnVolver control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolver;
+        protected global::System.Web.UI.WebControls.Button btnRegresar;
     }
 }
