@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
+using Microsoft.SqlServer.Server;
 
 namespace negocio
 {
     public class EspecialidadNegocio
     {
 
-        public List<Especialidad> ListarEspecialidades()
+        public List<Especialidad> ListarEspecialidades(string id = "" )
         {
             List<Especialidad> lista = new List<Especialidad>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad");
-
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad ");
+            
             try
             {
                 datos.ejecutarLectura();
+
+                
 
                 while (datos.Lector.Read())
                 {
@@ -57,6 +60,39 @@ namespace negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public Especialidad BuscarporID (string id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            datos.SetearConsulta("SELECT Nombre, Descripcion from Especialidad where IdEspecialidad=@IdEspecialidad");
+            datos.setearParametro("@IdEspecialidad", id);
+
+            try
+            {
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Especialidad especialidad = new Especialidad();
+
+                    //especialidad.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
+                   especialidad.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    especialidad.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
+                    
+
+                    return especialidad;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw (ex);
             }
             finally
             {

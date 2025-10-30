@@ -75,6 +75,7 @@
     <Content Include="Especialidades.aspx" />
     <Content Include="FormListaObrasSociales.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="ListaEspecialidad.aspx" />
     <Content Include="Medicos.aspx" />
     <Content Include="ObrasSociales.aspx" />
     <Content Include="Pacientes.aspx" />
@@ -115,6 +116,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ListaEspecialidad.aspx.cs">
+      <DependentUpon>ListaEspecialidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaEspecialidad.aspx.designer.cs">
+      <DependentUpon>ListaEspecialidad.aspx</DependentUpon>
     </Compile>
     <Compile Include="Medicos.aspx.cs">
       <DependentUpon>Medicos.aspx</DependentUpon>
