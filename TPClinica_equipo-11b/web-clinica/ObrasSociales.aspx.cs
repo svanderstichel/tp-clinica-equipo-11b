@@ -19,7 +19,7 @@ namespace web_clinica
 
         protected void btnAgregarOS_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CargarObraSocial.aspx", false);
+            Response.Redirect("CrearObraSocial.aspx", false);
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)

@@ -27,7 +27,7 @@ namespace web_clinica
                 nueva.Descripcion = txtDescripcion.Text;
 
                 negocio.Agregar(nueva);
-                Response.Redirect("Pacientes.aspx", false);
+                Response.Redirect("ObrasSociales.aspx", false);
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace web_clinica
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Pacientes.aspx", false);
+            Response.Redirect("ObrasSociales.aspx", false);
         }
     }
 }

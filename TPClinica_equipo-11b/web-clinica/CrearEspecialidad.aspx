@@ -29,7 +29,7 @@
              <asp:Button Text="Guardar" runat="server" ID="btnGuardar2" CssClass="btn btn-primary w-100" OnClick="btnGuardar2_Click"/>
              
         
-             <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" />
+             <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" CausesValidation="false" />
              
          </div>
      </div>
