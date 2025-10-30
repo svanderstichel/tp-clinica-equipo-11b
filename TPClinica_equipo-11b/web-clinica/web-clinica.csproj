@@ -72,12 +72,12 @@
     <Content Include="Content\icon.svg" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
-    <Content Include="Especialidades.aspx" />
-    <Content Include="FormListaObrasSociales.aspx" />
-    <Content Include="Global.asax" />
-    <Content Include="ListaEspecialidad.aspx" />
-    <Content Include="Medicos.aspx" />
+    <Content Include="CrearEspecialidad.aspx" />
     <Content Include="ObrasSociales.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Especialidades.aspx" />
+    <Content Include="Medicos.aspx" />
+    <Content Include="CrearObraSocial.aspx" />
     <Content Include="Pacientes.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
@@ -100,29 +100,29 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CrearEspecialidad.aspx.cs">
+      <DependentUpon>CrearEspecialidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrearEspecialidad.aspx.designer.cs">
+      <DependentUpon>CrearEspecialidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ObrasSociales.aspx.cs">
+      <DependentUpon>ObrasSociales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ObrasSociales.aspx.designer.cs">
+      <DependentUpon>ObrasSociales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Especialidades.aspx.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Especialidades.aspx.designer.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FormListaObrasSociales.aspx.cs">
-      <DependentUpon>FormListaObrasSociales.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FormListaObrasSociales.aspx.designer.cs">
-      <DependentUpon>FormListaObrasSociales.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ListaEspecialidad.aspx.cs">
-      <DependentUpon>ListaEspecialidad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ListaEspecialidad.aspx.designer.cs">
-      <DependentUpon>ListaEspecialidad.aspx</DependentUpon>
     </Compile>
     <Compile Include="Medicos.aspx.cs">
       <DependentUpon>Medicos.aspx</DependentUpon>
@@ -131,12 +131,12 @@
     <Compile Include="Medicos.aspx.designer.cs">
       <DependentUpon>Medicos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ObrasSociales.aspx.cs">
-      <DependentUpon>ObrasSociales.aspx</DependentUpon>
+    <Compile Include="CrearObraSocial.aspx.cs">
+      <DependentUpon>CrearObraSocial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ObrasSociales.aspx.designer.cs">
-      <DependentUpon>ObrasSociales.aspx</DependentUpon>
+    <Compile Include="CrearObraSocial.aspx.designer.cs">
+      <DependentUpon>CrearObraSocial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pacientes.aspx.cs">
       <DependentUpon>Pacientes.aspx</DependentUpon>

@@ -1,5 +1,4 @@
-﻿using dominio;
-using negocio;
+﻿using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +8,21 @@ using System.Web.UI.WebControls;
 
 namespace web_clinica
 {
-    public partial class ObrasSociales : System.Web.UI.Page
+    public partial class FormListaObrasSociales : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ObraSocialNegocio negocio = new ObraSocialNegocio();
+            dgvObraSocial.DataSource = negocio.ListarObrasSociales();
+            dgvObraSocial.DataBind();
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnAgregarOS_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ObraSocial nueva = new ObraSocial();
-                ObraSocialNegocio negocio = new ObraSocialNegocio();
-
-                nueva.Nombre = txtNombre.Text;
-                nueva.Descripcion = txtDescripcion.Text;
-
-                negocio.Agregar(nueva);
-                Response.Redirect("Pacientes.aspx", false);
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex);
-                throw;
-            }
+            Response.Redirect("CargarObraSocial.aspx", false);
         }
 
-        protected void btnCancelar_Click(object sender, EventArgs e)
+        protected void btnRegresar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Pacientes.aspx", false);
         }

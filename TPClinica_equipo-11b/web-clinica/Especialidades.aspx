@@ -1,40 +1,29 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Especialidades.aspx.cs" Inherits="web_clinica.Especialidades" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Especialidades.aspx.cs" Inherits="web_clinica.ListaEspecialidad" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <hr />
+<div class="row">
+    <div class="col">
+        <h1>Lista de especialidades</h1>
+        <asp:GridView runat="server" ID="dgvEspecialidad" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" 
+            DataKeyNames="IdEspecialidad" OnSelectedIndexChanged="dgvEspecialidad_SelectedIndexChanged"
+            OnPageIndexChanging="dgvEspecialidad_PageIndexChanging"
+            AllowPaging="true" PageSize="5" >
+            <Columns>
+                <asp:BoundField HeaderText="Nombre de la Especialidad" DataField="Nombre" />
+                <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                <asp:CommandField HeaderText="Accion" ShowSelectButton="true"  SelectText="✍️" />   
+                 
+            </Columns>
+        </asp:GridView>
+        <asp:Button Text="Agregar" runat="server" ID="btnAgregarEsp" CssClass="btn btn-primary" OnClick="btnAgregarEsp_Click"/>
+       
+        <asp:Button Text="Volver" runat="server" ID="btnRegresar" cssClass="btn btn-secondary"  OnClick="btnRegresar_Click"/>
+    
 
-
-
-       <hr />
-
-             <div class="d-flex justify-content-center align-items-start pt-5">
-     <div class="card shadow p-4" style="width: 22rem;">
-         <h4 class="text-center mb-4">Agregar Especialidad</h4>
-
-         <div class="mb-3">
-             <label for="txtNombre" class="form-label">Nombre</label>
-            
-             <asp:TextBox runat="server"  ID="TextBox1" cssClass="form-control" placeholder="Ingrese el nombre"></asp:TextBox>
-             <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="El nombre es requerido" ControlToValidate="TextBox1" runat="server" />
-         </div>
-         <div class="mb-3">
-             <label for="txtDescripcion" class="form-label">Descripción</label>
-             <asp:TextBox runat="server" ID="TextBox2" CssClass="form-control" TextMode="MultiLine" Rows="4" placeholder="Ingrese una descripción..." ></asp:TextBox>
-            <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="la descripcion es requerida" ControlToValidate="TextBox2" runat="server"/>
-         </div>
-
-         <div class="mb-3 d-grid gap-2">
-
-             <asp:Button Text="Guardar" runat="server" ID="btnGuardar2" CssClass="btn btn-primary w-100" OnClick="btnGuardar2_Click"/>
-             
-        
-             <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" />
-             
-         </div>
-     </div>
- </div>
-
+    </div>
+</div>
 
 
 </asp:Content>
