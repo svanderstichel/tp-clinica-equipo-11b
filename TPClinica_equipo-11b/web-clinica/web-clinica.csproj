@@ -70,6 +70,7 @@
     <Content Include="Content\error.png" />
     <Content Include="Content\github.svg" />
     <Content Include="Content\icon.svg" />
+    <Content Include="CrearMedico.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="CrearEspecialidad.aspx" />
@@ -86,6 +87,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrearMedico.aspx.cs">
+      <DependentUpon>CrearMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrearMedico.aspx.designer.cs">
+      <DependentUpon>CrearMedico.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
