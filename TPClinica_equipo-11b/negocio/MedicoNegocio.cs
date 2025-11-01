@@ -15,8 +15,8 @@ namespace negocio
             List<Medico> lista = new List<Medico>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo  FROM Medico ");
-           // datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo, IdEspecialidad FROM Medico ");
+            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo  FROM Medico ");
+           //datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo, IdEspecialidad FROM Medico ");
             try
             {
                 datos.ejecutarLectura();
@@ -29,10 +29,12 @@ namespace negocio
                     esp.IdMedico= (int)datos.Lector["IdMedico"];
                     esp.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     esp.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    esp.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     esp.Email = Convert.ToString(datos.Lector["Email"]);
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
                     esp.TurnoTrabajo.IdTurnoTrabajo = (int)datos.Lector["IdTurnoTrabajo"];
-                    //esp.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
+                    
+                   
 
                     lista.Add(esp);
                 }
@@ -54,7 +56,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido, Matricula, Email, Telefono, IdTurnoTrabajo) VALUES (   '@Nombre',    '@Apellido',    '@Matricula',     '@Email',     '@Telefono'    ;)");
+                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido,Matricula, Email, Telefono, IdTurnoTrabajo) VALUES (   @Nombre,    @Apellido,    @Matricula,     @Email,     @Telefono, @IdTurnoTrabajo)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Apellido", nueva.Apellido);
                 datos.setearParametro("@Matricula", nueva.Matricula);

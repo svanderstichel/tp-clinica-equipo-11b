@@ -15,7 +15,23 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+           
 
+
+            if (!IsPostBack)
+            {
+                //Cargar Turnos de Trabajo
+                TurnoTrabajoNegocio turnoNegocio = new TurnoTrabajoNegocio();
+                List<TurnoTrabajo> listaTurnos = turnoNegocio.Listar();
+
+                ddlTurnoTrabajo.DataSource = listaTurnos;
+                ddlTurnoTrabajo.DataTextField = "HoraEntrada";
+                ddlTurnoTrabajo.DataValueField = "IdTurnoTrabajo";
+                ddlTurnoTrabajo.DataBind();
+            }
+
+
+            
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -23,7 +39,7 @@ namespace web_clinica
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            // alta de una nueva especialidad en la BD
+            // alta de una nuevo medico en la BD
             try
             {
                 Medico nueva = new Medico();
@@ -31,15 +47,19 @@ namespace web_clinica
 
                 nueva.Nombre = textBox1.Text;
                 nueva.Apellido = textBox2.Text;
+                nueva.Matricula = textBox6.Text;
                 nueva.Email = textBox3.Text;
-                nueva.Telefono= textBox4.Text;
-                nueva.Matricula= textBox6.Text;
-                //nueva.TurnoTrabajo.IdTurnoTrabajo = textBox5;
+                nueva.Telefono = textBox4.Text;
+                
+                //Asignar el ID del Turno SELECCIONADO**
+                nueva.TurnoTrabajo = new TurnoTrabajo();
+                nueva.TurnoTrabajo.IdTurnoTrabajo = int.Parse(ddlTurnoTrabajo.SelectedValue);
 
 
 
 
                 negocio.Agregar(nueva);
+                
                 Response.Redirect("CrearMedico.aspx", false);
             }
             catch (Exception ex)
