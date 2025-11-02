@@ -25,7 +25,7 @@ namespace web_clinica
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx", false);
+            Response.Redirect("Especialidades.aspx", false);
         }
 
         protected void dgvEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
