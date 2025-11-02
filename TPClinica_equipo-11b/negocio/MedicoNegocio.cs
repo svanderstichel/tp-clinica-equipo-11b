@@ -32,7 +32,9 @@ namespace negocio
                     esp.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     esp.Email = Convert.ToString(datos.Lector["Email"]);
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
+                    esp.TurnoTrabajo = new dominio.TurnoTrabajo();
                     esp.TurnoTrabajo.IdTurnoTrabajo = (int)datos.Lector["IdTurnoTrabajo"];
+                    
                     
                    
 

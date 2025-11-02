@@ -35,7 +35,7 @@ namespace web_clinica
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CrearMedico.aspx", false);
+            Response.Redirect("Medicos.aspx", false);
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -60,7 +60,7 @@ namespace web_clinica
 
                 negocio.Agregar(nueva);
                 
-                Response.Redirect("CrearMedico.aspx", false);
+                Response.Redirect("Medicos.aspx", false);
             }
             catch (Exception ex)
             {

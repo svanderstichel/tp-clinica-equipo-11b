@@ -70,7 +70,7 @@ namespace web_clinica
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CrearEspecialidad.aspx", false);
+            Response.Redirect("Especialidades.aspx", false);
         }
 
         
@@ -87,7 +87,7 @@ namespace web_clinica
                 nueva.Descripcion = TextBox2.Text;
 
                 negocio.Agregar(nueva);
-                Response.Redirect("CrearEspecialidad.aspx", false);
+                Response.Redirect("Especialidades.aspx", false);
             }
             catch (Exception ex)
             {
