@@ -87,7 +87,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("UPDATE Medico SET Nombre = '@Nombre', Apellido = '@Apellido', Matricula = '@Matricula',Email = '@Email',Telefono= '@Telefono',IdTurnoTrabajo = '@IdTurnoTrabajo' WHERE IdMedico = '@IdMedico'");
+                datos.SetearConsulta("UPDATE Medico SET Nombre = @Nombre, Apellido = @Apellido, Matricula = @Matricula,Email = @Email,Telefono= @Telefono,IdTurnoTrabajo = @IdTurnoTrabajo WHERE IdMedico = @IdMedico");
                 datos.setearParametro("@IdMedico", medico.IdMedico);
                 datos.setearParametro("@Nombre", medico.Nombre);
                 datos.setearParametro("@Apellido", medico.Apellido);

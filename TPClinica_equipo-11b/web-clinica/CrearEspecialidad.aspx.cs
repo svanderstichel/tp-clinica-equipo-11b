@@ -17,63 +17,61 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
 
-   
         {
-                    
-
- 
-            //txtIdEspecialidad.Enabled = false;
-         /* try
-            { 
-                //guardo el dato del id si esta viajando
-                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString(): "" ;
-
+                //txtIdEspecialidad.Enabled = false;
+                try
+                {
+                    //guardo el dato del id si esta viajando en un elemento terciario
+                    //string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                    string id = Request.QueryString["id"];
                 // si es diferente de null entonces lo cargo para modificar
-                if (id !=null)
-               {
 
-                    //busco si ya existe en la db por id
-                    EspecialidadNegocio negocio = new EspecialidadNegocio();
-                    Especialidad existe = new Especialidad();
-                    existe = negocio.BuscarporID(id);
-
-                    //EspecialidadNegocio negocio = new EspecialidadNegocio();
-                    //List<Especialidad> lista = negocio.ListarEspecialidades(id);
-                    //Especialidad especialidad = lista[0];
-
-
-
-                    //si existe lo actualizo, sino lo agrego
-                    if (existe != null)
+                if (!IsPostBack)
+                {
+                    if (!string.IsNullOrEmpty(id)) // Si hay ID en la URL, es MODIFICACIÓN
                     {
-                        negocio.Actualizar(existe);
+                        EspecialidadNegocio negocio = new EspecialidadNegocio();
+                        Especialidad especialidad = negocio.ListarEspecialidades(id)[0];
+
+                        TextBox1.Text = especialidad.Nombre;
+                        TextBox2.Text = especialidad.Descripcion;
+
+                        //  Guardar el ID en el HiddenField
+                        hfIdEspecialidad.Value = id;
                     }
-                    else
+
+                    /*if (id != null)
                     {
-                        negocio.Agregar(existe);
-                   }
+
+                        EspecialidadNegocio negocio = new EspecialidadNegocio();
+                        Especialidad especialidad = negocio.ListarEspecialidades(id)[0];
+
+                        TextBox1.Text = especialidad.Nombre;
+                        TextBox2.Text = especialidad.Descripcion;
 
 
+                    }*/
+                }
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex);
+                    throw;
+                    //redirigir a pantalla de error
                 }
             }
-            catch (Exception ex)
-            {
-               Session.Add("Error", ex);
-                throw;
-                //redirigir a pantalla de error
-            }*/
-       
-        }
 
-               
-       
+        
+
+
+
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Especialidades.aspx", false);
         }
 
-        
+
 
         protected void btnGuardar2_Click(object sender, EventArgs e)
         {
@@ -83,19 +81,32 @@ namespace web_clinica
                 Especialidad nueva = new Especialidad();
                 EspecialidadNegocio negocio = new EspecialidadNegocio();
 
+
                 nueva.Nombre = TextBox1.Text;
                 nueva.Descripcion = TextBox2.Text;
 
-                negocio.Agregar(nueva);
+                if (!string.IsNullOrEmpty(hfIdEspecialidad.Value))
+                {
+                    // ASIGNAR EL ID AL OBJETO ANTES DE ACTUALIZAR
+                    nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
+
+                    negocio.Actualizar(nueva);
+                }
+                else // Si el HiddenField está vacío, es Agregar
+                {
+
+                    negocio.Agregar(nueva);
+                }
+                
                 Response.Redirect("Especialidades.aspx", false);
-            }
+        }
             catch (Exception ex)
             {
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
             }
-        }
+}
     }
 }
         
