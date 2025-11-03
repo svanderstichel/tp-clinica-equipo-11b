@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +18,31 @@ namespace web_clinica
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Perfil.aspx",false);
+            try
+            {
+                UsuarioNegocio datos = new UsuarioNegocio();
+
+                string email = txtEmail.Text;
+                string pass = txtPassword.Text;
+
+                if(datos.LoginUsuario(email, pass)){
+                    Usuario usuario = datos.LeerUsuario(email);
+                    Session.Add("Usuario", usuario);
+                    Response.Redirect("Perfil.aspx", false);
+                }
+                else
+                {
+                    Session.Add("Error", "Usuario o contraseña incorrectos.");
+                    Response.Redirect("Error.aspx",false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+            
         }
 
         protected void btnRegistro_Click(object sender, EventArgs e)

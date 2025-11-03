@@ -85,7 +85,7 @@ FOREIGN KEY (IdTurnoTrabajo) REFERENCES TurnoTrabajo(IdTurnoTrabajo);
 -- Usuarios del sistema
 CREATE TABLE Usuario (
     IdUsuario INT PRIMARY KEY IDENTITY(1,1),
-    Email VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) NOT NULL UNIQUE,
     Nombre VARCHAR(20) NOT NULL,
     Apellido VARCHAR(20) NOT NULL,
     Pass VARCHAR(20) NOT NULL,

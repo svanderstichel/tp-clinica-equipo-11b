@@ -22,14 +22,16 @@
                 <div class="mb-3">
                     <label for="disabledSelect" class="form-label">Rol</label>
                     <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-select">
-                        <asp:ListItem>Médico</asp:ListItem>
-                        <asp:ListItem>Recepcionista</asp:ListItem>
-                        <asp:ListItem>Administrador</asp:ListItem>
+                        <asp:ListItem Text="Seleccione rol..." Value="0" />
+                        <asp:ListItem Text="Administrador" Value="1" />
+                        <asp:ListItem Text="Recepcionista" Value="2" />
+                        <asp:ListItem Text="Médico" Value="3" />
+                        <asp:ListItem Text="Paciente" Value="4" />
                     </asp:DropDownList>
 
                 </div>
                 <div class="mb-3">
-                    <label for="inputPassword" class="form-label">Password</label>
+                    <label for="passwordInput" class="form-label">Password</label>
                     <asp:TextBox runat="server" ID="inputPassword" CssClass="form-control" TextMode="Password"></asp:TextBox>
                 </div>
                 <div class="mb-3">
