@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,13 @@ namespace negocio
             List<Especialidad> lista = new List<Especialidad>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad ");
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad  ");
+            if (id != "") {
+
+                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad where IdEspecialidad = @IdEspecialidad ");
+                datos.setearParametro("@IdEspecialidad", id);
+            }
+            
             
             try
             {
@@ -80,7 +87,7 @@ namespace negocio
                 {
                     Especialidad especialidad = new Especialidad();
 
-                    //especialidad.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
+                    especialidad.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
                    especialidad.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     especialidad.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
                     
@@ -107,6 +114,7 @@ namespace negocio
             try
             {
                 datos.SetearConsulta("UPDATE Especialidad SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IdEspecialidad = @IdEspecialidad");
+               
                 datos.setearParametro("@IdEspecialidad", especialidad.IdEspecialidad);
                 datos.setearParametro("@Nombre", especialidad.Nombre);
                 datos.setearParametro("@Descripcion", especialidad.Descripcion);
