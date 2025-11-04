@@ -40,18 +40,18 @@ namespace negocio
 
             try
             {
+                datos.SetearConsulta("UPDATE Usuario SET " +
+                                    "Nombre = @nombre, " +
+                                    "Apellido = @apellido, " +
+                                    "Pass = @pass, " +
+                                    "Tipo = @tipo " +
+                                    "WHERE Email = @email");
+
                 datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@nombre", usuario.Nombre);
                 datos.setearParametro("@apellido", usuario.Apellido);
                 datos.setearParametro("@pass", usuario.Pass);
-                datos.setearParametro("@tipo", usuario.Tipo);
-
-                datos.SetearConsulta("UPDATE Usuario SET " +
-                    "Nombre = @nombre," +
-                    "Apellido = @Apellido," +
-                    "Pass = @pass," +
-                    "Tipo = @tipo" +
-                    "WHERE Email = @email");
+                datos.setearParametro("@tipo", (int)usuario.Tipo);
 
                 datos.ejecutarAccion();
             }
