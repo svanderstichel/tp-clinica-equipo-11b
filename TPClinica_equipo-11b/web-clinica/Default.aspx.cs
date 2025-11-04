@@ -13,7 +13,11 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Usuario"] != null)
+            {
+                lblToast.Text = "Se ha logeado correctamente a la aplicación.";
+                MostrarToast();
+            }
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)
@@ -28,7 +32,9 @@ namespace web_clinica
                 if(datos.LoginUsuario(email, pass)){
                     Usuario usuario = datos.LeerUsuario(email);
                     Session.Add("Usuario", usuario);
-                    Response.Redirect("Perfil.aspx", false);
+                    Response.Redirect("Default.aspx", false);
+
+                    
                 }
                 else
                 {
@@ -49,5 +55,15 @@ namespace web_clinica
         {
             Response.Redirect("Registro.aspx",false);
         }
+        private void MostrarToast()
+        {
+            string script = @"
+                            const toastEl = document.getElementById('" + panelToast.ClientID + @"');
+                            const toast = new bootstrap.Toast(toastEl);
+                            toast.show();";
+
+            ClientScript.RegisterStartupScript(this.GetType(), "mostrarToast", script, true);
+        }
     }
+
 }

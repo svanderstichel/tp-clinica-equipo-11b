@@ -51,6 +51,9 @@ namespace web_clinica
 
                 datos.ModificarUsuario(usuario);
                 Session["Usuario"] = usuario;
+
+                lblToast.Text = "Los cambios se han guardado correctamente.";
+                MostrarToast();
             }
             catch(Exception ex)
             {
@@ -58,5 +61,15 @@ namespace web_clinica
                 Response.Redirect("Error.aspx", false);
             }
         }
+        private void MostrarToast()
+        {
+            string script = @"
+                            const toastEl = document.getElementById('" + panelToast.ClientID + @"');
+                            const toast = new bootstrap.Toast(toastEl);
+                            toast.show();"; 
+
+            ClientScript.RegisterStartupScript(this.GetType(), "mostrarToast", script, true);
+        }
+
     }
 }
