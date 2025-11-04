@@ -8,8 +8,9 @@
             <h4 class="card-title text-center mb-3">Bienvenido a su perfil</h4>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">@</span>
-                <asp:TextBox ID="txtEmapil" runat="server" CssClass="form-control" 
-                    placeholder="correo@ejemplo.com" aria-label="Email" aria-describedby="basic-addon1" />
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" 
+                    placeholder="correo@ejemplo.com" aria-label="Email" aria-describedby="basic-addon1" 
+                    ReadOnly ="true" />
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Nombre</span>
@@ -21,25 +22,32 @@
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"
                     placeholder="Apellido" aria-label="Apellido" aria-describedby="inputGroup-sizing-default" />
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">Email</span>
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"
-                    TextMode="Email" placeholder="correo@ejemplo.com" aria-label="Email" aria-describedby="inputGroup-sizing-default" />
-            </div>
             <div class="input-group mb-4">
                 <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-select">
-                    <asp:ListItem Text="Seleccione rol..." Value="" />
-                    <asp:ListItem Text="Administrador" Value="Admin" />
-                    <asp:ListItem Text="Recepcionista" Value="Recepcionista" />
-                    <asp:ListItem Text="Médico" Value="Medico" />
+                    <asp:ListItem Text="Seleccione rol..." Value="0" />
+                    <asp:ListItem Text="Administrador" Value="1" />
+                    <asp:ListItem Text="Recepcionista" Value="2" />
+                    <asp:ListItem Text="Médico" Value="3" />
+                    <asp:ListItem Text="Paciente" Value="4" />
                 </asp:DropDownList>
             </div>
             <div class="d-flex justify-content-between">
-                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary" />
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar cambios" CssClass="btn btn-primary" />
+                <asp:Button ID="btnPass" runat="server" Text="Cambiar contraseña" CssClass="btn btn-outline-danger" onclick ="btnPass_Click" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar cambios" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
             </div>
+            <div class="toast-container position-fixed bottom-0 end-0 p-5 mb-5">
+                <asp:Panel ID="panelToast" runat="server" CssClass="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <asp:Label ID="lblToast" runat="server"></asp:Label>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </asp:Panel>
+            </div>
+
         </div>
     </div>
-</div>
+    </div>
 
 </asp:Content>

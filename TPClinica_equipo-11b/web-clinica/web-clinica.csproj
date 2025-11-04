@@ -64,6 +64,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CambioPass.aspx" />
     <Content Include="Content\error.png" />
     <Content Include="Content\github.svg" />
     <Content Include="Content\icon.svg" />
@@ -84,6 +90,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CambioPass.aspx.cs">
+      <DependentUpon>CambioPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambioPass.aspx.designer.cs">
+      <DependentUpon>CambioPass.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CrearMedico.aspx.cs">
       <DependentUpon>CrearMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

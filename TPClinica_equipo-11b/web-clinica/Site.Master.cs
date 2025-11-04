@@ -13,5 +13,11 @@ namespace web_clinica
         {
 
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("Usuario");
+            Response.Redirect("Default.aspx", false);
+        }
     }
 }

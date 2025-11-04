@@ -13,23 +13,28 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand">Clínica médica</a>
+                <a class="navbar-brand" href="Default.aspx">Clínica médica</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="d-flex w-100 flex-column flex-lg-row align-items-center">
                         <div class="navbar-nav d-flex flex-column flex-lg-row gap-3">
+                           <% if (Session["Usuario"] != null){ %> 
                             <a class="nav-link active" href="Turnos.aspx">Turnos</a>
+                           <%dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];%>
+                           <% if (usuario.Tipo.ToString() == "Recepcionista" || usuario.Tipo.ToString() == "Administrador"){ %> 
                             <a class="nav-link active" href="Pacientes.aspx">Pacientes</a>
-                            <a class="nav-link active" href="Medicos.aspx">Médicos</a>
+                            <a class="nav-link active" href="Medicos.aspx">Médicos</a> <% } } %>
                         </div>
                         <div class="d-flex gap-2 ms-auto mt-2 mt-lg-0">
-                            <a href="Default.aspx" class="btn btn-primary" role="button">Login</a>
-                            <a href="Perfil.aspx" class="btn btn-outline-light" role="button">Perfil</a>
+                            <% if (Session["Usuario"] == null){ %> <a href="Default.aspx" class="btn btn-primary" role="button">Login</a> <% } %>
+                            <% if (Session["Usuario"] != null){ %> <a href="Perfil.aspx" class="btn btn-outline-light" role="button">Perfil</a> 
+                            <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-danger" Text="Logout" onclick="btnLogout_Click" /><% } %>
                         </div>
                     </div>
                 </div>

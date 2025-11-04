@@ -1,40 +1,43 @@
-﻿using dominio;
-using negocio;
-using System;
+﻿using System;
+using dominio;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using negocio;
 
 namespace web_clinica
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class CambioPass : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] != null)
-            {
-                lblToast.Text = "Se ha logeado correctamente a la aplicación.";
-                MostrarToast();
-            }
+            if (Session["Usuario"] == null) { Response.Redirect("Default.aspx", false); return; }
+            txtEmail.Text = ((Usuario)Session["Usuario"]).Email;
         }
 
-        protected void btnIngresar_Click(object sender, EventArgs e)
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Perfil.aspx", false);
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 UsuarioNegocio datos = new UsuarioNegocio();
 
                 string email = txtEmail.Text;
-                string pass = txtPassword.Text;
+                Usuario usuario = datos.LeerUsuario(email);
+                if(usuario.Pass == txtPassAnterior.Text)
+                {
+                    usuario.Pass = txtPassNueva.Text;
+                    datos.CambiarContraseña(usuario);
 
-                if(datos.LoginUsuario(email, pass)){
-                    Usuario usuario = datos.LeerUsuario(email);
-                    Session.Add("Usuario", usuario);
-                    Response.Redirect("Default.aspx", false);
-
-                    
+                    panelToast.CssClass = "toast align-items-center text-bg-success border-0";
+                    lblToast.Text = "Cambio de contraseña exitoso.";
+                    MostrarToast();
                 }
                 else
                 {
@@ -43,18 +46,12 @@ namespace web_clinica
                     MostrarToast();
                 }
 
-            }
-            catch (Exception ex)
+            } 
+                catch(Exception ex)
             {
                 Session.Add("Error", ex);
                 Response.Redirect("Error.aspx", false);
             }
-            
-        }
-
-        protected void btnRegistro_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Registro.aspx",false);
         }
         private void MostrarToast()
         {
@@ -66,5 +63,4 @@ namespace web_clinica
             ClientScript.RegisterStartupScript(this.GetType(), "mostrarToast", script, true);
         }
     }
-
 }
