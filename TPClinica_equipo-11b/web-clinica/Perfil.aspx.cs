@@ -71,5 +71,9 @@ namespace web_clinica
             ClientScript.RegisterStartupScript(this.GetType(), "mostrarToast", script, true);
         }
 
+        protected void btnPass_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CambioPass.aspx", false);
+        }
     }
 }

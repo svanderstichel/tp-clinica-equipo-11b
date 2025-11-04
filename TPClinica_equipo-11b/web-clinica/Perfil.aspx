@@ -32,7 +32,7 @@
                 </asp:DropDownList>
             </div>
             <div class="d-flex justify-content-between">
-                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary" />
+                <asp:Button ID="btnPass" runat="server" Text="Cambiar contraseña" CssClass="btn btn-outline-danger" onclick ="btnPass_Click" />
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar cambios" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
             </div>
             <div class="toast-container position-fixed bottom-0 end-0 p-5 mb-5">

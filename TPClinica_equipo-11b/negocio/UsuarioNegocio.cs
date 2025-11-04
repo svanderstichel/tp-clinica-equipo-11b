@@ -127,5 +127,28 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public void CambiarContraseña(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta("UPDATE Usuario SET " +
+                                    "Pass = @pass " +
+                                    "WHERE Email = @email");
+                datos.setearParametro("@email", usuario.Email);
+                datos.setearParametro("@pass", usuario.Pass);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
+
 }
