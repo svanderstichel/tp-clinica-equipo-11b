@@ -22,13 +22,16 @@ namespace web_clinica
 
             try
             {
+                TurnoNegocio datos = new TurnoNegocio();
                 Usuario usuario = (Usuario)Session["Usuario"];
                 if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
                 {
-                    TurnoNegocio datos = new TurnoNegocio();
                     dgvTurnos.DataSource = datos.ListarTurnos();
                     dgvTurnos.DataBind();
-
+                }else
+                {
+                    dgvTurnos.DataSource = datos.ListarTurnos(usuario);
+                    dgvTurnos.DataBind();
                 }
             }
             catch(Exception ex)
@@ -36,6 +39,16 @@ namespace web_clinica
                 Session.Add("Error", ex);
                 Response.Redirect("Error.aspx",false);
             }
+        }
+
+        protected void dgvTurnos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idTurno = (int)dgvTurnos.SelectedDataKey.Value;
+        }
+
+        protected void dgvTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int idTurno = (int)dgvTurnos.DataKeys[e.RowIndex].Value;   
         }
     }
 }

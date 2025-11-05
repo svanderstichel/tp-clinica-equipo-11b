@@ -35,7 +35,7 @@ namespace web_clinica
                 datos.CrearUsuario(usuario);
                 datos.LeerUsuario(usuario.Email);
                 Session.Add("Usuario", usuario);
-                Response.Redirect("Perfil.aspx", false);
+                Response.Redirect("Default.aspx", false);
             }
 
             else
