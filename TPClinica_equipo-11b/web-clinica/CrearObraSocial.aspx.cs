@@ -14,6 +14,17 @@ namespace web_clinica
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Request.QueryString["id"] != null)
+            {
+                //obtengo el id de la url
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
+                ObraSocial seleccionada =  temporal.Find(x => x.IdObraSocial == id);
+                //precargo los datos
+                txtNombre.Text = seleccionada.Nombre;
+                txtDescripcion.Text = seleccionada.Descripcion;
+                
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -25,6 +36,11 @@ namespace web_clinica
 
                 nueva.Nombre = txtNombre.Text;
                 nueva.Descripcion = txtDescripcion.Text;
+
+                //me traigo de la sesion la lista de os
+
+                List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
+                temporal.Add(nueva);
 
                 negocio.Agregar(nueva);
                 Response.Redirect("ObrasSociales.aspx", false);
