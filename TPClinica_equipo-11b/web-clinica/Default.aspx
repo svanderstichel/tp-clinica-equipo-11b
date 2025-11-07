@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <% if (Session["Usuario"] == null)
         { %>
-    <div class="d-flex justify-content-center align-items-start pt-5">
+    <div class="d-flex justify-content-center align-items-start pt-5 mb-5">
         <div class="card shadow p-4" style="width: 22rem;">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>

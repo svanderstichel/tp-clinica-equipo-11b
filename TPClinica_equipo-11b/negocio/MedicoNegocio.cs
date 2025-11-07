@@ -16,7 +16,16 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo  FROM Medico ");
-           //datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo, IdEspecialidad FROM Medico ");
+            //datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo, IdEspecialidad FROM Medico ");
+            if (id != "")
+            {
+
+                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo FROM Medico where IdMedico = @IdMedico ");
+                datos.setearParametro("@IdMedico", id);
+            }
+
+
+
             try
             {
                 datos.ejecutarLectura();
@@ -108,9 +117,32 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public void EliminarMedico(int id)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("DELETE FROM Medico WHERE IdMedico =  @IdMedico");
+                datos.setearParametro("@IdMedico", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
 
     }
 
-
 }
+
+
+
 
