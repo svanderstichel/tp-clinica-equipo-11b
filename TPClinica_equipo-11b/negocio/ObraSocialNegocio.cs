@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,9 @@ namespace negocio
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion FROM ObraSocial");
+            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial");
             if (id != "")
-                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion FROM ObraSocial where IdObraSocial = " + id);
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial where IdObraSocial = " + id);
 
             try
             {
@@ -28,6 +29,7 @@ namespace negocio
                     obra.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     obra.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     obra.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
+                    obra.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     lista.Add(obra);
                 }
@@ -85,6 +87,22 @@ namespace negocio
             finally
             {
                 datos.CerrarConexion();
+            }
+        }
+        public void EliminarLogico(int id, bool activo = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("update ObraSocial set Activo = @activo Where idObraSocial = @idObraSocial");
+                datos.setearParametro("@idObraSocial", id);
+                datos.setearParametro("@activo", activo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

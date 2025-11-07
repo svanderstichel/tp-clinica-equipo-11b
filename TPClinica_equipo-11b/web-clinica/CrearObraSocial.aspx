@@ -22,12 +22,28 @@
 
             <div class="mb-3 d-grid gap-2">
                 <asp:Button runat="server" ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary w-100" OnClick="btnGuardar_Click" />
-                <asp:Button runat="server" ID="btnVolver" Text="Cancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" />
+            </div>
+            <div class="mb-3 d-grid gap-2">
+                <asp:Button runat="server" ID="Button1" Text="Cancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" />
+            </div>
+            <div class="mb-3 d-grid gap-2">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3 d-grid gap-2">
+                            <asp:Button runat="server" ID="btnEliminar" OnClick="btnEliminar_Click" Text="Eliminar" CssClass="btn btn-danger" />
+                        </div>
+                        <%if (ConfirmaEliminacion)
+                            { %>
+                        <div class="mb-3">
+                            <asp:CheckBox Text="Confirmar Eliminacion" ID="chkConfirmarEliminacion" runat="server" />
+                            <asp:Button Text="Eliminar" ID="btnConfirmaEliminar" OnClick="btnConfirmaEliminar_Click" CssClass="btn btn-outline-danger" runat="server" />
+                        </div>
+                        <% } %>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
-
-
 
 
 </asp:Content>
