@@ -11,8 +11,10 @@ namespace web_clinica
 {
     public partial class ObrasSociales : System.Web.UI.Page
     {
+        public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ConfirmaEliminacion = false;
             //Configuracion si estamos modificando
             string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
             if (id != "" && !IsPostBack)
@@ -58,7 +60,8 @@ namespace web_clinica
                 {
                     negocio.Agregar(nueva);
                 }
-
+                //Actualizp la lista en sesión
+                Session["listaOS"] = negocio.ListarObrasSociales();
                 Response.Redirect("ObrasSociales.aspx", false);
             }
             catch (Exception ex)
@@ -71,6 +74,36 @@ namespace web_clinica
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("ObrasSociales.aspx", false);
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmaEliminacion = true;
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmarEliminacion.Checked)
+                {
+                    ObraSocialNegocio negocio = new ObraSocialNegocio(); 
+
+                    //recupero el id de la sesion
+                    int id = int.Parse(Request.QueryString["id"].ToString());
+
+                    negocio.EliminarLogico(id);
+
+                    //actualizo la sesion
+                    Session["listaOS"] = negocio.ListarObrasSociales();
+                    Response.Redirect("ObrasSociales.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex);
+            }
         }
     }
 }

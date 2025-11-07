@@ -93,5 +93,5 @@ CREATE TABLE Usuario (
 );
 
 
-
+Alter Table ObraSocial ADD Activo BIT NULL;
 
