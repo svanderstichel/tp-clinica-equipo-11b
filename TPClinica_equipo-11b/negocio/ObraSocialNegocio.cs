@@ -9,12 +9,14 @@ namespace negocio
 {
     public class ObraSocialNegocio
     {
-        public List<ObraSocial> ListarObrasSociales()
+        public List<ObraSocial> ListarObrasSociales(string id = "")
         {
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
             datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion FROM ObraSocial");
+            if (id != "")
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion FROM ObraSocial where IdObraSocial = " + id);
 
             try
             {

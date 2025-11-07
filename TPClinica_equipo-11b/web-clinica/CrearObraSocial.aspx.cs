@@ -13,17 +13,24 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Request.QueryString["id"] != null)
+            //Configuracion si estamos modificando
+            string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+            if (id != "" && !IsPostBack)
             {
+                //Puedo traerme la lista desde sesion o desde bd
                 //obtengo el id de la url
-                int id = int.Parse(Request.QueryString["id"].ToString());
-                List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
-                ObraSocial seleccionada =  temporal.Find(x => x.IdObraSocial == id);
-                //precargo los datos
+                //int id = int.Parse(Request.QueryString["id"].ToString());
+                //List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
+                //ObraSocial seleccionada =  temporal.Find(x => x.IdObraSocial == id);
+
+                ObraSocialNegocio negocio = new ObraSocialNegocio();
+                List<ObraSocial> lista = negocio.ListarObrasSociales(Request.QueryString["id"].ToString());
+                ObraSocial seleccionada = lista[0]; //porque la lista solo tiene un registro
+
+                //precargo todos los campos
                 txtNombre.Text = seleccionada.Nombre;
                 txtDescripcion.Text = seleccionada.Descripcion;
-                
+
             }
         }
 
@@ -38,11 +45,20 @@ namespace web_clinica
                 nueva.Descripcion = txtDescripcion.Text;
 
                 //me traigo de la sesion la lista de os
-
                 List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
                 temporal.Add(nueva);
 
-                negocio.Agregar(nueva);
+                //si vino un id estoy modificando
+                if (Request.QueryString["id"] != null)
+                {
+                    nueva.IdObraSocial = int.Parse(Request.QueryString["id"].ToString());
+                    negocio.Actualizar(nueva);
+                }
+                else
+                {
+                    negocio.Agregar(nueva);
+                }
+
                 Response.Redirect("ObrasSociales.aspx", false);
             }
             catch (Exception ex)
