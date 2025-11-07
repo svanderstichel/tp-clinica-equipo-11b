@@ -18,7 +18,7 @@ namespace web_clinica
                 //guardo la lista de os en sesion
                 Session.Add("listaOS", negocio.ListarObrasSociales());
             }
-            //la cargo desde sesion (memoria)
+            ////la cargo desde sesion (memoria)
             dgvObraSocial.DataSource = Session["listaOS"];
             dgvObraSocial.DataBind();
         }
