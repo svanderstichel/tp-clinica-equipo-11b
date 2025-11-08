@@ -15,15 +15,19 @@ namespace web_clinica
 {
     public partial class Especialidades : System.Web.UI.Page
     {
+        public bool ConfirmarEliminacion { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
 
         {
-                //txtIdEspecialidad.Enabled = false;
-                try
-                {
-                    //guardo el dato del id si esta viajando en un elemento terciario
-                    //string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                    string id = Request.QueryString["id"];
+            ConfirmarEliminacion = false;
+
+
+            try
+            {
+                //guardo el dato del id 
+                string id = Request.QueryString["id"];
+
                 // si es diferente de null entonces lo cargo para modificar
 
                 if (!IsPostBack)
@@ -40,28 +44,17 @@ namespace web_clinica
                         hfIdEspecialidad.Value = id;
                     }
 
-                    /*if (id != null)
-                    {
-
-                        EspecialidadNegocio negocio = new EspecialidadNegocio();
-                        Especialidad especialidad = negocio.ListarEspecialidades(id)[0];
-
-                        TextBox1.Text = especialidad.Nombre;
-                        TextBox2.Text = especialidad.Descripcion;
-
-
-                    }*/
-                }
-                }
-                catch (Exception ex)
-                {
-                    Session.Add("Error", ex);
-                    throw;
-                    //redirigir a pantalla de error
                 }
             }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+                //redirigir a pantalla de error
+            }
+        }
 
-        
+
 
 
 
@@ -97,17 +90,39 @@ namespace web_clinica
 
                     negocio.Agregar(nueva);
                 }
-                
+
                 Response.Redirect("Especialidades.aspx", false);
-        }
+            }
             catch (Exception ex)
             {
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
             }
-}
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmarEliminacion = true;
+        }
+
+        protected void btnConfirmaEliminacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                Especialidad nueva = new Especialidad();
+                nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
+                negocio.Eliminar(nueva.IdEspecialidad);
+                Response.Redirect("especialidades.aspx");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
-        
-    
+
+

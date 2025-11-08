@@ -40,6 +40,8 @@ namespace web_clinica
 
         protected void dgvMedicos_SelectedIndexChanged1(object sender, EventArgs e)
         {
+            string id = dgvMedicos.SelectedDataKey.Value.ToString();
+            Response.Redirect("CrearMedico.aspx?id=" + id);
 
         }
 

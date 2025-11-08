@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
@@ -114,7 +115,7 @@ namespace negocio
             try
             {
                 datos.SetearConsulta("UPDATE Especialidad SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IdEspecialidad = @IdEspecialidad");
-               
+
                 datos.setearParametro("@IdEspecialidad", especialidad.IdEspecialidad);
                 datos.setearParametro("@Nombre", especialidad.Nombre);
                 datos.setearParametro("@Descripcion", especialidad.Descripcion);
@@ -131,5 +132,29 @@ namespace negocio
             }
         }
 
+
+           public void Eliminar(int id) {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("DELETE FROM ESPECIALIDAD WHERE IdEspecialidad =  @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
     }
-}
+
+    }
+

@@ -28,7 +28,7 @@ namespace negocio
                      turno.HoraEntrada = (TimeSpan)datos.Lector["HoraEntrada"];
                      turno.HoraSalida = (TimeSpan)datos.Lector["HoraSalida"];
 
-                     // **Lógica clave para mapear DiasLaborales (String SQL -> List<DiaSemana> C#)**
+                     // Lógica clave para mapear DiasLaborales (String SQL -> List<DiaSemana)
                      string diasStr = datos.Lector["DiasLaborales"].ToString();
                      turno.DiasLaborales = ConvertirStringADiasSemana(diasStr);
 
