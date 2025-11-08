@@ -67,7 +67,6 @@ CREATE TABLE Turno (
     IdEspecialidad INT NOT NULL,
     Fecha DATE NOT NULL,
     Hora TIME NOT NULL,
-    IdEstado INT NOT NULL,
     Estado INT NOT NULL, -- Nuevo, Reprogramado, Cancelado, NoAsistió, Cerrado
     Observaciones VARCHAR(500),
     CONSTRAINT FK_Turno_Paciente FOREIGN KEY (IdPaciente) REFERENCES Paciente(IdPaciente),
@@ -93,5 +92,5 @@ CREATE TABLE Usuario (
 );
 
 
-
+Alter Table ObraSocial ADD Activo BIT NULL;
 
