@@ -40,15 +40,27 @@ namespace web_clinica
                 Response.Redirect("Error.aspx",false);
             }
         }
-
+            
         protected void dgvTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idTurno = (int)dgvTurnos.SelectedDataKey.Value;
+            TurnoNegocio datos = new TurnoNegocio();
+            Turno turno = datos.LeerTurno(idTurno);
+            Session.Add("Turno", turno);
+            Response.Redirect("CrearTurno.aspx", false);
         }
 
         protected void dgvTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int idTurno = (int)dgvTurnos.DataKeys[e.RowIndex].Value;   
+            int idTurno = (int)dgvTurnos.DataKeys[e.RowIndex].Value;
+            TurnoNegocio datos = new TurnoNegocio();
+            datos.EliminarTurno(idTurno);
+            Response.Redirect("Turnos.aspx", false);
+        }
+
+        protected void BtnCrearTurno_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CrearTurno.aspx", false);
         }
     }
 }

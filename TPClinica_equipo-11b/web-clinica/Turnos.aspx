@@ -19,6 +19,6 @@
         </asp:GridView>
     </div>
     <div class="d-flex justify-content-end mt-3">
-        <asp:Button ID="BtnCrearTurno" runat="server" Text="Solicitar turno" CssClass="btn btn-primary" />
+        <asp:Button ID="BtnCrearTurno" runat="server" Text="Solicitar turno" CssClass="btn btn-primary" OnClick="BtnCrearTurno_Click" />
     </div>
 </asp:Content>
