@@ -10,14 +10,15 @@ namespace negocio
 {
     public class ObraSocialNegocio
     {
-        public List<ObraSocial> ListarObrasSociales(string id = "")
+        public List<ObraSocial> ListarObrasSociales(string id = "") //Parametro opcional
         {
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial");
+            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial WHERE Activo = 1");
+            //Si el ID no esta vacio, me traigo solamemte la os que mande por parametro
             if (id != "")
-                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial where IdObraSocial = " + id);
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial where Activo = 1 and IdObraSocial = " + id);
 
             try
             {
@@ -29,7 +30,7 @@ namespace negocio
                     obra.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     obra.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     obra.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
-                    obra.Activo = bool.Parse(datos.Lector["Activo"].ToString());
+                  //  obra.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     lista.Add(obra);
                 }
@@ -51,7 +52,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
+                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Activo) VALUES (@Nombre, @Descripcion, 1)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
 

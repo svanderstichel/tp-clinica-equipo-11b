@@ -14,25 +14,19 @@ namespace web_clinica
         public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ConfirmaEliminacion = false;
-            //Configuracion si estamos modificando
+            //ConfirmaEliminacion = false;
+            // Configuracion si estamos modificando
+
+            /*Si del objeto Request estoy trayendo el id*/
             string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
             if (id != "" && !IsPostBack)
             {
-                //Puedo traerme la lista desde sesion o desde bd
-                //obtengo el id de la url
-                //int id = int.Parse(Request.QueryString["id"].ToString());
-                //List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
-                //ObraSocial seleccionada =  temporal.Find(x => x.IdObraSocial == id);
-
                 ObraSocialNegocio negocio = new ObraSocialNegocio();
-                List<ObraSocial> lista = negocio.ListarObrasSociales(Request.QueryString["id"].ToString());
-                ObraSocial seleccionada = lista[0]; //porque la lista solo tiene un registro
+                ObraSocial seleccionada = (negocio.ListarObrasSociales(id))[0]; //porque la lista solo tiene un registro
 
-                //precargo todos los campos
+                //Precargo todos los campos
                 txtNombre.Text = seleccionada.Nombre;
                 txtDescripcion.Text = seleccionada.Descripcion;
-
             }
         }
 
@@ -46,10 +40,6 @@ namespace web_clinica
                 nueva.Nombre = txtNombre.Text;
                 nueva.Descripcion = txtDescripcion.Text;
 
-                //me traigo de la sesion la lista de os
-                List<ObraSocial> temporal = (List<ObraSocial>)Session["listaOS"];
-                temporal.Add(nueva);
-
                 //si vino un id estoy modificando
                 if (Request.QueryString["id"] != null)
                 {
@@ -60,8 +50,7 @@ namespace web_clinica
                 {
                     negocio.Agregar(nueva);
                 }
-                //Actualizp la lista en sesión
-                Session["listaOS"] = negocio.ListarObrasSociales();
+
                 Response.Redirect("ObrasSociales.aspx", false);
             }
             catch (Exception ex)
@@ -87,7 +76,7 @@ namespace web_clinica
             {
                 if (chkConfirmarEliminacion.Checked)
                 {
-                    ObraSocialNegocio negocio = new ObraSocialNegocio(); 
+                    ObraSocialNegocio negocio = new ObraSocialNegocio();
 
                     //recupero el id de la sesion
                     int id = int.Parse(Request.QueryString["id"].ToString());
@@ -95,7 +84,7 @@ namespace web_clinica
                     negocio.EliminarLogico(id);
 
                     //actualizo la sesion
-                    Session["listaOS"] = negocio.ListarObrasSociales();
+                //    Session["listaOS"] = negocio.ListarObrasSociales();
                     Response.Redirect("ObrasSociales.aspx");
                 }
             }
