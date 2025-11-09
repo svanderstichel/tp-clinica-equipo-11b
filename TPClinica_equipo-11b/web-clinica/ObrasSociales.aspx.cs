@@ -12,14 +12,8 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["listaOS"] == null)
-            {
-                ObraSocialNegocio negocio = new ObraSocialNegocio();
-                //guardo la lista de os en sesion
-                Session.Add("listaOS", negocio.ListarObrasSociales());
-            }
-            ////la cargo desde sesion (memoria)
-            dgvObraSocial.DataSource = Session["listaOS"];
+            ObraSocialNegocio negocio = new ObraSocialNegocio();
+            dgvObraSocial.DataSource = negocio.ListarObrasSociales();
             dgvObraSocial.DataBind();
         }
 
@@ -30,14 +24,14 @@ namespace web_clinica
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Pacientes.aspx", false);
+            Response.Redirect("Default.aspx", false);
         }
 
         protected void dgvObraSocial_SelectedIndexChanged(object sender, EventArgs e)
         {
             //guardo el id seleccionado
             var id = dgvObraSocial.SelectedDataKey.Value.ToString();
-
+            //envio el id como parametro en la URL
             Response.Redirect("CrearObraSocial.aspx?id=" + id);
         }
 
