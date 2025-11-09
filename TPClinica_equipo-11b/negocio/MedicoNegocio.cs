@@ -1,15 +1,92 @@
-﻿using System;
+﻿using dominio;
+using Microsoft.SqlServer.Server;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
-using Microsoft.SqlServer.Server;
 
 namespace negocio
 {
     public class MedicoNegocio
     {
+        public Medico LeerMedico(int idMedico)
+        {
+            Medico medico = new Medico();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.setearParametro("@IdMedico", idMedico);
+            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono FROM Medico M WHERE IdMedico = @IdMedico");
+            try
+            {
+                datos.ejecutarLectura();
+
+
+
+                while (datos.Lector.Read())
+                {
+                    medico.IdMedico = (int)datos.Lector["IdMedico"];
+                    medico.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    medico.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
+                    medico.Email = Convert.ToString(datos.Lector["Email"]);
+                    medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    medico.TurnoTrabajo = new dominio.TurnoTrabajo();
+
+                    return medico;
+                }
+
+                return medico;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<Medico> ListarMedicos(int idEspecialidad)
+        {
+            List<Medico> lista = new List<Medico>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.setearParametro("@IdEspecialidad", idEspecialidad);
+            datos.SetearConsulta("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
+
+            try
+            {
+                datos.ejecutarLectura();
+
+
+
+                while (datos.Lector.Read())
+                {
+                    Medico medico = new Medico();
+                    medico.IdMedico = (int)datos.Lector["IdMedico"];
+                    medico.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    medico.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
+                    medico.Email = Convert.ToString(datos.Lector["Email"]);
+                    medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    medico.TurnoTrabajo = new dominio.TurnoTrabajo();
+
+                    lista.Add(medico);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
         public List<Medico> ListarMedicos(string id = "")
         {
             List<Medico> lista = new List<Medico>();
