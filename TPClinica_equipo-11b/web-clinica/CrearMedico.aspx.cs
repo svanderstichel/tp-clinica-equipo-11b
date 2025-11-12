@@ -36,7 +36,7 @@ namespace web_clinica
             try
             {
                
-                // si es diferente de null entonces lo cargo para modificar
+               
 
                     if (!string.IsNullOrEmpty(id)) // Si hay ID en la URL, es MODIFICACIÓN
                     {
@@ -136,6 +136,26 @@ namespace web_clinica
                 throw;
                 //redirigir a pantalla de error
             }
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MedicoNegocio negocio = new MedicoNegocio();
+                Medico nueva = new Medico();
+                nueva.IdMedico = int.Parse(hfIdMedico.Value);
+                negocio.EliminarLogico(nueva.IdMedico);
+                Response.Redirect("Medicos.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+                throw;
+                //redirigir a pantalla de error
+            }
+
         }
     }
 }

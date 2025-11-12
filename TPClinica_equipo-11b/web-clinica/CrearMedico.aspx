@@ -69,8 +69,14 @@
                 <div class="col-6">
                     <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" CausesValidation="false" />
                 </div>
-
                  </div>
+
+                <div class="mb-3 d-grid gap-2">
+                    <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-secondary"  OnClick="btnInactivar_Click" runat="server" />
+
+                </div>
+
+                
 
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>

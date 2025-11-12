@@ -18,6 +18,7 @@
                     <asp:BoundField HeaderText="Email" DataField="Email" />
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
                     <asp:BoundField HeaderText="IdTurnoTrabajo" DataField="TurnoTrabajo.IdTurnoTrabajo" />
+                    <asp:CheckBoxField HeaderText="Estado Activo" DataField="Estado" />
                     <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="✍️" />
 
                 </Columns>

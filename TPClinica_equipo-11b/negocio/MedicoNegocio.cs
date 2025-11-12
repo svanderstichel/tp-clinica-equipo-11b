@@ -17,7 +17,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             datos.setearParametro("@IdMedico", idMedico);
-            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono FROM Medico M WHERE IdMedico = @IdMedico");
+            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M WHERE IdMedico = @IdMedico");
             try
             {
                 datos.ejecutarLectura();
@@ -33,6 +33,7 @@ namespace negocio
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
                     medico.TurnoTrabajo = new dominio.TurnoTrabajo();
+                    medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
                     return medico;
                 }
@@ -54,7 +55,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             datos.setearParametro("@IdEspecialidad", idEspecialidad);
-            datos.SetearConsulta("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
+            datos.SetearConsulta("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
 
             try
             {
@@ -72,7 +73,7 @@ namespace negocio
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
                     medico.TurnoTrabajo = new dominio.TurnoTrabajo();
-
+                    medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
                     lista.Add(medico);
                 }
 
@@ -92,12 +93,12 @@ namespace negocio
             List<Medico> lista = new List<Medico>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo  FROM Medico ");
-            //datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Email,Telefono, IdTurnoTrabajo, IdEspecialidad FROM Medico ");
+            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado  FROM Medico ");
+            
             if (id != "")
             {
 
-                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo FROM Medico where IdMedico = @IdMedico ");
+                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado FROM Medico where IdMedico = @IdMedico ");
                 datos.setearParametro("@IdMedico", id);
             }
 
@@ -120,9 +121,9 @@ namespace negocio
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
                     esp.TurnoTrabajo = new dominio.TurnoTrabajo();
                     esp.TurnoTrabajo.IdTurnoTrabajo = (int)datos.Lector["IdTurnoTrabajo"];
-                    
-                    
-                   
+                    esp.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+
+
 
                     lista.Add(esp);
                 }
@@ -204,6 +205,27 @@ namespace negocio
                 datos.setearParametro("@IdMedico", id);
                 datos.ejecutarAccion();
 
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+        public void EliminarLogico(int id, bool Estado=false)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("update Medico set Estado = @Estado  WHERE IdMedico =  @IdMedico");
+                datos.setearParametro("@IdMedico", id);
+                datos.setearParametro("@Estado", Estado);
+                datos.ejecutarAccion();
             }
             catch (Exception Ex)
             {

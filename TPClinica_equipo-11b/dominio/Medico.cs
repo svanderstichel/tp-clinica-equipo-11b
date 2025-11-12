@@ -16,6 +16,7 @@ namespace dominio
         public string Telefono { get; set; }
         public List<Especialidad> Especialidad { get; set; }
         public TurnoTrabajo TurnoTrabajo { get; set; }
+        //public List<TurnoTrabajo> TurnosAsignados { get; set; }
         public bool Estado { get; set; }
     }
 }
