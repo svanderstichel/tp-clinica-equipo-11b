@@ -13,6 +13,7 @@
             <Columns>
                 <asp:BoundField HeaderText="Nombre de la Especialidad" DataField="Nombre" />
                 <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                <asp:CheckBoxField HeaderText="Estado Activo" DataField="Estado"/>
                 <asp:CommandField HeaderText="Accion" ShowSelectButton="true"  SelectText="✍️" />   
                  
             </Columns>

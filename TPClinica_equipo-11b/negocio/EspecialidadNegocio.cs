@@ -18,10 +18,10 @@ namespace negocio
             List<Especialidad> lista = new List<Especialidad>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad  ");
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad  ");
             if (id != "") {
 
-                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion FROM Especialidad where IdEspecialidad = @IdEspecialidad ");
+                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion, Estado FROM Especialidad where IdEspecialidad = @IdEspecialidad ");
                 datos.setearParametro("@IdEspecialidad", id);
             }
             
@@ -38,6 +38,7 @@ namespace negocio
                     esp.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
                     esp.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     esp.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
+                    esp.Estado = bool.Parse (datos.Lector["Estado"].ToString());
 
                     lista.Add(esp);
                 }
@@ -133,7 +134,8 @@ namespace negocio
         }
 
 
-           public void Eliminar(int id) {
+           public void Eliminar(int id) 
+        {
 
             AccesoDatos datos = new AccesoDatos();
             try
@@ -152,6 +154,22 @@ namespace negocio
                 datos.CerrarConexion();
             }
 
+        }
+        public void EliminarLogico(int id, bool Estado = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("update Especialidad set Estado = @Estado Where IdEspecialidad = @IdEspecialidad");
+                datos.setearParametro("@IdEspecialidad", id);
+                datos.setearParametro("@Estado", Estado);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }
