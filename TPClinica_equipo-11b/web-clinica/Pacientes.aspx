@@ -19,9 +19,8 @@
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
                     <asp:BoundField HeaderText="Fecha de Naciemiento" DataField="FechaNacimiento" />
                     <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
-
-                    <%--asp:CheckBoxField HeaderText ="Activo" DataField="Activo" />
-                    <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" /--%>
+                    <asp:CheckBoxField HeaderText ="Activo" DataField="Activo" />
+                    <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>
             <asp:Button runat="server" ID="btnAgregarPaciente" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregarPaciente_Click" />

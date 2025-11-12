@@ -16,8 +16,14 @@ namespace negocio
 
             datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
                                  " FROM Paciente as p " +
-                                 "INNER JOIN ObraSocial as os  ON p.IdObraSocial = os.IdObraSocial");
-
+                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE p.Activo = 1");
+            if(id != "")
+            {
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                                 " FROM Paciente as p " +
+                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
+                                 "WHERE p.Activo = 1 and p.IdPaciente =  " + id);
+            }
             try
             {
                 datos.ejecutarLectura();
@@ -56,7 +62,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial) VALUES (@Nombre, @Apellido, @Email, @DNI, @Telefono, @FechaNacimiento, @IdObraSocial)");
+                datos.SetearConsulta("INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Activo) VALUES (@Nombre, @Apellido, @Email, @DNI, @Telefono, @FechaNacimiento, @IdObraSocial, 1)");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
                 datos.setearParametro("@Email", nuevo.Email);
@@ -77,5 +83,50 @@ namespace negocio
             }
         }
 
+        public void Actualizar(Paciente paciente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta("UPDATE Paciente SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, DNI = @DNI, Telefono = @Telefono, FechaNacimiento = @FechaNacimiento, IdObraSocial = @IdObraSocial " +
+                    "WHERE IdPaciente = @IdPaciente");
+
+                datos.setearParametro("@IdPaciente", paciente.IdPaciente);
+                datos.setearParametro("@Nombre", paciente.Nombre);
+                datos.setearParametro("@Apellido", paciente.Apellido);
+                datos.setearParametro("@Email", paciente.Email);
+                datos.setearParametro("@DNI", paciente.DNI);
+                datos.setearParametro("@Telefono", paciente.Telefono);
+                datos.setearParametro("@FechaNacimiento", paciente.FechaNacimiento);
+                datos.setearParametro("@IdObraSocial", paciente.ObraSocial.IdObraSocial);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public void EliminarLogico(int id, bool activo = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("update Paciente set Activo = @activo Where IdPaciente = @idPaciente");
+                datos.setearParametro("@IdPaciente", id);
+                datos.setearParametro("@activo", activo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

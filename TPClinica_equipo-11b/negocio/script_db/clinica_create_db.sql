@@ -94,3 +94,4 @@ CREATE TABLE Usuario (
 
 Alter Table ObraSocial ADD Activo BIT NULL;
 
+ALTER TABlE Paciente ADD Activo BIT NULL;
