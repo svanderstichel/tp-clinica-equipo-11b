@@ -70,6 +70,7 @@
     <Content Include="Content\icon.svg" />
     <Content Include="CrearMedico.aspx" />
     <Content Include="CrearPaciente.aspx" />
+    <Content Include="CrearTrabajoTurno.aspx" />
     <Content Include="CrearTurno.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
@@ -107,6 +108,13 @@
     </Compile>
     <Compile Include="CrearPaciente.aspx.designer.cs">
       <DependentUpon>CrearPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrearTrabajoTurno.aspx.cs">
+      <DependentUpon>CrearTrabajoTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrearTrabajoTurno.aspx.designer.cs">
+      <DependentUpon>CrearTrabajoTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="CrearTurno.aspx.cs">
       <DependentUpon>CrearTurno.aspx</DependentUpon>

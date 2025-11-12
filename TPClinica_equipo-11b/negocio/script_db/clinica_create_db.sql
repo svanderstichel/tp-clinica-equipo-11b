@@ -7,7 +7,8 @@ GO
 CREATE TABLE ObraSocial (
     IdObraSocial INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(100) NOT NULL UNIQUE,
-    Descripcion VARCHAR(200)
+    Descripcion VARCHAR(200),
+    Activo bit null
 );
 
 -- Paciente
