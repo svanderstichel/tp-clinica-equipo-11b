@@ -13,28 +13,40 @@ namespace web_clinica
         protected void Page_Load(object sender, EventArgs e)
         {
             //mostrar el dgv
-            PacienteNegocio negocio = new PacienteNegocio();
-            dgvPaciente.DataSource = negocio.ListarPacientes();
-            dgvPaciente.DataBind();
+            if (!IsPostBack)
+            {
+                PacienteNegocio negocio = new PacienteNegocio();
+                dgvPaciente.DataSource = negocio.ListarPacientes();
+                dgvPaciente.DataBind();
+            }
         }
 
         protected void dgvPaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //guardo el id seleccionado
+            var id = dgvPaciente.SelectedDataKey.Value.ToString();
+            //envio el id como parametro en la URL para precargar los valores
+            Response.Redirect("CrearPaciente.aspx?idPaciente=" + id, false);
         }
 
         protected void dgvPaciente_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            PacienteNegocio negocio = new PacienteNegocio();
+            dgvPaciente.PageIndex = e.NewPageIndex;
+            dgvPaciente.DataSource = negocio.ListarPacientes();
 
+            dgvPaciente.DataBind();
         }
 
         protected void btnAgregarPaciente_Click(object sender, EventArgs e)
         {
+            Response.Redirect("CrearPaciente.aspx", false);
 
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
+            Response.Redirect("Default.aspx", false);
 
         }
     }

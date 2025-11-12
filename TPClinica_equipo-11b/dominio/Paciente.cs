@@ -17,5 +17,6 @@ namespace dominio
         public string Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public ObraSocial ObraSocial { get; set; }
+        public bool Activo { get; set; }
     }
 }

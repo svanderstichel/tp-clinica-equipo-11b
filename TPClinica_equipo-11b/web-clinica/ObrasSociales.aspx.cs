@@ -12,9 +12,12 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ObraSocialNegocio negocio = new ObraSocialNegocio();
-            dgvObraSocial.DataSource = negocio.ListarObrasSociales();
-            dgvObraSocial.DataBind();
+            if (!IsPostBack)
+            {
+                ObraSocialNegocio negocio = new ObraSocialNegocio();
+                dgvObraSocial.DataSource = negocio.ListarObrasSociales();
+                dgvObraSocial.DataBind();
+            }
         }
 
         protected void btnAgregarOS_Click(object sender, EventArgs e)

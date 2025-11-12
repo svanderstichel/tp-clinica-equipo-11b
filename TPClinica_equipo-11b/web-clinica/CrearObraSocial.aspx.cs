@@ -85,7 +85,7 @@ namespace web_clinica
 
                     //actualizo la sesion
                 //    Session["listaOS"] = negocio.ListarObrasSociales();
-                    Response.Redirect("ObrasSociales.aspx");
+                    Response.Redirect("ObrasSociales.aspx", false);
                 }
             }
             catch (Exception ex)

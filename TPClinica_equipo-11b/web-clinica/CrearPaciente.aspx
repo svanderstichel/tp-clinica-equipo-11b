@@ -55,6 +55,23 @@
                 <asp:Button Text="Guardar" runat="server" ID="btnGuardar" CssClass="btn btn-primary w-100" OnClick="btnGuardar_Click" />
                 <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" CausesValidation="false" />
             </div>
+
+            <div class="mb-3 d-grid gap-2">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3 d-grid gap-2">
+                            <asp:Button runat="server" ID="btnEliminarPaciente" OnClick="btnEliminarPaciente_Click" Text="Eliminar" CssClass="btn btn-danger" />
+                        </div>
+                        <%if (ConfirmaEliminacion)
+                            { %>
+                        <div class="mb-3">
+                            <asp:CheckBox Text="Confirmar Eliminacion" ID="chkConfirmarEliminarPaciente" runat="server" />
+                            <asp:Button Text="Eliminar" ID="btnConfirmaEliminarPaciente" OnClick="btnConfirmaEliminarPaciente_Click" CssClass="btn btn-outline-danger" runat="server" />
+                        </div>
+                        <% } %>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
         </div>
     </div>
 
