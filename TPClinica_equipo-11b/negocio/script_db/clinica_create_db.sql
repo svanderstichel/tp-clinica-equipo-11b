@@ -35,7 +35,8 @@ CREATE TABLE TurnoTrabajo (
 CREATE TABLE Especialidad (
     IdEspecialidad INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(200)
+    Descripcion VARCHAR(200),
+    Estado bit null,
 );
 
 -- Medico
@@ -46,7 +47,8 @@ CREATE TABLE Medico (
     Matricula VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(100) UNIQUE,
     Telefono VARCHAR(20),
-    IdTurnoTrabajo INT NOT NULL
+    IdTurnoTrabajo INT NOT NULL,
+    Estado bit null,
 );
 
 -- MedicoEspecialidad (relación muchos a muchos)

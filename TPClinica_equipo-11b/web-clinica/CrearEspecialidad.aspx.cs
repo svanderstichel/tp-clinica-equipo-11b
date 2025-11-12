@@ -114,11 +114,28 @@ namespace web_clinica
                 Especialidad nueva = new Especialidad();
                 nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
                 negocio.Eliminar(nueva.IdEspecialidad);
-                Response.Redirect("especialidades.aspx");
+                Response.Redirect("Especialidades.aspx");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Session.Add("Error", ex);
+                throw;
+            }
+        }
 
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                Especialidad nueva = new Especialidad();
+                nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
+                negocio.EliminarLogico(nueva.IdEspecialidad);
+                Response.Redirect("Especialidades.aspx");
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
                 throw;
             }
         }
