@@ -33,7 +33,7 @@
 
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
+                <%--<ContentTemplate>
 
                
             <div class="mb-3 d-grid gap-2">
@@ -51,7 +51,7 @@
                 </div>
 
              <%}  %>
-        </ContentTemplate>            
+        </ContentTemplate>  no esta implementado el borrado fisico de registros--%>          
         </asp:UpdatePanel>
         </div>
 

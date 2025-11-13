@@ -13,9 +13,18 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            EspecialidadNegocio negocio = new EspecialidadNegocio();
-            dgvEspecialidad.DataSource = negocio.ListarEspecialidades();
-            dgvEspecialidad.DataBind();
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
+            if (!IsPostBack)
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                dgvEspecialidad.DataSource = negocio.ListarEspecialidades();
+                dgvEspecialidad.DataBind();
+            }
         }
 
         protected void btnAgregarEsp_Click(object sender, EventArgs e)
@@ -25,7 +34,7 @@ namespace web_clinica
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Especialidades.aspx", false);
+            Response.Redirect("Medicos.aspx", false);
         }
 
         protected void dgvEspecialidad_SelectedIndexChanged(object sender, EventArgs e)

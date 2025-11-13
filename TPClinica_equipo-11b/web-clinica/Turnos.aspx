@@ -4,7 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container d-flex justify-content-center mt-5">
-        <asp:GridView ID="dgvTurnos" OnRowDeleting="dgvTurnos_RowDeleting" OnSelectedIndexChanged = "dgvTurnos_SelectedIndexChanged" DataKeyNames="Id" runat="server" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+            <div class="w-100">
+        <h3 class="text-center mb-3">Lista de Turnos</h3>
+        <asp:GridView ID="dgvTurnos" OnRowDeleting="dgvTurnos_RowDeleting" OnSelectedIndexChanged = "dgvTurnos_SelectedIndexChanged" DataKeyNames="Id" runat="server" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" OnPageIndexChanging ="dgvTurnos_PageIndexChanging" >
             <Columns>
                 <asp:BoundField DataField="Estado" HeaderText="Estado" />
                 <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
@@ -18,6 +20,7 @@
             </Columns>
         </asp:GridView>
     </div>
+        </div>
     <div class="d-flex justify-content-end mt-3">
         <asp:Button ID="BtnCrearTurno" runat="server" Text="Solicitar turno" CssClass="btn btn-primary" OnClick="BtnCrearTurno_Click" />
     </div>

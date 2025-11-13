@@ -62,5 +62,11 @@ namespace web_clinica
         {
             Response.Redirect("CrearTurno.aspx", false);
         }
+
+        protected void dgvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvTurnos.PageIndex = e.NewPageIndex;
+            dgvTurnos.DataBind();
+        }
     }
 }

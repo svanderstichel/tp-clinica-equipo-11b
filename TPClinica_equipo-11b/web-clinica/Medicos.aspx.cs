@@ -15,14 +15,16 @@ namespace web_clinica
     public partial class Medicos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-
-
         {
-            
-                    MedicoNegocio negocio = new MedicoNegocio();
-                    dgvMedicos.DataSource = negocio.ListarMedicos();
-                    dgvMedicos.DataBind();
-         
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
+            MedicoNegocio negocio = new MedicoNegocio();
+            dgvMedicos.DataSource = negocio.ListarMedicos();
+            dgvMedicos.DataBind();        
         }
 
         
@@ -35,7 +37,7 @@ namespace web_clinica
 
         protected void btnRegresarMedicos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Medicos.aspx", false);
+            Response.Redirect("Default.aspx", false);
         }
 
         protected void dgvMedicos_SelectedIndexChanged1(object sender, EventArgs e)
@@ -49,6 +51,11 @@ namespace web_clinica
         {
             dgvMedicos.PageIndex = e.NewPageIndex;
             dgvMedicos.DataBind();
+        }
+
+        protected void btnEspecialidades_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Especialidades.aspx", false);
         }
     }
 }

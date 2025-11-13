@@ -93,12 +93,12 @@ namespace negocio
             List<Medico> lista = new List<Medico>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado  FROM Medico ");
+            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado  FROM Medico Where Estado = 1");
             
             if (id != "")
             {
 
-                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado FROM Medico where IdMedico = @IdMedico ");
+                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado FROM Medico where IdMedico = @IdMedico");
                 datos.setearParametro("@IdMedico", id);
             }
 

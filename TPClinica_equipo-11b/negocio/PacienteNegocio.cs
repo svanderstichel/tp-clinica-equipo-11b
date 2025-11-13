@@ -56,7 +56,7 @@ namespace negocio
             datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
                                  " FROM Paciente as p " +
                                  "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE p.Activo = 1");
-            if(id != "")
+            if (id != "")
             {
                 datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
                                  " FROM Paciente as p " +
@@ -163,8 +163,88 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
+            }
+        }
+        public void Eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("DELETE FROM Paciente Where IdPaciente = @idPaciente");
+                datos.setearParametro("@IdPaciente", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool LeerPaciente(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta(
+                    "SELECT p.IdPaciente " +
+                    "FROM Paciente AS p " +
+                    "INNER JOIN ObraSocial AS os ON p.IdObraSocial = os.IdObraSocial " +
+                    "WHERE p.Email = @Email AND p.Activo = 1"
+                );
+                datos.setearParametro("@Email", email);
+                datos.ejecutarLectura();
+
+                // Si hay al menos un registro, el paciente existe
+                return datos.Lector.Read();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<Paciente> ListarUsuarioTipoPaciente(string email)
+        {
+            List<Paciente> lista = new List<Paciente>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+
+                    datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                                     " FROM Paciente as p " +
+                                     "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
+                                     "WHERE p.Activo = 1 and p.Email =  @email");
+                    datos.setearParametro("@Email", email);
+                    datos.ejecutarLectura();
+
+                    while (datos.Lector.Read())
+                    {
+                        Paciente paciente = new Paciente();
+                        paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
+                        paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                        paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                        paciente.Email = Convert.ToString(datos.Lector["Email"]);
+                        paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
+                        paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                        paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                        paciente.ObraSocial = new ObraSocial();
+                        paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+                        lista.Add(paciente);
+                    }
+                    return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
             }
         }
     }

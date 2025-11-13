@@ -12,6 +12,12 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
             if (!IsPostBack)
             {
                 ObraSocialNegocio negocio = new ObraSocialNegocio();
@@ -27,7 +33,7 @@ namespace web_clinica
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx", false);
+            Response.Redirect("Pacientes.aspx", false);
         }
 
         protected void dgvObraSocial_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,7 +46,9 @@ namespace web_clinica
 
         protected void dgvObraSocial_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            ObraSocialNegocio negocio = new ObraSocialNegocio();
             dgvObraSocial.PageIndex = e.NewPageIndex;
+            dgvObraSocial.DataSource = negocio.ListarObrasSociales();
             dgvObraSocial.DataBind();
         }
     }
