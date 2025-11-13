@@ -18,10 +18,10 @@ namespace negocio
             List<Especialidad> lista = new List<Especialidad>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad  ");
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad WHERE Estado = 1 ");
             if (id != "") {
 
-                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion, Estado FROM Especialidad where IdEspecialidad = @IdEspecialidad ");
+                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion, Estado FROM Especialidad where IdEspecialidad = @IdEspecialidad and Estado = 1");
                 datos.setearParametro("@IdEspecialidad", id);
             }
             
@@ -38,7 +38,7 @@ namespace negocio
                     esp.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
                     esp.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     esp.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
-                    esp.Estado = bool.Parse (datos.Lector["Estado"].ToString());
+                    //esp.Estado = bool.Parse (datos.Lector["Estado"].ToString()); no se muestra el estado en la web
 
                     lista.Add(esp);
                 }
@@ -60,7 +60,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Especialidad (Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
+                datos.SetearConsulta("INSERT INTO Especialidad (Nombre, Descripcion, Estado) VALUES (@Nombre, @Descripcion,1)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
 

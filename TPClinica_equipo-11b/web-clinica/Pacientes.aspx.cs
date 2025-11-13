@@ -1,5 +1,7 @@
-﻿using negocio;
+﻿using dominio;
+using negocio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,9 +17,26 @@ namespace web_clinica
             //mostrar el dgv
             if (!IsPostBack)
             {
+                if (Session["Usuario"] == null)
+                {
+                    Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                    Response.Redirect("Error.aspx", false);
+                    return;
+                }
+
+                Usuario usuario = (Usuario)Session["Usuario"];
                 PacienteNegocio negocio = new PacienteNegocio();
-                dgvPaciente.DataSource = negocio.ListarPacientes();
-                dgvPaciente.DataBind();
+
+                if (usuario.Tipo == TipoUsuario.Paciente && negocio.LeerPaciente(usuario.Email))
+                {
+                    dgvPaciente.DataSource = negocio.ListarUsuarioTipoPaciente(usuario.Email);
+                    dgvPaciente.DataBind();
+                }   
+                if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
+                {
+                    dgvPaciente.DataSource = negocio.ListarPacientes();
+                    dgvPaciente.DataBind();
+                }
             }
         }
 
@@ -48,6 +67,11 @@ namespace web_clinica
         {
             Response.Redirect("Default.aspx", false);
 
+        }
+
+        protected void btnObraSocial_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ObrasSociales.aspx", false);
         }
     }
 }

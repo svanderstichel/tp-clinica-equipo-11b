@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="script_db\clinica_create_db.sql" />
+    <Content Include="script_db\test_values.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dominio\dominio.csproj">

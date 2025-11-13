@@ -14,8 +14,15 @@ namespace web_clinica
         public bool ConfirmaEliminacion { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
+        
         {
-            
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
+
             try
             {
                 //si es la primera vez que estoy cargando esta pantalla
@@ -47,6 +54,18 @@ namespace web_clinica
                     txbEmail.Text = seleccionado.Email;
                     txtFechaNacimiento.Text = seleccionado.FechaNacimiento.ToString("yyyy-MM-dd");
                     ddlObraSocial.SelectedValue = seleccionado.ObraSocial.IdObraSocial.ToString();
+                }
+                // Configuracion si un paciente se da de alta
+                /*Si del objeto Request estoy trayendo el id*/
+                Usuario usuario = (Usuario)Session["Usuario"];
+                if (usuario.Tipo == TipoUsuario.Paciente && !IsPostBack)
+                {
+                    //Precargo y bloqueo el email
+
+                    txbEmail.Text = usuario.Email;
+                    txbEmail.ReadOnly = true;
+                    txbEmail.CssClass = "form-control readonly-textbox";
+
                 }
 
             }
@@ -120,7 +139,7 @@ namespace web_clinica
                     //recupero el id de la sesion
                     int id = int.Parse(Request.QueryString["idPaciente"].ToString());
 
-                    negocio.EliminarLogico(id);
+                    negocio.Eliminar(id);
 
                     Response.Redirect("Pacientes.aspx", false);
                 }

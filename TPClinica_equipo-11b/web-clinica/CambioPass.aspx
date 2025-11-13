@@ -2,6 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Panel ID="pnlCambioPass" runat="server" DefaultButton="btnGuardar">
+
     <div class="d-flex justify-content-center align-items-center mt-5">
     <div class="card" style="width: 30rem;">
         <div class="card-body">
@@ -39,4 +41,5 @@
         </div>
     </div>
     </div>
+        </asp:Panel>
 </asp:Content>

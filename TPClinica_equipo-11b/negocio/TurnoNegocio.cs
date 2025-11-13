@@ -19,7 +19,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nEstado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad");
+                datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nTurno.Estado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -60,11 +60,11 @@ namespace negocio
             {
                 if (usuario.Tipo == TipoUsuario.Medico)
                 {
-                    datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nEstado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad WHERE Medico.Email = @email");
+                    datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nTurno.Estado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad WHERE Medico.Email = @email");
                 }
                 if (usuario.Tipo == TipoUsuario.Paciente)
                 {
-                    datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nEstado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad WHERE Paciente.Email = @email");
+                    datos.SetearConsulta("SELECT \r\nIdTurno as id, \r\nEspecialidad.Nombre as Especialidad, \r\nPaciente.Apellido + ', ' + Paciente.Nombre as Paciente, \r\nMedico.Apellido + ', ' + Medico.Nombre as Medico, \r\nFecha, \r\nHora, \r\nTurno.Estado, \r\nObservaciones \r\nFROM Turno\r\nINNER JOIN Paciente\r\nON Turno.IdPaciente = Paciente.IdPaciente\r\nINNER JOIN Medico\r\nON turno.IdMedico = Medico.IdMedico \r\nINNER JOIN Especialidad\r\nON Turno.IdEspecialidad = Especialidad.IdEspecialidad WHERE Paciente.Email = @email");
                 }
                 datos.setearParametro("@email", email);
                 datos.ejecutarLectura();

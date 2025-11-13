@@ -20,7 +20,7 @@
         </asp:GridView>
         <asp:Button Text="Agregar" runat="server" ID="btnAgregarEsp" CssClass="btn btn-primary" OnClick="btnAgregarEsp_Click"/>
        
-        <asp:Button Text="Volver" runat="server" ID="btnRegresar" cssClass="btn btn-secondary"  OnClick="btnRegresar_Click"/>
+        <asp:Button Text="Cancelar" runat="server" ID="btnRegresar" cssClass="btn btn-secondary"  OnClick="btnRegresar_Click"/>
     
 
     </div>

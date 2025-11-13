@@ -14,6 +14,12 @@ namespace web_clinica
         public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
             //ConfirmaEliminacion = false;
             // Configuracion si estamos modificando
 

@@ -20,7 +20,8 @@ CREATE TABLE Paciente (
     DNI VARCHAR(20) NOT NULL UNIQUE,
     Telefono VARCHAR(20),
     FechaNacimiento DATE,
-    IdObraSocial INT NOT NULL
+    IdObraSocial INT NOT NULL,
+    Activo bit null
 );
 
 -- TurnoTrabajo
@@ -93,8 +94,3 @@ CREATE TABLE Usuario (
     Pass VARCHAR(20) NOT NULL,
     Tipo INT NOT NULL
 );
-
-
-Alter Table ObraSocial ADD Activo BIT NULL;
-
-ALTER TABlE Paciente ADD Activo BIT NULL;

@@ -72,13 +72,13 @@
                  </div>
 
                 <div class="mb-3 d-grid gap-2">
-                    <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-secondary"  OnClick="btnInactivar_Click" runat="server" />
+                    <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-danger"  OnClick="btnInactivar_Click" runat="server" />
 
                 </div>
 
                 
 
-             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
 
        
@@ -98,7 +98,7 @@
 
                  <%}  %>
             </ContentTemplate>            
-         </asp:UpdatePanel>
+         </asp:UpdatePanel>No hay borrado fisico de registros --%>
      
         </div>
       </div>
