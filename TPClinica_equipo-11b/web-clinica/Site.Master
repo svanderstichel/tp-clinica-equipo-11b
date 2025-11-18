@@ -36,18 +36,13 @@
                                 {
                                     dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];
                             %>
-                            <!-- Todos los usuarios ven Turnos -->
                             <a class="nav-link active" href="Turnos.aspx">Turnos</a>
-
-                            <!-- Solo los pacientes ven Pacientes -->
                             <% if (usuario.Tipo.ToString() == "Paciente"
                                     || usuario.Tipo.ToString() == "Recepcionista"
                                     || usuario.Tipo.ToString() == "Administrador")
                                 { %>
                             <a class="nav-link active" href="Pacientes.aspx">Pacientes</a>
                             <% } %>
-
-                            <!-- Solo los Recepcionistas y administradores ven Médicos -->
                             <% if (usuario.Tipo.ToString() == "Recepcionista" || usuario.Tipo.ToString() == "Administrador")
                                 { %>
                             <a class="nav-link active" href="Medicos.aspx">Médicos</a>

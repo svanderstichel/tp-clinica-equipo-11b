@@ -4,7 +4,7 @@ GO
 ------------------------------------------------------------
 -- 1️⃣ OBRAS SOCIALES
 ------------------------------------------------------------
-INSERT INTO ObraSocial (Nombre, Descripcion, Activo)
+INSERT INTO ObraSocial (Nombre, Descripcion, Estado)
 VALUES
 ('OSDE', 'Obra social de directivos de empresas', 1),
 ('Swiss Medical', 'Cobertura médica privada', 1),
@@ -16,7 +16,7 @@ VALUES
 ------------------------------------------------------------
 -- 2️⃣ PACIENTES
 ------------------------------------------------------------
-INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Activo)
+INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Estado)
 VALUES
 ('Juan', 'Pérez', 'juan.perez@gmail.com', '30123456', '2235123456', '1988-05-12', 1, 1),
 ('María', 'López', 'maria.lopez@yahoo.com', '29456789', '2235987456', '1992-09-03', 2, 1),
@@ -40,22 +40,6 @@ VALUES
 ('Santiago', 'Campos', 'santiago.campos@gmail.com', '29221133', '2235222133', '1998-06-20', 4, 1);
 
 ------------------------------------------------------------
--- 3️⃣ TURNOS DE TRABAJO
-------------------------------------------------------------
-INSERT INTO TurnoTrabajo (DiasLaborales, HoraEntrada, HoraSalida)
-VALUES
-('[1,2,3,4,5]', '08:00', '14:00'),
-('[1,2,3,4,5]', '10:00', '16:00'),
-('[2,3,4,5,6]', '09:00', '15:00'),
-('[1,3,5]', '08:00', '12:00'),
-('[1,2,4,5]', '13:00', '19:00'),
-('[1,2,3,4,5]', '07:00', '13:00'),
-('[1,2,3,4,5,6]', '09:00', '17:00'),
-('[2,3,5]', '14:00', '20:00'),
-('[1,2,3,4]', '08:30', '14:30'),
-('[1,2,3,4,5]', '12:00', '18:00');
-
-------------------------------------------------------------
 -- 4️⃣ ESPECIALIDADES
 ------------------------------------------------------------
 INSERT INTO Especialidad (Nombre, Descripcion, Estado)
@@ -72,18 +56,18 @@ VALUES
 ------------------------------------------------------------
 -- 5️⃣ MÉDICOS
 ------------------------------------------------------------
-INSERT INTO Medico (Nombre, Apellido, Matricula, Email, Telefono, IdTurnoTrabajo, Estado)
+INSERT INTO Medico (Nombre, Apellido, Matricula, Email, Telefono, Estado,DiasLaborales, HoraEntrada, HoraSalida)
 VALUES
-('Ana', 'Martínez', 'M-1234', 'ana.martinez@clinica.com', '2235441122', 1, 1),
-('Roberto', 'Suárez', 'M-2345', 'roberto.suarez@clinica.com', '2235442233', 2, 1),
-('Carolina', 'Vega', 'M-3456', 'carolina.vega@clinica.com', '2235443344', 3, 1),
-('Sergio', 'Morales', 'M-4567', 'sergio.morales@clinica.com', '2235444455', 4, 1),
-('Lucía', 'Navarro', 'M-5678', 'lucia.navarro@clinica.com', '2235445566', 5, 1),
-('Pablo', 'Cano', 'M-6789', 'pablo.cano@clinica.com', '2235446677', 6, 1),
-('Graciela', 'Pardo', 'M-7890', 'graciela.pardo@clinica.com', '2235447788', 7, 1),
-('Tomás', 'Herrera', 'M-8901', 'tomas.herrera@clinica.com', '2235448899', 8, 1),
-('Elena', 'Ríos', 'M-9012', 'elena.rios@clinica.com', '2235449900', 9, 1),
-('Marcos', 'Luna', 'M-0123', 'marcos.luna@clinica.com', '2235450011', 10, 1);
+('Ana', 'Martínez', 'M-1234', 'ana.martinez@clinica.com', '2235441122', 1,'[1,2,3,4,5]', '08:00', '14:00'),
+('Roberto', 'Suárez', 'M-2345', 'roberto.suarez@clinica.com', '2235442233', 1,'[1,2,3,4,5]', '10:00', '16:00'),
+('Carolina', 'Vega', 'M-3456', 'carolina.vega@clinica.com', '2235443344', 1,'[2,3,4,5,6]', '09:00', '15:00'),
+('Sergio', 'Morales', 'M-4567', 'sergio.morales@clinica.com', '2235444455', 1,'[1,3,5]', '08:00', '12:00'),
+('Lucía', 'Navarro', 'M-5678', 'lucia.navarro@clinica.com', '2235445566', 1,'[1,2,4,5]', '13:00', '19:00'),
+('Pablo', 'Cano', 'M-6789', 'pablo.cano@clinica.com', '2235446677', 1,'[1,2,3,4,5]', '07:00', '13:00'),
+('Graciela', 'Pardo', 'M-7890', 'graciela.pardo@clinica.com', '2235447788', 1,'[1,2,3,4,5,6]', '09:00', '17:00'),
+('Tomás', 'Herrera', 'M-8901', 'tomas.herrera@clinica.com', '2235448899', 1,'[2,3,5]', '14:00', '20:00'),
+('Elena', 'Ríos', 'M-9012', 'elena.rios@clinica.com', '2235449900', 1,'[1,2,3,4]', '08:30', '14:30'),
+('Marcos', 'Luna', 'M-0123', 'marcos.luna@clinica.com', '2235450011', 1,'[1,2,3,4,5]', '12:00', '18:00');
 
 ------------------------------------------------------------
 -- 6️⃣ MÉDICO - ESPECIALIDAD

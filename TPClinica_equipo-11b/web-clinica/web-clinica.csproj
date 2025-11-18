@@ -70,7 +70,6 @@
     <Content Include="Content\icon.svg" />
     <Content Include="CrearMedico.aspx" />
     <Content Include="CrearPaciente.aspx" />
-    <Content Include="CrearTrabajoTurno.aspx" />
     <Content Include="CrearTurno.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
@@ -84,7 +83,6 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Turnos.aspx" />
-    <Content Include="TurnosTrabajo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,13 +106,6 @@
     </Compile>
     <Compile Include="CrearPaciente.aspx.designer.cs">
       <DependentUpon>CrearPaciente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CrearTrabajoTurno.aspx.cs">
-      <DependentUpon>CrearTrabajoTurno.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CrearTrabajoTurno.aspx.designer.cs">
-      <DependentUpon>CrearTrabajoTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="CrearTurno.aspx.cs">
       <DependentUpon>CrearTurno.aspx</DependentUpon>
@@ -210,13 +201,6 @@
     </Compile>
     <Compile Include="Turnos.aspx.designer.cs">
       <DependentUpon>Turnos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TurnosTrabajo.aspx.cs">
-      <DependentUpon>TurnosTrabajo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TurnosTrabajo.aspx.designer.cs">
-      <DependentUpon>TurnosTrabajo.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

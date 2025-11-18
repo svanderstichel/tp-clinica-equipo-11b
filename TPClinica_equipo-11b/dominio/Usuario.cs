@@ -21,6 +21,5 @@ namespace dominio
         public string Apellido { get; set; }
         public string Pass { get; set; }
         public TipoUsuario Tipo { get; set; }
-
     }
 }

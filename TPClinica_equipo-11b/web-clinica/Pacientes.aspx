@@ -22,7 +22,7 @@
                         <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
                         <asp:BoundField HeaderText="Fecha de Naciemiento" DataField="FechaNacimiento" />
                         <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
-                        <%--<asp:CheckBoxField HeaderText ="Activo" DataField="Activo" /> La baja lógica no esta implementada--%>
+                        <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" /> La baja lógica no esta implementada--%>
                         <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                     </Columns>
                 </asp:GridView>

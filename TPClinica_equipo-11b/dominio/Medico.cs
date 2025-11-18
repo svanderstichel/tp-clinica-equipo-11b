@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
+    public enum DiaSemana
+    {
+        Lunes = 1,
+        Martes = 2,
+        Miercoles = 3,
+        Jueves = 4,
+        Viernes = 5
+    }
     public class Medico
     {
         public int IdMedico { get; set; }
@@ -15,7 +23,9 @@ namespace dominio
         public string Email { get; set; }
         public string Telefono { get; set; }
         public List<Especialidad> Especialidad { get; set; }
-        public TurnoTrabajo TurnoTrabajo { get; set; }
+        public List<DiaSemana> DiasLaborales { get; set; }
+        public TimeSpan HoraEntrada { get; set; } //tipo TimeSpan: Se usa para almacenar y manipular diferencias de tiempo, como la hora de entrada y salida de un turno.
+        public TimeSpan HoraSalida { get; set; }
         //public List<TurnoTrabajo> TurnosAsignados { get; set; }
         public bool Estado { get; set; }
     }
