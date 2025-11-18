@@ -15,10 +15,10 @@ namespace negocio
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial WHERE Activo = 1");
+            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Estado FROM ObraSocial WHERE Estado = 1");
             //Si el ID no esta vacio, me traigo solamemte la os que mande por parametro
             if (id != "")
-                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Activo FROM ObraSocial where Activo = 1 and IdObraSocial = " + id);
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Estado FROM ObraSocial where Estado = 1 and IdObraSocial = " + id);
 
             try
             {
@@ -30,7 +30,7 @@ namespace negocio
                     obra.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     obra.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     obra.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
-                  //  obra.Activo = bool.Parse(datos.Lector["Activo"].ToString());
+                    //  obra.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
                     lista.Add(obra);
                 }
@@ -52,7 +52,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Activo) VALUES (@Nombre, @Descripcion, 1)");
+                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Estado) VALUES (@Nombre, @Descripcion, 1)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
 
@@ -90,14 +90,14 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-        public void EliminarLogico(int id, bool activo = false)
+        public void EliminarLogico(int id, bool estado = false)
         {
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.SetearConsulta("update ObraSocial set Activo = @activo Where idObraSocial = @idObraSocial");
+                datos.SetearConsulta("update ObraSocial set Estado = @estado Where idObraSocial = @idObraSocial");
                 datos.setearParametro("@idObraSocial", id);
-                datos.setearParametro("@activo", activo);
+                datos.setearParametro("@estado", estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

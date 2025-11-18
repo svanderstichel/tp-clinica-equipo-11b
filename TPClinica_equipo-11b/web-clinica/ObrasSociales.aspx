@@ -20,7 +20,7 @@
 <%--                    <asp:BoundField HeaderText="Id" DataField="IdObraSocial" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />--%>
                     <asp:BoundField HeaderText="Nombre de la Obra Social" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
-                    <%--<asp:CheckBoxField HeaderText ="Activo" DataField="Activo" />La baja lógica no esta implementada--%>
+                    <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" />La baja lógica no esta implementada--%>
                     <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>

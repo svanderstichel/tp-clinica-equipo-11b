@@ -8,7 +8,8 @@ CREATE TABLE ObraSocial (
     IdObraSocial INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(100) NOT NULL UNIQUE,
     Descripcion VARCHAR(200),
-    Activo bit null
+    Cobertura VARCHAR(100) NOT NULL,
+    Estado bit null
 );
 
 -- Paciente
@@ -21,16 +22,7 @@ CREATE TABLE Paciente (
     Telefono VARCHAR(20),
     FechaNacimiento DATE,
     IdObraSocial INT NOT NULL,
-    Activo bit null
-);
-
--- TurnoTrabajo
-CREATE TABLE TurnoTrabajo (
-    IdTurnoTrabajo INT PRIMARY KEY IDENTITY(1,1),
-    DiasLaborales VARCHAR(100) NOT NULL, -- En la capa de dominio los dias de la semana se representan como un array de int. Ejemplo: lunes a viernes [1,2,3,4,5];
-    HoraEntrada TIME NOT NULL,
-    HoraSalida TIME NOT NULL,
-    CONSTRAINT CK_TurnoTrabajo_Horario CHECK (HoraSalida > HoraEntrada)
+    Estado bit null
 );
 
 -- Especialidad
@@ -49,7 +41,9 @@ CREATE TABLE Medico (
     Matricula VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(100) UNIQUE,
     Telefono VARCHAR(20),
-    IdTurnoTrabajo INT NOT NULL,
+    DiasLaborales VARCHAR(100) NOT NULL, -- En la capa de dominio los dias de la semana se representan como un array de int. Ejemplo: lunes a viernes [1,2,3,4,5];
+    HoraEntrada TIME NOT NULL,
+    HoraSalida TIME NOT NULL,
     Estado bit null,
 );
 
@@ -81,9 +75,6 @@ CREATE TABLE Turno (
 -- Foreign Keys
 ALTER TABLE Paciente ADD CONSTRAINT FK_Paciente_ObraSocial
 FOREIGN KEY (IdObraSocial) REFERENCES ObraSocial(IdObraSocial);
-
-ALTER TABLE Medico ADD CONSTRAINT FK_Medico_TurnoTrabajo
-FOREIGN KEY (IdTurnoTrabajo) REFERENCES TurnoTrabajo(IdTurnoTrabajo);
 
 -- Usuarios del sistema
 CREATE TABLE Usuario (
