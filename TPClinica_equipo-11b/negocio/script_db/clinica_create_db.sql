@@ -41,9 +41,9 @@ CREATE TABLE Medico (
     Matricula VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(100) UNIQUE,
     Telefono VARCHAR(20),
-    DiasLaborales VARCHAR(100) NOT NULL, -- En la capa de dominio los dias de la semana se representan como un array de int. Ejemplo: lunes a viernes [1,2,3,4,5];
-    HoraEntrada TIME NOT NULL,
-    HoraSalida TIME NOT NULL,
+    DiasLaborales VARCHAR(100) NULL, -- En la capa de dominio los dias de la semana se representan como un array de int. Ejemplo: lunes a viernes [1,2,3,4,5];
+    HoraEntrada TIME NULL,
+    HoraSalida TIME NULL,
     Estado bit null,
 );
 
