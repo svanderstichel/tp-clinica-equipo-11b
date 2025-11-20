@@ -1,139 +1,157 @@
 ﻿USE ClinicaMedica;
 GO
 
-------------------------------------------------------------
--- 1️⃣ OBRAS SOCIALES
-------------------------------------------------------------
-INSERT INTO ObraSocial (Nombre, Descripcion, Estado)
+---------------------------------------------------------
+-- OBRAS SOCIALES
+---------------------------------------------------------
+INSERT INTO ObraSocial (Nombre, Descripcion, Cobertura, Estado)
 VALUES
-('OSDE', 'Obra social de directivos de empresas', 1),
-('Swiss Medical', 'Cobertura médica privada', 1),
-('IOMA', 'Instituto de Obra Médico Asistencial', 1),
-('PAMI', 'Obra social de jubilados y pensionados', 1),
-('Galeno', 'Cobertura integral de salud', 1),
-('Sancor Salud', 'Obra social con cobertura nacional', 1);
+('OSDE', 'Plan 310', 'Alta', 1),
+('Swiss Medical', 'Plan SMG20', 'Media', 1),
+('PAMI', 'Afiliados mayores', 'Baja', 1),
+('Medifé', 'Plan Oro', 'Alta', 1),
+('Galeno', 'Plan 220', 'Media', 1),
+('IOMA', 'Instituto Obra Medica', 'Baja', 1),
+('Sancor Salud', 'Plan 3000', 'Media', 1),
+('Federada', 'Plan Premium', 'Alta', 1);
 
-------------------------------------------------------------
--- 2️⃣ PACIENTES
-------------------------------------------------------------
-INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Estado)
-VALUES
-('Juan', 'Pérez', 'juan.perez@gmail.com', '30123456', '2235123456', '1988-05-12', 1, 1),
-('María', 'López', 'maria.lopez@yahoo.com', '29456789', '2235987456', '1992-09-03', 2, 1),
-('Carlos', 'Gómez', 'carlos.gomez@hotmail.com', '31222333', '2235445566', '1979-02-21', 3, 1),
-('Lucía', 'Fernández', 'lucia.fernandez@gmail.com', '28456712', '2235123489', '2000-12-30', 4, 1),
-('Javier', 'Martínez', 'javier.martinez@live.com', '29987123', '2235667788', '1985-03-14', 1, 1),
-('Sofía', 'Torres', 'sofia.torres@gmail.com', '30111987', '2235778899', '1990-10-09', 2, 1),
-('Diego', 'Ruiz', 'diego.ruiz@yahoo.com', '31002211', '2235889900', '1982-06-22', 3, 1),
-('Camila', 'Santos', 'camila.santos@hotmail.com', '32233444', '2235990011', '1999-08-01', 4, 1),
-('Nicolás', 'Herrera', 'nicolas.herrera@gmail.com', '28776655', '2235110022', '1995-04-16', 5, 1),
-('Valentina', 'Suárez', 'valentina.suarez@gmail.com', '30188900', '2235221133', '1987-12-28', 6, 1),
-('Martín', 'Alonso', 'martin.alonso@gmail.com', '29550122', '2235332244', '1993-09-15', 1, 1),
-('Paula', 'Vega', 'paula.vega@gmail.com', '30011223', '2235443355', '1984-11-07', 2, 1),
-('Andrés', 'Mendoza', 'andres.mendoza@yahoo.com', '30889977', '2235554466', '1996-07-19', 3, 1),
-('Julieta', 'Cáceres', 'julieta.caceres@gmail.com', '31221144', '2235665577', '1991-05-23', 4, 1),
-('Federico', 'Paz', 'federico.paz@gmail.com', '29987766', '2235776688', '1989-09-11', 5, 1),
-('Elena', 'Bravo', 'elena.bravo@gmail.com', '30199888', '2235887799', '1994-10-02', 6, 1),
-('Laura', 'Castro', 'laura.castro@gmail.com', '32011009', '2235998800', '1997-01-25', 1, 1),
-('Ezequiel', 'Moreno', 'ezequiel.moreno@gmail.com', '28991222', '2235009911', '1981-03-05', 2, 1),
-('Agustina', 'Leiva', 'agustina.leiva@gmail.com', '29887700', '2235111022', '2001-02-14', 3, 1),
-('Santiago', 'Campos', 'santiago.campos@gmail.com', '29221133', '2235222133', '1998-06-20', 4, 1);
-
-------------------------------------------------------------
--- 4️⃣ ESPECIALIDADES
-------------------------------------------------------------
+---------------------------------------------------------
+-- ESPECIALIDADES
+---------------------------------------------------------
 INSERT INTO Especialidad (Nombre, Descripcion, Estado)
 VALUES
-('Clínica Médica', 'Atención médica general', 1),
-('Pediatría', 'Atención de niños y adolescentes', 1),
-('Cardiología', 'Estudios y control del corazón', 1),
-('Dermatología', 'Tratamiento de enfermedades de la piel', 1),
-('Traumatología', 'Lesiones óseas y musculares', 1),
-('Oftalmología', 'Estudios de la vista', 1),
-('Ginecología', 'Salud reproductiva femenina', 1),
-('Neurología', 'Sistema nervioso y cerebro', 1);
+('Cardiología', 'Corazón', 1),
+('Clínica Médica', 'General', 1),
+('Dermatología', 'Piel', 1),
+('Traumatología', 'Huesos y articulaciones', 1),
+('Pediatría', 'Niños', 1),
+('Neurología', 'Sistema nervioso', 1),
+('Ginecología', 'Salud femenina', 1),
+('Endocrinología', 'Hormonas', 1),
+('Gastroenterología', 'Sistema digestivo', 1),
+('Otorrinolaringología', 'Oídos y garganta', 1);
 
-------------------------------------------------------------
--- 5️⃣ MÉDICOS
-------------------------------------------------------------
-INSERT INTO Medico (Nombre, Apellido, Matricula, Email, Telefono, Estado,DiasLaborales, HoraEntrada, HoraSalida)
+---------------------------------------------------------
+-- MÉDICOS
+---------------------------------------------------------
+INSERT INTO Medico
+(Nombre, Apellido, Matricula, Email, Telefono, DiasLaborales, HoraEntrada, HoraSalida, Estado)
 VALUES
-('Ana', 'Martínez', 'M-1234', 'ana.martinez@clinica.com', '2235441122', 1,'[1,2,3,4,5]', '08:00', '14:00'),
-('Roberto', 'Suárez', 'M-2345', 'roberto.suarez@clinica.com', '2235442233', 1,'[1,2,3,4,5]', '10:00', '16:00'),
-('Carolina', 'Vega', 'M-3456', 'carolina.vega@clinica.com', '2235443344', 1,'[2,3,4,5,6]', '09:00', '15:00'),
-('Sergio', 'Morales', 'M-4567', 'sergio.morales@clinica.com', '2235444455', 1,'[1,3,5]', '08:00', '12:00'),
-('Lucía', 'Navarro', 'M-5678', 'lucia.navarro@clinica.com', '2235445566', 1,'[1,2,4,5]', '13:00', '19:00'),
-('Pablo', 'Cano', 'M-6789', 'pablo.cano@clinica.com', '2235446677', 1,'[1,2,3,4,5]', '07:00', '13:00'),
-('Graciela', 'Pardo', 'M-7890', 'graciela.pardo@clinica.com', '2235447788', 1,'[1,2,3,4,5,6]', '09:00', '17:00'),
-('Tomás', 'Herrera', 'M-8901', 'tomas.herrera@clinica.com', '2235448899', 1,'[2,3,5]', '14:00', '20:00'),
-('Elena', 'Ríos', 'M-9012', 'elena.rios@clinica.com', '2235449900', 1,'[1,2,3,4]', '08:30', '14:30'),
-('Marcos', 'Luna', 'M-0123', 'marcos.luna@clinica.com', '2235450011', 1,'[1,2,3,4,5]', '12:00', '18:00');
+('Juan', 'Pérez', 'MAT-001', 'jperez@clinica.com', '2235123456', '[1,2,3,4,5]', '08:00', '14:00', 1),
+('María', 'García', 'MAT-002', 'mgarcia@clinica.com', '2235987654', '[1,3,5]', '10:00', '16:00', 1),
+('Carlos', 'López', 'MAT-003', 'clopez@clinica.com', '2235543210', '[2,4]', '09:00', '13:00', 1),
+('Ana', 'Torres', 'MAT-004', 'atorres@clinica.com', '2234321122', '[1,2,3]', '08:30', '14:30', 1),
+('Javier', 'Mena', 'MAT-005', 'jmena@clinica.com', '2235009988', '[1,2,4,5]', '10:00', '17:00', 1),
+('Lucía', 'Rojas', 'MAT-006', 'lrojas@clinica.com', '2235447766', '[3,4,5]', '09:00', '15:00', 1),
+('Roberto', 'Sosa', 'MAT-007', 'rsosa@clinica.com', '2235223344', '[2,3,4]', '08:00', '14:00', 1),
+('Laura', 'Vega', 'MAT-008', 'lvega@clinica.com', '2235448833', '[1,4,5]', '11:00', '18:00', 1),
+('Sofía', 'Martínez', 'MAT-009', 'smartinez@clinica.com', '2235772233', '[1,2]', '07:00', '13:00', 1),
+('Hernán', 'Gutiérrez', 'MAT-010', 'hgutiérrez@clinica.com', '2235667788', '[3,5]', '12:00', '18:00', 1),
+('Pedro', 'Salas', 'MAT-011', 'psalas@clinica.com', '2236112211', '[1,2,3,4,5]', '08:00', '14:00', 1),
+('Claudia', 'Nuñez', 'MAT-012', 'cnunez@clinica.com', '2236998877', '[2,4]', '10:00', '16:00', 1);
 
-------------------------------------------------------------
--- 6️⃣ MÉDICO - ESPECIALIDAD
-------------------------------------------------------------
+---------------------------------------------------------
+-- MÉDICO - ESPECIALIDAD (many-to-many)
+---------------------------------------------------------
 INSERT INTO MedicoEspecialidad (IdMedico, IdEspecialidad)
 VALUES
-(1, 1), (1, 3),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 1),
-(9, 8),
-(10, 1), (10, 5);
+(1,1),(1,2),(2,2),(2,5),(3,3),(4,4),(4,2),(5,1),
+(5,6),(6,7),(7,8),(7,2),(8,9),(9,10),(9,2),(10,6),
+(11,4),(11,1),(12,7),(12,9),(6,3),(3,10),(5,3),(8,4);
 
-------------------------------------------------------------
--- 7️⃣ TURNOS (30 turnos aleatorios)
-------------------------------------------------------------
+---------------------------------------------------------
+-- PACIENTES (20 registros)
+---------------------------------------------------------
+INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Estado)
+VALUES
+('Santiago','Vander','sv1@mail.com','40111221','2236001001','1995-03-10',1,1),
+('Lucía','Martínez','lm1@mail.com','38999441','2236001002','1988-07-21',2,1),
+('Pablo','Ramírez','pr@mail.com','35555112','2236001003','1990-11-02',3,1),
+('Marina','Díaz','md@mail.com','32000999','2236001004','1992-12-12',4,1),
+('Jorge','Santos','js@mail.com','33000888','2236001005','1985-01-14',5,1),
+('Rocío','Fernández','rf@mail.com','30077111','2236001006','1999-02-20',6,1),
+('Emilia','Quiroga','eq@mail.com','40988777','2236001007','2000-06-04',7,1),
+('Bruno','López','bl@mail.com','28888111','2236001008','1983-09-19',8,1),
+('Lucas','Paz','lp@mail.com','37123456','2236001009','1989-05-30',1,1),
+('Carla','Soto','cs@mail.com','36111222','2236001010','1997-10-10',2,1),
+('Esteban','Mansilla','em@mail.com','34222111','2236001011','1984-04-13',3,1),
+('Mauro','Duarte','md2@mail.com','30011222','2236001012','1991-02-02',4,1),
+('Sofía','Rivas','sr@mail.com','32233111','2236001013','1998-11-25',5,1),
+('Camila','Giménez','cg@mail.com','33322111','2236001014','1994-03-03',6,1),
+('Tobías','Mena','tm@mail.com','31111999','2236001015','2001-01-09',7,1),
+('Nadia','Vega','nv@mail.com','35022022','2236001016','1986-07-08',8,1),
+('Franco','Alvarez','fa@mail.com','37011222','2236001017','1993-12-31',1,1),
+('Josefina','Roldán','jr@mail.com','41112222','2236001018','2002-05-15',2,1),
+('Milena','Suarez','ms@mail.com','39999111','2236001019','1990-09-09',3,1),
+('Agustín','Bravo','ab@mail.com','35111222','2236001020','1996-08-18',4,1);
+
+---------------------------------------------------------
+-- TURNOS (40 registros)
+-- Estado ENUM: 1 Nuevo – 2 Reprogramado – 3 Cancelado – 4 Ausente – 5 Cerrado
+---------------------------------------------------------
 INSERT INTO Turno (IdPaciente, IdMedico, IdEspecialidad, Fecha, Hora, Estado, Observaciones)
 VALUES
-(1, 1, 1, '2025-11-13', '09:00', 1, 'Consulta general'),
-(2, 2, 2, '2025-11-13', '10:00', 2, 'Control pediátrico'),
-(3, 3, 3, '2025-11-14', '11:30', 5, 'Chequeo cardiológico completado'),
-(4, 4, 4, '2025-11-15', '08:30', 3, 'Turno cancelado por el paciente'),
-(5, 1, 3, '2025-11-16', '09:30', 4, 'Paciente no asistió'),
-(6, 5, 5, '2025-11-16', '14:00', 1, 'Lesión de rodilla'),
-(7, 6, 6, '2025-11-17', '15:00', 5, 'Control oftalmológico'),
-(8, 7, 7, '2025-11-18', '10:00', 1, 'Chequeo ginecológico'),
-(9, 8, 1, '2025-11-18', '09:00', 1, 'Consulta clínica'),
-(10, 9, 8, '2025-11-19', '11:30', 1, 'Control neurológico'),
-(11, 10, 5, '2025-11-19', '16:00', 2, 'Reprogramado por médico'),
-(12, 1, 3, '2025-11-20', '09:00', 1, 'Chequeo cardiovascular'),
-(13, 2, 2, '2025-11-20', '11:00', 1, 'Revisión pediátrica'),
-(14, 3, 3, '2025-11-21', '10:30', 3, 'Cancelado por paciente'),
-(15, 4, 4, '2025-11-22', '09:00', 5, 'Tratamiento dermatológico finalizado'),
-(16, 5, 5, '2025-11-22', '13:30', 1, 'Control postoperatorio'),
-(17, 6, 6, '2025-11-23', '08:00', 4, 'No asistió'),
-(18, 7, 7, '2025-11-23', '14:30', 5, 'Chequeo completado'),
-(19, 8, 1, '2025-11-24', '09:15', 1, 'Consulta general'),
-(20, 9, 8, '2025-11-24', '10:00', 2, 'Reprogramado por médico'),
-(1, 2, 2, '2025-11-25', '09:45', 1, 'Chequeo pediátrico'),
-(2, 3, 3, '2025-11-25', '10:30', 1, 'Estudio de rutina'),
-(3, 4, 4, '2025-11-26', '11:15', 3, 'Turno cancelado'),
-(4, 5, 5, '2025-11-27', '08:45', 1, 'Dolor muscular'),
-(5, 6, 6, '2025-11-27', '10:00', 1, 'Control visual'),
-(6, 7, 7, '2025-11-28', '12:00', 5, 'Chequeo ginecológico completado'),
-(7, 8, 1, '2025-11-28', '09:00', 4, 'No asistió'),
-(8, 9, 8, '2025-11-29', '15:00', 1, 'Evaluación neurológica'),
-(9, 10, 1, '2025-11-29', '10:30', 5, 'Turno cerrado con éxito'),
-(10, 1, 3, '2025-11-30', '09:30', 1, 'Control cardiológico'),
-(11, 2, 2, '2025-12-01', '10:15', 1, 'Chequeo general');
+(1,1,1,'2025-03-10','09:00',1,'Control inicial'),
+(2,2,2,'2025-03-10','10:00',1,NULL),
+(3,3,3,'2025-03-11','11:30',5,'Consulta cerrada'),
+(4,4,4,'2025-03-11','09:15',1,NULL),
+(5,5,1,'2025-03-12','13:00',2,'Reprogramado por médico'),
+(6,6,7,'2025-03-12','14:00',1,NULL),
+(7,7,8,'2025-03-12','08:30',3,'Cancelado por paciente'),
+(8,8,9,'2025-03-13','10:00',1,NULL),
+(9,9,10,'2025-03-13','11:00',4,'Ausente'),
+(10,10,6,'2025-03-13','12:00',1,NULL),
+(11,11,4,'2025-03-14','09:00',1,NULL),
+(12,12,7,'2025-03-14','10:00',5,'Cerrado'),
+(13,1,2,'2025-03-14','11:00',1,NULL),
+(14,2,5,'2025-03-14','12:00',2,'Reprogramado'),
+(15,3,3,'2025-03-15','09:15',3,'Cancelado'),
+(16,4,4,'2025-03-15','10:45',1,NULL),
+(17,5,1,'2025-03-15','11:30',1,NULL),
+(18,6,7,'2025-03-15','12:15',5,'Finalizado'),
+(19,7,8,'2025-03-16','08:00',1,NULL),
+(20,8,9,'2025-03-16','08:45',4,'No asistió'),
+(1,10,6,'2025-03-17','10:00',1,NULL),
+(2,11,4,'2025-03-17','11:00',1,NULL),
+(3,12,7,'2025-03-17','12:00',5,'Finalizado'),
+(4,9,10,'2025-03-17','13:30',2,'Reprogramado'),
+(5,8,9,'2025-03-18','09:00',1,NULL),
+(6,7,2,'2025-03-18','10:00',3,'Cancelado'),
+(7,6,3,'2025-03-18','11:30',1,NULL),
+(8,5,6,'2025-03-18','12:30',1,NULL),
+(9,4,4,'2025-03-19','09:00',4,'Ausente'),
+(10,3,3,'2025-03-19','09:45',1,NULL),
+(11,2,2,'2025-03-19','10:30',5,'Cerrado'),
+(12,1,1,'2025-03-19','11:15',1,NULL),
+(13,10,6,'2025-03-20','08:00',1,NULL),
+(14,11,4,'2025-03-20','09:15',3,'Cancelado'),
+(15,12,7,'2025-03-20','10:30',1,NULL),
+(16,9,10,'2025-03-20','11:45',1,NULL),
+(17,8,9,'2025-03-21','12:00',1,NULL),
+(18,7,8,'2025-03-21','13:00',1,NULL),
+(19,6,7,'2025-03-21','14:00',5,'Finalizado'),
+(20,5,1,'2025-03-21','15:00',1,NULL);
 
-------------------------------------------------------------
--- 8️⃣ USUARIOS DEL SISTEMA
-------------------------------------------------------------
+---------------------------------------------------------
+-- USUARIOS (15 registros)
+-- TipoUsuario: 1 Admin, 2 Recepcionista, 3 Medico, 4 Paciente
+---------------------------------------------------------
 INSERT INTO Usuario (Email, Nombre, Apellido, Pass, Tipo)
 VALUES
-('admin@clinica.com', 'Admin', 'General', 'admin123', 1),
-('recepcion@clinica.com', 'Laura', 'Méndez', 'recep123', 2),
-('ana.martinez@clinica.com', 'Ana', 'Martínez', 'medico123', 3),
-('roberto.suarez@clinica.com', 'Roberto', 'Suárez', 'medico234', 3),
-('soporte@clinica.com', 'Soporte', 'IT', 'soporte123', 4),
-('pablo.cano@clinica.com', 'Pablo', 'Cano', 'medico456', 3),
-('graciela.pardo@clinica.com', 'Graciela', 'Pardo', 'medico567', 3),
-('lucia.navarro@clinica.com', 'Lucía', 'Navarro', 'medico678', 3),
-('marcos.luna@clinica.com', 'Marcos', 'Luna', 'medico789', 3),
-('elena.rios@clinica.com', 'Elena', 'Ríos', 'medico890', 3);
+('admin@clinica.com','Admin','Root','admin123',1),
+('recepcion1@clinica.com','Laura','Ríos','r1',2),
+('recepcion2@clinica.com','Marcos','Bello','r2',2),
+
+('jperez@clinica.com','Juan','Pérez','m1',3),
+('mgarcia@clinica.com','María','García','m2',3),
+('clopez@clinica.com','Carlos','López','m3',3),
+('atorres@clinica.com','Ana','Torres','m4',3),
+('jmena@clinica.com','Javier','Mena','m5',3),
+
+('sv1@mail.com','Santiago','Vander','p1',4),
+('lm1@mail.com','Lucía','Martínez','p2',4),
+('pr@mail.com','Pablo','Ramírez','p3',4),
+('md@mail.com','Marina','Díaz','p4',4),
+('js@mail.com','Jorge','Santos','p5',4),
+('rf@mail.com','Rocío','Fernández','p6',4),
+('eq@mail.com','Emilia','Quiroga','p7',4);

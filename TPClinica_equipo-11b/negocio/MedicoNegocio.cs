@@ -32,7 +32,6 @@ namespace negocio
                     medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
-                    medico.TurnoTrabajo = new dominio.TurnoTrabajo();
                     medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
                     return medico;
@@ -72,7 +71,6 @@ namespace negocio
                     medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
-                    medico.TurnoTrabajo = new dominio.TurnoTrabajo();
                     medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
                     lista.Add(medico);
                 }
@@ -93,12 +91,12 @@ namespace negocio
             List<Medico> lista = new List<Medico>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado  FROM Medico Where Estado = 1");
+            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, Estado  FROM Medico Where Estado = 1");
             
             if (id != "")
             {
 
-                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, IdTurnoTrabajo, Estado FROM Medico where IdMedico = @IdMedico");
+                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, Estado FROM Medico where IdMedico = @IdMedico");
                 datos.setearParametro("@IdMedico", id);
             }
 
@@ -119,8 +117,6 @@ namespace negocio
                     esp.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     esp.Email = Convert.ToString(datos.Lector["Email"]);
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
-                    esp.TurnoTrabajo = new dominio.TurnoTrabajo();
-                    esp.TurnoTrabajo.IdTurnoTrabajo = (int)datos.Lector["IdTurnoTrabajo"];
                     esp.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
 
@@ -145,13 +141,12 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido,Matricula, Email, Telefono, IdTurnoTrabajo) VALUES (   @Nombre,    @Apellido,    @Matricula,     @Email,     @Telefono, @IdTurnoTrabajo)");
+                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido,Matricula, Email, Telefono) VALUES (@Nombre,    @Apellido,    @Matricula,     @Email,     @Telefono)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Apellido", nueva.Apellido);
                 datos.setearParametro("@Matricula", nueva.Matricula);
                 datos.setearParametro("@Email", nueva.Email);
                 datos.setearParametro("@Telefono", nueva.Telefono);
-                datos.setearParametro("@IdTurnoTrabajo", nueva.TurnoTrabajo.IdTurnoTrabajo);
 
 
                 datos.ejecutarAccion();
@@ -174,15 +169,13 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("UPDATE Medico SET Nombre = @Nombre, Apellido = @Apellido, Matricula = @Matricula,Email = @Email,Telefono= @Telefono,IdTurnoTrabajo = @IdTurnoTrabajo WHERE IdMedico = @IdMedico");
+                datos.SetearConsulta("UPDATE Medico SET Nombre = @Nombre, Apellido = @Apellido, Matricula = @Matricula,Email = @Email,Telefono= @Telefono WHERE IdMedico = @IdMedico");
                 datos.setearParametro("@IdMedico", medico.IdMedico);
                 datos.setearParametro("@Nombre", medico.Nombre);
                 datos.setearParametro("@Apellido", medico.Apellido);
                 datos.setearParametro("@Matricula", medico.Matricula);
                 datos.setearParametro("@Email", medico.Email);
                 datos.setearParametro("@Telefono", medico.Telefono);
-                datos.setearParametro("@IdTurnoTrabajo", medico.TurnoTrabajo.IdTurnoTrabajo);
-
 
                 datos.ejecutarAccion();
             }
