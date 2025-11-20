@@ -7,25 +7,45 @@
     <div class="row">
         <div class="col">
                         <div class="w-100">
-        <h3 class="text-center mb-3">Lista de Médicos</h3>
-            <asp:GridView runat="server" ID="dgvMedicos" CssClass="table table-dark table-bordered " AutoGenerateColumns="false"
-                DataKeyNames="IdMedico" OnSelectedIndexChanged="dgvMedicos_SelectedIndexChanged1" OnPageIndexChanging="dgvMedicos_PageIndexChanging1"
-                AllowPaging="true" PageSize="10">
+        <h3 class="text-center mb-3">Lista de Médicos</h3> <asp:GridView runat="server" ID="dgvMedicos" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" DataKeyNames="IdMedico" OnRowCommand="dgvMedicos_RowCommand" OnPageIndexChanging="dgvMedicos_PageIndexChanging1" AllowPaging="true" PageSize="10">
 
-                <Columns>
-                    <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-                    <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
-                    <asp:BoundField HeaderText="Matricula" DataField="Matricula" />
-                    <asp:BoundField HeaderText="Email" DataField="Email" />
-                    <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
-                    <%--<asp:BoundField HeaderText="IdTurnoTrabajo" DataField="TurnoTrabajo.IdTurnoTrabajo" />No esta implementada la logica de turnos de trabajo--%>
-                    <%--<asp:CheckBoxField HeaderText="Estado Activo" DataField="Estado" />No esta implementada la lógica de reactivar--%>
-                    <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="✍️" />
+    <Columns>
+        <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+        <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
+        <asp:BoundField HeaderText="Matricula" DataField="Matricula" />
+        <asp:BoundField HeaderText="Email" DataField="Email" />
+        <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
 
-                </Columns>
+        <asp:ButtonField 
+            HeaderText="Especialidades"
+            CommandName="Especialidades"
+            Text="🩺"
+            ButtonType="Button"
+            ControlStyle-CssClass="btn btn-outline-info"
+            ItemStyle-HorizontalAlign="Center"
+            HeaderStyle-HorizontalAlign="Center" />
 
+        <asp:ButtonField 
+            HeaderText="Horario"
+            CommandName="Horario"
+            Text="🕒"
+            ButtonType="Button"
+            ControlStyle-CssClass="btn btn-outline-info"
+            ItemStyle-HorizontalAlign="Center"
+            HeaderStyle-HorizontalAlign="Center" />
 
-            </asp:GridView>
+        <asp:ButtonField 
+            HeaderText="Datos"
+            CommandName="Datos"
+            Text="✍️"
+            ButtonType="Button"
+            ControlStyle-CssClass="btn btn-outline-info"
+            ItemStyle-HorizontalAlign="Center"
+            HeaderStyle-HorizontalAlign="Center" />
+    </Columns>
+
+</asp:GridView>
+
         </div>
 
            

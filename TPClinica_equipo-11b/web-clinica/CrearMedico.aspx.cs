@@ -29,21 +29,8 @@ namespace web_clinica
 
             if (!IsPostBack)
             {
-                //Cargar Turnos de Trabajo
-                TurnoTrabajoNegocio turnoNegocio = new TurnoTrabajoNegocio();
-                List<TurnoTrabajo> listaTurnos = turnoNegocio.Listar();
-
-                ddlTurnoTrabajo.DataSource = listaTurnos;
-                ddlTurnoTrabajo.DataTextField = "HoraEntrada";
-                ddlTurnoTrabajo.DataValueField = "IdTurnoTrabajo";
-                ddlTurnoTrabajo.DataBind();
-           
-
             try
             {
-               
-               
-
                     if (!string.IsNullOrEmpty(id)) // Si hay ID en la URL, es MODIFICACIÓN
                     {
                         MedicoNegocio negocio = new MedicoNegocio();
@@ -54,7 +41,6 @@ namespace web_clinica
                         textBox6.Text = medico.Matricula;
                         textBox3.Text = medico.Email;
                         textBox4.Text = medico.Telefono;
-                        ddlTurnoTrabajo.SelectedValue = medico.TurnoTrabajo.IdTurnoTrabajo.ToString();
                         //  Guardar el ID en el HiddenField
                         hfIdMedico.Value = id;
                     }
@@ -92,9 +78,6 @@ namespace web_clinica
                 nueva.Email = textBox3.Text;
                 nueva.Telefono = textBox4.Text;
                 
-                //Asignar el ID del Turno SELECCIONADO**
-                nueva.TurnoTrabajo = new TurnoTrabajo();
-                nueva.TurnoTrabajo.IdTurnoTrabajo = int.Parse(ddlTurnoTrabajo.SelectedValue);
                 if (!string.IsNullOrEmpty(hfIdMedico.Value))
                 {
                     // Es MODIFICACIÓN
@@ -103,9 +86,6 @@ namespace web_clinica
                 }
                 else
                 {
-
-
-
                     negocio.Agregar(nueva);
                 }
                 

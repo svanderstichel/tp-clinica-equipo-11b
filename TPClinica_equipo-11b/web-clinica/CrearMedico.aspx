@@ -8,7 +8,7 @@
     <hr />
 
     <div class="d-flex justify-content-center align-items-start pt-3 mb-5">
-        <div class="card shadow p-4 " style="width: 45rem;background-color: #EDEAD3;">
+        <div class="card shadow p-4 " style="width: 45rem; background-color: #EDEAD3;">
             <h4 class="text-center mb-4" color="blue">Agregar Medico</h4>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -48,13 +48,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-
-                    <div class="mb-3">
-                        <label for="ddlTurnoTrabajo" class="form-label">Turno de Trabajo</label>
-                        <asp:DropDownList runat="server" ID="ddlTurnoTrabajo" CssClass="form-control">
-                        </asp:DropDownList>
-                        <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="El turno es requerido" ControlToValidate="ddlTurnoTrabajo" runat="server" InitialValue="0" />
-                    </div>
                 </div>
             </div>
 
@@ -69,16 +62,16 @@
                 <div class="col-6">
                     <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" CausesValidation="false" />
                 </div>
-                 </div>
+            </div>
 
-                <div class="mb-3 d-grid gap-2">
-                    <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-danger"  OnClick="btnInactivar_Click" runat="server" />
+            <div class="mb-3 d-grid gap-2">
+                <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-danger" OnClick="btnInactivar_Click" runat="server" />
 
-                </div>
+            </div>
 
-                
 
-<%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+            <%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
 
        
@@ -99,7 +92,6 @@
                  <%}  %>
             </ContentTemplate>            
          </asp:UpdatePanel>No hay borrado fisico de registros --%>
-     
         </div>
-      </div>
+    </div>
 </asp:Content>

@@ -27,9 +27,6 @@ namespace web_clinica
             dgvMedicos.DataBind();        
         }
 
-        
-       
-
         protected void btnAgregarMedicos_Click(object sender, EventArgs e)
         {
             Response.Redirect("CrearMedico.aspx", false);
@@ -38,13 +35,6 @@ namespace web_clinica
         protected void btnRegresarMedicos_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx", false);
-        }
-
-        protected void dgvMedicos_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            string id = dgvMedicos.SelectedDataKey.Value.ToString();
-            Response.Redirect("CrearMedico.aspx?id=" + id);
-
         }
 
         protected void dgvMedicos_PageIndexChanging1(object sender, GridViewPageEventArgs e)
@@ -56,6 +46,26 @@ namespace web_clinica
         protected void btnEspecialidades_Click(object sender, EventArgs e)
         {
             Response.Redirect("Especialidades.aspx", false);
+        }
+
+        protected void dgvMedicos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            string id = dgvMedicos.DataKeys[index].Value.ToString();
+            switch (e.CommandName)
+            { 
+                case "Especialidades":
+                    Response.Redirect("AsignarEspecialidad.aspx?id=" + id, false);
+                    break;
+
+                case "Horario":
+                    Response.Redirect("AsignarHorario.aspx?id=" + id, false);
+                    break;
+
+                case "Datos":
+                    Response.Redirect("CrearMedico.aspx?id=" + id, false);
+                    break;
+            }
         }
     }
 }
