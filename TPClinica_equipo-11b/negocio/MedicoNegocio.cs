@@ -141,12 +141,13 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido,Matricula, Email, Telefono) VALUES (@Nombre,    @Apellido,    @Matricula,     @Email,     @Telefono)");
+                datos.SetearConsulta("INSERT INTO Medico (Nombre, Apellido,Matricula, Email, Telefono, Estado) VALUES (@Nombre,    @Apellido,    @Matricula,     @Email,     @Telefono, @Estado)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Apellido", nueva.Apellido);
                 datos.setearParametro("@Matricula", nueva.Matricula);
                 datos.setearParametro("@Email", nueva.Email);
                 datos.setearParametro("@Telefono", nueva.Telefono);
+                datos.setearParametro("@Estado", true);
 
 
                 datos.ejecutarAccion();
