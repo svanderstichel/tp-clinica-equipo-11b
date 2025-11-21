@@ -15,12 +15,21 @@ namespace web_clinica
         {
             if (!IsPostBack)
             {
+                string id = Request.QueryString["id"];
+
+                if (string.IsNullOrEmpty(id))
+                {
+                    Session.Add("Error", "No se seleccionó un médico");
+                    Response.Redirect("Error.aspx", false);
+                }
+                Session["IdMedico"] = id;
                 MedicoNegocio negocio = new MedicoNegocio();
+
 
                 try
                 {
 
-                    dgvEspeciliadadMedico.DataSource = negocio.ListarMedicos();
+                    dgvEspeciliadadMedico.DataSource = (negocio.ListarMedicos(id))[0];
                     dgvEspeciliadadMedico.DataBind();
 
 

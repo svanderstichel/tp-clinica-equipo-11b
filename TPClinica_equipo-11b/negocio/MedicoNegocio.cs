@@ -91,16 +91,18 @@ namespace negocio
             List<Medico> lista = new List<Medico>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, Estado  FROM Medico Where Estado = 1");
-            
-            if (id != "")
+            if(id == "")
             {
+                datos.SetearConsulta( "SELECT IdMedico, Nombre, Apellido, Matricula, Email, Telefono, Estado " +
+                                      "FROM Medico WHERE Estado = 1" );
+            }
+            else {
 
-                datos.SetearConsulta("SELECT IdMedico, Nombre, Apellido, Matricula, Email,Telefono, Estado FROM Medico where IdMedico = @IdMedico");
+
+                datos.SetearConsulta( "SELECT IdMedico, Nombre, Apellido, Matricula, Email, Telefono, Estado " +
+                                      "FROM Medico WHERE IdMedico = @IdMedico" );
                 datos.setearParametro("@IdMedico", id);
             }
-
-
 
             try
             {
@@ -118,8 +120,6 @@ namespace negocio
                     esp.Email = Convert.ToString(datos.Lector["Email"]);
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
                     esp.Estado = bool.Parse(datos.Lector["Estado"].ToString());
-
-
 
                     lista.Add(esp);
                 }

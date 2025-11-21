@@ -7,7 +7,11 @@
     <div class="row">
         <div class="col">
                         <div class="w-100">
-        <h3 class="text-center mb-3">Lista de Médicos</h3> <asp:GridView runat="server" ID="dgvMedicos" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" DataKeyNames="IdMedico" OnRowCommand="dgvMedicos_RowCommand" OnPageIndexChanging="dgvMedicos_PageIndexChanging1" AllowPaging="true" PageSize="10">
+        <h3 class="text-center mb-3">Lista de Médicos</h3>
+        <asp:GridView runat="server" ID="dgvMedicos"
+            CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
+            DataKeyNames="IdMedico" OnRowCommand="dgvMedicos_RowCommand" 
+            OnPageIndexChanging="dgvMedicos_PageIndexChanging1" AllowPaging="true" PageSize="10">
 
     <Columns>
         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -16,7 +20,7 @@
         <asp:BoundField HeaderText="Email" DataField="Email" />
         <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
 
-        <asp:ButtonField 
+<%--       <asp:ButtonField 
             HeaderText="Especialidades"
             CommandName="Especialidades"
             Text="🩺"
@@ -24,6 +28,17 @@
             ControlStyle-CssClass="btn btn-outline-info"
             ItemStyle-HorizontalAlign="Center"
             HeaderStyle-HorizontalAlign="Center" />
+--%>
+
+        <asp:TemplateField HeaderText="Especialidades">
+    <ItemTemplate>
+        <asp:Button runat="server"
+            Text="🩺"
+            CssClass="btn btn-outline-info"
+            CommandName="Especialidades"
+            CommandArgument='<%# Container.DataItemIndex %>' />
+    </ItemTemplate>
+</asp:TemplateField>
 
         <asp:ButtonField 
             HeaderText="Horario"
