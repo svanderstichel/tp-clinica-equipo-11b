@@ -85,3 +85,23 @@ CREATE TABLE Usuario (
     Pass VARCHAR(20) NOT NULL,
     Tipo INT NOT NULL
 );
+
+-- ESPECIALIDADES
+INSERT INTO Especialidad (Nombre, Descripcion, Estado)
+VALUES 
+('Cardiología', 'Estudios y control del sistema cardiovascular', 1),
+('Dermatología', 'Atención de piel, uñas y cabello', 1),
+('Pediatría', 'Atención médica de niños y adolescentes', 1),
+('Ginecología', 'Salud reproductiva y control ginecológico', 1),
+('Traumatología', 'Lesiones y sistema músculo-esquelético', 1);
+GO
+
+-- MÉDICOS
+INSERT INTO Medico (Nombre, Apellido, Matricula, Email, Telefono, DiasLaborales, HoraEntrada, HoraSalida, Estado)
+VALUES
+('Juan', 'Pérez', 'MAT-001', 'juan.perez@clinica.com', '1122334455', '1,2,3,4,5', '08:00', '16:00', 1),
+('María', 'Gómez', 'MAT-002', 'maria.gomez@clinica.com', '1199887766', '1,2,3,4,5', '09:00', '17:00', 1),
+('Roberto', 'López', 'MAT-003', 'roberto.lopez@clinica.com', '1133445566', '2,3,4', '10:00', '18:00', 1),
+('Ana', 'Martínez', 'MAT-004', 'ana.martinez@clinica.com', '1144556677', '1,3,5', '08:30', '15:30', 1),
+('Lucía', 'Fernández', 'MAT-005', 'lucia.fernandez@clinica.com', '1177665544', '1,2,3,4,5', '12:00', '20:00', 1);
+GO
