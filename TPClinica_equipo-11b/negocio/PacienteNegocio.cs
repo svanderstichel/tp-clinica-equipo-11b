@@ -207,6 +207,44 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public Paciente LeerPacienteEmail(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Paciente paciente = new Paciente();
+            try
+            {
+                datos.setearParametro("@email", email);
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                                 " FROM Paciente as p " +
+                                 "INNER JOIN ObraSocial as os  ON p.IdObraSocial = os.IdObraSocial WHERE Email = @email");
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
+                    paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    paciente.Email = Convert.ToString(datos.Lector["Email"]);
+                    paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
+                    paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    paciente.ObraSocial = new ObraSocial();
+                    paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+
+                    return paciente;
+                }
+
+                return paciente;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
         public List<Paciente> ListarUsuarioTipoPaciente(string email)
         {
             List<Paciente> lista = new List<Paciente>();
