@@ -49,10 +49,12 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-                Session.Add("Error", ex);
-                throw;
-                //redirigir a pantalla de error
-            }
+                    Session.Add("Error", "Ocurrió un error al guardar los datos del médico: " + ex.Message);
+                    //Session.Add("Error", ex);
+                    //throw;
+                    //redirigir a pantalla de error
+                    Response.Redirect("Error.aspx", false);
+                }
 
             }
 
@@ -92,11 +94,13 @@ namespace web_clinica
                 Response.Redirect("Medicos.aspx", false);
             }
             catch (Exception ex)
+
             {
                 
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -121,6 +125,7 @@ namespace web_clinica
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -140,6 +145,7 @@ namespace web_clinica
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
+                Response.Redirect("Error.aspx", false);
             }
 
         }
@@ -162,6 +168,7 @@ namespace web_clinica
                 Session.Add("Error", ex);
                 throw;
                 //redirigir a pantalla de error
+                Response.Redirect("Error.aspx", false);
             }
 
 
