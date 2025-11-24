@@ -19,10 +19,13 @@ namespace web_clinica
                 Response.Redirect("Error.aspx", false);
                 return;
             }
+            
+            EspecialidadNegocio negocio = new EspecialidadNegocio();
+                
+
             if (!IsPostBack)
             {
-                EspecialidadNegocio negocio = new EspecialidadNegocio();
-                dgvEspecialidad.DataSource = negocio.ListarEspecialidades();
+                dgvEspecialidad.DataSource = negocio.ListarEspecialidadesDos();
                 dgvEspecialidad.DataBind();
             }
         }
@@ -49,7 +52,25 @@ namespace web_clinica
         protected void dgvEspecialidad_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvEspecialidad.PageIndex = e.NewPageIndex;
+            EspecialidadNegocio negocio = new EspecialidadNegocio();
+            dgvEspecialidad.DataSource = negocio.ListarEspecialidadesDos();
             dgvEspecialidad.DataBind();
+        }
+
+        protected void dgvEspecialidad_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Accion")
+            {
+                // Obtener el índice de la fila que se presionó.
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                // Obtener el valor del DataKey (IdEspecialidad) usando el índice.
+                
+                string id = dgvEspecialidad.DataKeys[index].Value.ToString();
+
+                // Redirigir a la página de modificación.
+                Response.Redirect("CrearEspecialidad.aspx?id=" + id, false);
+            }
         }
     }
 }
