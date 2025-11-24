@@ -1,11 +1,13 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using negocio.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using dominio;
-using negocio;
 
 namespace web_clinica
 {
@@ -20,27 +22,41 @@ namespace web_clinica
                 Response.Redirect("Error.aspx", false);
                 return;
             }
+            if (!IsPostBack)
+            {
+                try
+                {
+                    TurnoNegocio datos = new TurnoNegocio();
+                    Usuario usuario = (Usuario)Session["Usuario"];
+                    //verifica usuario administrador/recepcionista lista todos los turnos
+                    if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
+                    {
+                        Session.Add("ListaTurnos", datos.ListarTurnos());
+                        dgvTurnos.DataSource = Session["ListaTurnos"];
+                        dgvTurnos.DataBind();
 
-            try
-            {
-                TurnoNegocio datos = new TurnoNegocio();
-                Usuario usuario = (Usuario)Session["Usuario"];
-                //verifica usuario administrador/recepcionista lista todos los turnos
-                if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
-                {
-                    dgvTurnos.DataSource = datos.ListarTurnos();
-                    dgvTurnos.DataBind();
-                }else
-                //verifica usuario medico/paciente lista turnos asociados
-                {
-                    dgvTurnos.DataSource = datos.ListarTurnos(usuario);
-                    dgvTurnos.DataBind();
+                        //cargo valores al filtro de estado de turno
+                        FiltroEstado.Items.Clear();
+                        foreach (var estado in Enum.GetValues(typeof(Estado)))
+                        {
+                            FiltroEstado.Items.Add(
+                                new ListItem(estado.ToString(), estado.ToString())
+                            );
+                        }
+                        FiltroEstado.Items.Insert(0, new ListItem("", ""));
+                    }
+                    else
+                    //verifica usuario medico/paciente lista turnos asociados
+                    {
+                        dgvTurnos.DataSource = datos.ListarTurnos(usuario);
+                        dgvTurnos.DataBind();
+                    }
                 }
-            }
-            catch(Exception ex)
-            {
-                Session.Add("Error", ex);
-                Response.Redirect("Error.aspx",false);
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex);
+                    Response.Redirect("Error.aspx", false);
+                }
             }
         }
          
@@ -71,6 +87,55 @@ namespace web_clinica
         {
             dgvTurnos.PageIndex = e.NewPageIndex;
             dgvTurnos.DataBind();
+        }
+
+        protected void FiltroPaciente_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["ListaTurnosFiltrada"] != null) {
+                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnosFiltrada"]).FindAll(x => x.Paciente.ToUpper().Contains(FiltroPaciente.Text.ToUpper()));
+                dgvTurnos.DataSource = listaTurnosFiltrada;
+                dgvTurnos.DataBind();
+                Session.Remove("ListaTurnosFiltrada");
+            }
+            else
+            {
+                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnos"]).FindAll(x => x.Paciente.ToUpper().Contains(FiltroPaciente.Text.ToUpper()));
+                dgvTurnos.DataSource = listaTurnosFiltrada;
+                dgvTurnos.DataBind();
+                Session["ListaTurnosFiltrada"] = listaTurnosFiltrada;
+            }
+        }
+
+        protected void FiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Session["ListaTurnosFiltrada"] != null)
+            {
+                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnosFiltrada"]).FindAll(x => x.Estado.ToString() == FiltroEstado.SelectedItem.Text);
+                dgvTurnos.DataSource = listaTurnosFiltrada;
+                dgvTurnos.DataBind();
+                Session.Remove("ListaTurnosFiltrada");
+            }
+            else
+            {
+                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnos"]).FindAll(x => x.Estado.ToString() == FiltroEstado.SelectedItem.Text);
+                dgvTurnos.DataSource = listaTurnosFiltrada;
+                dgvTurnos.DataBind();
+                Session["ListaTurnosFiltrada"] = listaTurnosFiltrada;
+            }
+        }
+
+        protected void BtnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("Turnos.aspx", false);
+            } 
+            catch(Exception ex)
+            {
+                Session.Add("Error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
     }
 }
