@@ -17,7 +17,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             datos.setearParametro("@IdMedico", idMedico);
-            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M WHERE IdMedico = @IdMedico");
+            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado, M.DiasLaborales, M.HoraEntrada, M.HoraSalida FROM Medico M WHERE IdMedico = @IdMedico and M.Estado = 1");
             try
             {
                 datos.ejecutarLectura();
@@ -33,6 +33,9 @@ namespace negocio
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
                     medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    medico.DiasLaborales = stringToDias(datos.Lector["DiasLaborales"].ToString());
+                    medico.HoraEntrada = (TimeSpan)datos.Lector["HoraEntrada"];
+                    medico.HoraSalida = (TimeSpan)datos.Lector["HoraSalida"];
 
                     return medico;
                 }
@@ -210,6 +213,26 @@ namespace negocio
             }
 
         }
+        // metodo para castear el la lista de dias de la base de datos a el enum DiaSemana
+        public List<DiaSemana> stringToDias(string dias)
+            {
+            //si es null devuelve una lista vacia
+            if (string.IsNullOrWhiteSpace(dias))
+                return new List<DiaSemana>();
+
+            dias = dias.Trim('[', ']', ' ');
+                return dias.Split(',').Select(x => {int valor = int.Parse(x); return (DiaSemana)valor;}).ToList();
+            }
+        // metodo para castear la lista de enum DiaSemana a un array varchar de la base de datos
+        public string diasToString(List<DiaSemana> dias)
+        {
+            if (dias == null || dias.Count == 0)
+                return "[]";
+
+            var numeros = dias.Select(d => ((int)d).ToString());
+            return "[" + string.Join(",", numeros) + "]";
+        }
+
         public void EliminarLogico(int id, bool Estado=false)
         {
 

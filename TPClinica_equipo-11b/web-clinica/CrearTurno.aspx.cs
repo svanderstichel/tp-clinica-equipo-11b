@@ -32,6 +32,7 @@ namespace web_clinica
                 ddlEspecialidad.DataBind();
                 ddlEspecialidad.Items.Insert(0, new ListItem("Seleccionar...", ""));
                 ddlEspecialidad.SelectedIndex = 0;
+                txtFechaTurno.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
             }
             //precarga de formulario para modificar turno
             if (!IsPostBack && Session["Turno"] != null)
@@ -85,28 +86,35 @@ namespace web_clinica
 
                     //se cargan horarios diponibles
                     List<TimeSpan> horarios = new List<TimeSpan>();
-                    for (int hora = 7; hora <= 18; hora++)
+
+                    // se carga el horario laboral del medico
+                    for (int hora = medico.HoraEntrada.Hours; hora <= medico.HoraSalida.Hours; hora++)
                     {
                         horarios.Add(new TimeSpan(hora, 0, 0));
                     }
-                    int idMedico = (int)Session["IdMedicoSeleccionado"];
                     DateTime fecha = DateTime.Parse(txtFechaTurno.Text);
-                    Session.Add("FechaSeleccionada", fecha);
 
-                    if (fecha.DayOfWeek != DayOfWeek.Sunday && fecha.DayOfWeek != DayOfWeek.Saturday)
+                    // verificar que el medico trabaje ese dia
+                    DayOfWeek dia = fecha.DayOfWeek;
+                    DiaSemana diaMedico = (DiaSemana)((int)dia);
+                    if (dia != DayOfWeek.Sunday && dia != DayOfWeek.Saturday && medico.DiasLaborales.Contains(diaMedico))
                     {
-                        TurnoNegocio datosTurnos = new TurnoNegocio();
-                        List<TimeSpan> turnosOcupados = datosTurnos.TurnosOcupados(idMedico, fecha);
+                    //se filtran los horarios con turnos ocupados
+                    TurnoNegocio datosTurnos = new TurnoNegocio();
+                    List<TimeSpan> turnosOcupados = datosTurnos.TurnosOcupados(medico.IdMedico, fecha);
 
-                        List<TimeSpan> horariosDisponibles = horarios.FindAll(x => !turnosOcupados.Contains(x));
+                    List<TimeSpan> horariosDisponibles = horarios.FindAll(x => !turnosOcupados.Contains(x));
+                    // se agrega el horario del turno a modificar
+                    horariosDisponibles.Add(turno.Hora);
 
-                        horariosDisponibles.Add(turno.Hora);
+                    //se cargan los horarios disponible en el ddl
+                    ddlHora.DataSource = horariosDisponibles;
+                    ddlHora.DataBind();
 
-                        ddlHora.DataSource = horariosDisponibles;
-                        ddlHora.DataBind();
-
-                        ddlHora.SelectedValue = turno.Hora.ToString();
+                    //se genera un preselecciona la hora del turno
+                    ddlHora.SelectedValue = turno.Hora.ToString();
                     }
+            
                 }
                 catch(Exception ex)
                 {
@@ -164,27 +172,41 @@ namespace web_clinica
             Medico medico = datos.LeerMedico(idMedico);
 
 
-            for (int hora = Convert.ToInt32(medico.HoraEntrada); hora <= Convert.ToInt32(medico.HoraSalida); hora++)
+            // se cargan variables requeridas para la operacion
+            // se carga el horario laboral del medico
+            for (int hora = medico.HoraEntrada.Hours; hora <= medico.HoraSalida.Hours; hora++)
             {
                 horarios.Add(new TimeSpan(hora, 0, 0));
             }
 
-            DateTime fecha = DateTime.Parse(txtFechaTurno.Text);
-            Session.Add("FechaSeleccionada", fecha);
+                DateTime fecha = DateTime.Parse(txtFechaTurno.Text);
+                Session.Add("FechaSeleccionada", fecha);
 
-            if (fecha.DayOfWeek != DayOfWeek.Sunday && fecha.DayOfWeek != DayOfWeek.Saturday)
-            {
-                TurnoNegocio datosTurnos = new TurnoNegocio();
-                List<TimeSpan> turnosOcupados = datosTurnos.TurnosOcupados(idMedico, fecha);
+                // verificar que el medico trabaje ese dia
+                DayOfWeek dia = fecha.DayOfWeek;
+                DiaSemana diaMedico = (DiaSemana)((int)dia);
+                if (dia != DayOfWeek.Sunday && dia != DayOfWeek.Saturday && medico.DiasLaborales.Contains(diaMedico))
+                {
+                    //se filtran los horarios con turnos ocupados
+                    TurnoNegocio datosTurnos = new TurnoNegocio();
+                    List<TimeSpan> turnosOcupados = datosTurnos.TurnosOcupados(idMedico, fecha);
 
-                List<TimeSpan> horariosDisponibles = horarios.FindAll(x => !turnosOcupados.Contains(x));
+                    List<TimeSpan> horariosDisponibles = horarios.FindAll(x => !turnosOcupados.Contains(x));
 
-                ddlHora.DataSource = horariosDisponibles;
-                ddlHora.DataBind();
+                    //se cargan los horarios disponible en el ddl
+                    ddlHora.DataSource = horariosDisponibles;
+                    ddlHora.DataBind();
 
-                ddlHora.Items.Insert(0, new ListItem("Seleccionar hora...", ""));
+                    //se genera un placeholder para el ddl
+                    ddlHora.Items.Insert(0, new ListItem("Seleccionar hora...", ""));
+                }
+                else
+                {
+                    // en el caso que no sea un dia laborable se le informa al usuario
+                    ddlHora.Items.Clear();
+                    ddlHora.Items.Insert(0, new ListItem("El médico no trabaja este día", ""));
+                }
             }
-        }
         // guardar/modificar turno
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
