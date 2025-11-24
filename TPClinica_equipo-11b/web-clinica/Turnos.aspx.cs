@@ -86,6 +86,17 @@ namespace web_clinica
         protected void dgvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvTurnos.PageIndex = e.NewPageIndex;
+
+            // verifica si hay filtros activos
+            if (Session["ListaTurnosFiltrada"] != null)
+            {
+                dgvTurnos.DataSource = (List<TurnoDto>)Session["ListaTurnosFiltrada"];
+            }
+            else
+            {
+                dgvTurnos.DataSource = (List<TurnoDto>)Session["ListaTurnos"];
+            }
+
             dgvTurnos.DataBind();
         }
 
@@ -136,6 +147,35 @@ namespace web_clinica
                 Response.Redirect("Error.aspx", false);
             }
 
+        }
+        //metodo para asignar estilo a los estados de turno segun su valor
+        protected void dgvTurnos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string estado = e.Row.Cells[0].Text.Trim();
+                string css = "";
+
+                switch (estado)
+                {
+                    case "Nuevo":
+                        css = "badge bg-primary";
+                        break;
+                    case "Reprogramado":
+                        css = "badge bg-warning text-dark";
+                        break;
+                    case "Cancelado":
+                        css = "badge bg-danger";
+                        break;
+                    case "Ausente":
+                        css = "badge bg-secondary";
+                        break;
+                    case "Cerrado":
+                        css = "badge bg-success";
+                        break;
+                }
+                e.Row.Cells[0].Text = $"<span class='{css}'>{estado}</span>";
+            }
         }
     }
 }
