@@ -25,6 +25,15 @@ namespace negocio
 
         public void SetearConsulta(string consulta)
         {
+            //Limpiar la lista de parámetros antes de establecer una nueva consulta.
+          
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = consulta;
+        }
+        public void SetearConsultaDos(string consulta)
+        {
+            //Limpiar la lista de parámetros antes de establecer una nueva consulta.
+            comando.Parameters.Clear();
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }

@@ -25,11 +25,11 @@ namespace web_clinica
                 Session["IdMedico"] = id;
                 MedicoNegocio negocio = new MedicoNegocio();
 
-
+                List<Medico> listaMedico = negocio.ListarMedicos(id);
                 try
                 {
-
-                    dgvEspeciliadadMedico.DataSource = (negocio.ListarMedicos(id))[0];
+                    dgvEspeciliadadMedico.DataSource = listaMedico;
+                    //dgvEspeciliadadMedico.DataSource = (negocio.ListarMedicos(id))[0];
                     dgvEspeciliadadMedico.DataBind();
 
 
@@ -136,11 +136,11 @@ namespace web_clinica
 
                 //  Recargar el GridView para asegurar que se muestre el estado guardado
                 // Es importante hacer un DataBind completo después de guardar.
-                MedicoNegocio negocio = new MedicoNegocio();
-                dgvEspeciliadadMedico.DataSource = negocio.ListarMedicos();
-                dgvEspeciliadadMedico.DataBind();
+                //MedicoNegocio negocio = new MedicoNegocio();
+                //dgvEspeciliadadMedico.DataSource = negocio.ListarMedicos();
+                //dgvEspeciliadadMedico.DataBind();
+                Response.Redirect("Medicos.aspx", false);
 
-                
             }
             catch (Exception ex)
             {
