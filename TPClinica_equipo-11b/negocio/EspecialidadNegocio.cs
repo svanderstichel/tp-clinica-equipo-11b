@@ -18,7 +18,7 @@ namespace negocio
             List<Especialidad> lista = new List<Especialidad>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad WHERE Estado = 1 ");
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad ");
             if (id != "") {
 
                 datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion, Estado FROM Especialidad where IdEspecialidad = @IdEspecialidad and Estado = 1");
@@ -54,6 +54,52 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+
+        public List<Especialidad> ListarEspecialidadesDos(string id = "")
+        {
+            List<Especialidad> lista = new List<Especialidad>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.SetearConsulta("SELECT IdEspecialidad, Nombre,  Descripcion, Estado FROM Especialidad ");
+            if (id != "")
+            {
+
+                datos.SetearConsulta("SELECT IdEspecialidad, Nombre, Descripcion, Estado FROM Especialidad where IdEspecialidad = @IdEspecialidad ");
+                datos.setearParametro("@IdEspecialidad", id);
+            }
+
+
+            try
+            {
+                datos.ejecutarLectura();
+
+
+
+                while (datos.Lector.Read())
+                {
+                    Especialidad esp = new Especialidad();
+                    esp.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
+                    esp.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    esp.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
+                    //esp.Estado = bool.Parse (datos.Lector["Estado"].ToString()); no se muestra el estado en la web
+                    esp.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(esp);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+
         public void Agregar(Especialidad nueva)
         {
             AccesoDatos datos = new AccesoDatos();

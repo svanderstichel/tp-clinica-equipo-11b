@@ -46,6 +46,16 @@
             ControlStyle-CssClass="btn btn-outline-info"
             ItemStyle-HorizontalAlign="Center"
             HeaderStyle-HorizontalAlign="Center" />
+
+        <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
+    <ItemTemplate>
+            <asp:CheckBox  runat="server" ID="chkEstado" Enabled="false" Checked='<%# Eval("Estado") %>' />        
+        
+    </ItemTemplate>
+</asp:TemplateField>
+
+
+
     </Columns>
 
 </asp:GridView>

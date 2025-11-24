@@ -15,7 +15,7 @@ namespace negocio
         {
             Medico medico = new Medico();
             AccesoDatos datos = new AccesoDatos();
-
+          
             datos.setearParametro("@IdMedico", idMedico);
             datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado, M.DiasLaborales, M.HoraEntrada, M.HoraSalida FROM Medico M WHERE IdMedico = @IdMedico and M.Estado = 1");
             try
@@ -57,7 +57,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
 
             datos.setearParametro("@IdEspecialidad", idEspecialidad);
-            datos.SetearConsulta("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
+            datos.SetearConsultaDos("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
 
             try
             {
@@ -97,14 +97,16 @@ namespace negocio
             if(id == "")
             {
                 datos.SetearConsulta( "SELECT IdMedico, Nombre, Apellido, Matricula, Email, Telefono, Estado " +
-                                      "FROM Medico WHERE Estado = 1" );
+                                      "FROM Medico" );
             }
             else {
 
-
-                datos.SetearConsulta( "SELECT IdMedico, Nombre, Apellido, Matricula, Email, Telefono, Estado " +
+                
+                datos.SetearConsultaDos( "SELECT IdMedico, Nombre, Apellido, Matricula, Email, Telefono, Estado " +
                                       "FROM Medico WHERE IdMedico = @IdMedico" );
-                datos.setearParametro("@IdMedico", id);
+               //datos.setearParametro("@IdMedico", id);
+                datos.setearParametro("@IdMedico", Convert.ToInt32(id));
+
             }
 
             try
@@ -122,7 +124,9 @@ namespace negocio
                     esp.Matricula = Convert.ToString(datos.Lector["Matricula"]);
                     esp.Email = Convert.ToString(datos.Lector["Email"]);
                     esp.Telefono= Convert.ToString(datos.Lector["Telefono"]);
-                    esp.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    //esp.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    //esp.Estado = (bool)datos.Lector["Estado"];
+                    esp.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
 
                     lista.Add(esp);
                 }

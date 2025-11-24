@@ -1,6 +1,7 @@
 ﻿using dominio;
 using negocio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -28,35 +29,52 @@ namespace web_clinica
             }
             ConfirmarEliminacion = false;
 
+            //guardo el dato del id 
+            string id = Request.QueryString["id"];
 
-            try
+
+            // si es diferente de null entonces lo cargo para modificar
+
+            if (!IsPostBack)
             {
-                //guardo el dato del id 
-                string id = Request.QueryString["id"];
 
-                // si es diferente de null entonces lo cargo para modificar
-
-                if (!IsPostBack)
+                try
                 {
+
                     if (!string.IsNullOrEmpty(id)) // Si hay ID en la URL, es MODIFICACIÓN
                     {
                         EspecialidadNegocio negocio = new EspecialidadNegocio();
-                        Especialidad especialidad = negocio.ListarEspecialidades(id)[0];
+                        List<dominio.Especialidad> lista = negocio.ListarEspecialidadesDos(id);
 
-                        TextBox1.Text = especialidad.Nombre;
-                        TextBox2.Text = especialidad.Descripcion;
+                        if (lista != null && lista.Count > 0)
+                        {
+                            dominio.Especialidad especialidad = lista[0];
+
+                            TextBox1.Text = especialidad.Nombre;
+                            TextBox2.Text = especialidad.Descripcion;
+                            hfIdEspecialidad.Value = id;
+                        }
+                        else
+                        {
+                            // Si el ID no existe en la base de datos, redirigir al error
+                            Session["Error"] = "Error al cargar la especialidad: El ID proporcionado no fue encontrado en el sistema.";
+                            Response.Redirect("Error.aspx", false);
+                        }
+
+
 
                         //  Guardar el ID en el HiddenField
                         hfIdEspecialidad.Value = id;
                     }
 
                 }
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex);
-                throw;
-                //redirigir a pantalla de error
+
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex);
+                    throw;
+                    //redirigir a pantalla de error
+                }
             }
         }
 
@@ -137,6 +155,23 @@ namespace web_clinica
                 Especialidad nueva = new Especialidad();
                 nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
                 negocio.EliminarLogico(nueva.IdEspecialidad);
+                Response.Redirect("Especialidades.aspx");
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+            }
+        }
+
+        protected void btnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EspecialidadNegocio negocio = new EspecialidadNegocio();
+                Especialidad nueva = new Especialidad();
+                nueva.IdEspecialidad = int.Parse(hfIdEspecialidad.Value);
+                negocio.EliminarLogico(nueva.IdEspecialidad, true);
                 Response.Redirect("Especialidades.aspx");
             }
             catch (Exception ex)

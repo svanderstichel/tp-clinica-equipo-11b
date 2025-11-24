@@ -40,6 +40,8 @@ namespace negocio
 
             try
             {
+                
+
                 datos.SetearConsulta("UPDATE Usuario SET " +
                                     "Nombre = @nombre, " +
                                     "Apellido = @apellido, " +
@@ -52,6 +54,7 @@ namespace negocio
                 datos.setearParametro("@apellido", usuario.Apellido);
                 datos.setearParametro("@pass", usuario.Pass);
                 datos.setearParametro("@tipo", (int)usuario.Tipo);
+
 
                 datos.ejecutarAccion();
             }
