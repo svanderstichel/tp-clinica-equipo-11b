@@ -66,8 +66,10 @@
 
             <div class="mb-3 d-grid gap-2">
                 <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-danger" OnClick="btnInactivar_Click" runat="server" />
-
+                <asp:Button Text="Activar" runat="server" ID="btnActivar" CssClass="btn btn-success" onclick="btnActivar_Click"  />
+                
             </div>
+
 
 
 

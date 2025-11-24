@@ -143,5 +143,28 @@ namespace web_clinica
             }
 
         }
+
+       
+
+        protected void btnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MedicoNegocio negocio = new MedicoNegocio();
+                Medico nueva = new Medico();
+                nueva.IdMedico = int.Parse(hfIdMedico.Value);
+                negocio.EliminarLogico(nueva.IdMedico, true);
+                Response.Redirect("Medicos.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+                throw;
+                //redirigir a pantalla de error
+            }
+
+
+        }
     }
 }
