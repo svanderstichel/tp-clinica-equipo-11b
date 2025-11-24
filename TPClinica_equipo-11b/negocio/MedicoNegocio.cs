@@ -89,6 +89,44 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public List<Medico> ListarMedicosEspecialidad(int idEspecialidad)
+        {
+            List<Medico> lista = new List<Medico>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.setearParametro("@IdEspecialidad", idEspecialidad);
+            datos.SetearConsulta("SELECT DISTINCT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado FROM Medico M INNER JOIN MedicoEspecialidad E ON M.IdMedico = E.IdMedico WHERE IdEspecialidad = @IdEspecialidad");
+
+            try
+            {
+                datos.ejecutarLectura();
+
+
+
+                while (datos.Lector.Read())
+                {
+                    Medico medico = new Medico();
+                    medico.IdMedico = (int)datos.Lector["IdMedico"];
+                    medico.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    medico.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
+                    medico.Email = Convert.ToString(datos.Lector["Email"]);
+                    medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    lista.Add(medico);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
         public List<Medico> ListarMedicos(string id = "")
         {
             List<Medico> lista = new List<Medico>();
