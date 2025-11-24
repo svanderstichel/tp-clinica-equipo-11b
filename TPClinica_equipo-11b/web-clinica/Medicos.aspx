@@ -20,7 +20,7 @@
         <asp:BoundField HeaderText="Email" DataField="Email" />
         <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
 
-<%--       <asp:ButtonField 
+        <asp:ButtonField 
             HeaderText="Especialidades"
             CommandName="Especialidades"
             Text="🩺"
@@ -28,17 +28,6 @@
             ControlStyle-CssClass="btn btn-outline-info"
             ItemStyle-HorizontalAlign="Center"
             HeaderStyle-HorizontalAlign="Center" />
---%>
-
-        <asp:TemplateField HeaderText="Especialidades">
-    <ItemTemplate>
-        <asp:Button runat="server"
-            Text="🩺"
-            CssClass="btn btn-outline-info"
-            CommandName="Especialidades"
-            CommandArgument='<%# Container.DataItemIndex %>' />
-    </ItemTemplate>
-</asp:TemplateField>
 
         <asp:ButtonField 
             HeaderText="Horario"

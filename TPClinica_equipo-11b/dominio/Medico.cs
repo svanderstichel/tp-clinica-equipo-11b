@@ -24,9 +24,8 @@ namespace dominio
         public string Telefono { get; set; }
         public List<Especialidad> Especialidad { get; set; }
         public List<DiaSemana> DiasLaborales { get; set; }
-        public TimeSpan HoraEntrada { get; set; } //tipo TimeSpan: Se usa para almacenar y manipular diferencias de tiempo, como la hora de entrada y salida de un turno.
+        public TimeSpan HoraEntrada { get; set; }
         public TimeSpan HoraSalida { get; set; }
-        //public List<TurnoTrabajo> TurnosAsignados { get; set; }
         public bool Estado { get; set; }
     }
 }

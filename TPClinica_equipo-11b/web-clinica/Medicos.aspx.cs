@@ -50,29 +50,25 @@ namespace web_clinica
 
         protected void dgvMedicos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Especialidades" ||
-                e.CommandName == "Horario" ||
-                e.CommandName == "Datos")
+             int index = Convert.ToInt32(e.CommandArgument);
+            string id = dgvMedicos.DataKeys[index].Value.ToString();
+            switch (e.CommandName)
             {
-                int index = Convert.ToInt32(e.CommandArgument);
+                case "Especialidades":
+                    Response.Redirect("AsignarEspecialidad.aspx?id=" + id, false);
+                    break;
 
-                string id = dgvMedicos.DataKeys[index].Value.ToString();
+                case "Horario":
+                    Response.Redirect("AsignarHorario.aspx?id=" + id, false);
+                    break;
 
-                switch (e.CommandName)
-                {
-                    case "Especialidades":
-                        Response.Redirect("AsignarEspecialidad.aspx?id=" + id, false);
-                        break;
 
-                    case "Horario":
-                        Response.Redirect("AsignarHorario.aspx?id=" + id, false);
-                        break;
 
-                    case "Datos":
-                        Response.Redirect("CrearMedico.aspx?id=" + id, false);
-                        break;
-                }
+                case "Datos":
+                    Response.Redirect("CrearMedico.aspx?id=" + id, false);
+                    break;
             }
+            
         }     
     }
 }

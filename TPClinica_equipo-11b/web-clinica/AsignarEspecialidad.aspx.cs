@@ -15,14 +15,14 @@ namespace web_clinica
         {
             if (!IsPostBack)
             {
-                string id = Request.QueryString["id"];
+               /* string id = Request.QueryString["id"];
 
                 if (string.IsNullOrEmpty(id))
                 {
                     Session.Add("Error", "No se seleccionó un médico");
                     Response.Redirect("Error.aspx", false);
                 }
-                Session["IdMedico"] = id;
+                Session["IdMedico"] = id;*/
                 MedicoNegocio negocio = new MedicoNegocio();
 
 
