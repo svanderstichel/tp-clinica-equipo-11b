@@ -86,53 +86,17 @@ namespace web_clinica
         protected void dgvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvTurnos.PageIndex = e.NewPageIndex;
-
-            // verifica si hay filtros activos
-            if (Session["ListaTurnosFiltrada"] != null)
-            {
-                dgvTurnos.DataSource = (List<TurnoDto>)Session["ListaTurnosFiltrada"];
-            }
-            else
-            {
-                dgvTurnos.DataSource = (List<TurnoDto>)Session["ListaTurnos"];
-            }
-
-            dgvTurnos.DataBind();
+            AplicarFiltros();
         }
 
         protected void FiltroPaciente_TextChanged(object sender, EventArgs e)
         {
-            if (Session["ListaTurnosFiltrada"] != null) {
-                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnosFiltrada"]).FindAll(x => x.Paciente.ToUpper().Contains(FiltroPaciente.Text.ToUpper()));
-                dgvTurnos.DataSource = listaTurnosFiltrada;
-                dgvTurnos.DataBind();
-                Session.Remove("ListaTurnosFiltrada");
-            }
-            else
-            {
-                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnos"]).FindAll(x => x.Paciente.ToUpper().Contains(FiltroPaciente.Text.ToUpper()));
-                dgvTurnos.DataSource = listaTurnosFiltrada;
-                dgvTurnos.DataBind();
-                Session["ListaTurnosFiltrada"] = listaTurnosFiltrada;
-            }
+            AplicarFiltros();
         }
 
         protected void FiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Session["ListaTurnosFiltrada"] != null)
-            {
-                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnosFiltrada"]).FindAll(x => x.Estado.ToString() == FiltroEstado.SelectedItem.Text);
-                dgvTurnos.DataSource = listaTurnosFiltrada;
-                dgvTurnos.DataBind();
-                Session.Remove("ListaTurnosFiltrada");
-            }
-            else
-            {
-                List<TurnoDto> listaTurnosFiltrada = ((List<TurnoDto>)Session["ListaTurnos"]).FindAll(x => x.Estado.ToString() == FiltroEstado.SelectedItem.Text);
-                dgvTurnos.DataSource = listaTurnosFiltrada;
-                dgvTurnos.DataBind();
-                Session["ListaTurnosFiltrada"] = listaTurnosFiltrada;
-            }
+            AplicarFiltros();
         }
 
         protected void BtnLimpiarFiltro_Click(object sender, EventArgs e)
@@ -176,6 +140,28 @@ namespace web_clinica
                 }
                 e.Row.Cells[0].Text = $"<span class='{css}'>{estado}</span>";
             }
+        }
+        private void AplicarFiltros()
+        {
+            var listaTurnos = (List<TurnoDto>)Session["ListaTurnos"];
+
+            string filtroPaciente = FiltroPaciente.Text.Trim().ToUpper();
+            string filtroEstado = FiltroEstado.SelectedValue;
+
+            List<TurnoDto> listaFiltrada = listaTurnos;
+
+            if (!string.IsNullOrEmpty(filtroPaciente))
+                listaFiltrada = listaFiltrada.FindAll(x =>
+                    x.Paciente.ToUpper().Contains(filtroPaciente)
+                );
+
+            if (!string.IsNullOrEmpty(filtroEstado))
+                listaFiltrada = listaFiltrada.FindAll(x =>
+                    x.Estado.ToString() == filtroEstado
+                );
+
+            dgvTurnos.DataSource = listaFiltrada;
+            dgvTurnos.DataBind();
         }
     }
 }

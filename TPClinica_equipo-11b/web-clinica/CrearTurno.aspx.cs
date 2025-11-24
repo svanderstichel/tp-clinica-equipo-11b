@@ -142,7 +142,7 @@ namespace web_clinica
             int idEspecialidad = int.Parse(ddlEspecialidad.SelectedValue);
             Session.Add("IdEspecialidadSeleccionado", idEspecialidad);
             MedicoNegocio datosMedicos = new MedicoNegocio();
-            List<Medico> medicos = datosMedicos.ListarMedicos(idEspecialidad);
+            List<Medico> medicos = datosMedicos.ListarMedicosEspecialidad(idEspecialidad);
 
             ddlMedico.DataSource = medicos;
             ddlMedico.DataTextField = "Apellido";
