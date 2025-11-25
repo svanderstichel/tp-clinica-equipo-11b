@@ -63,9 +63,9 @@
                 </asp:CheckBoxList>
             </div>
 
-            <div class="d-flex justify-content-end gap-3 mt-4 pt-3 pe-3 pb-3">
-                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-outline-danger" Text="Cancelar" />
-                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-success" Text="Guardar" />
+            <div class="d-flex justify-content-end gap-3 pt-3 pe-3 pb-3">
+                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-outline-danger" Text="Cancelar" OnClick="btnCancelar_Click" />
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnGuardar_Click" />
             </div>
 
         </div>

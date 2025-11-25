@@ -33,9 +33,18 @@ namespace negocio
                     medico.Email = Convert.ToString(datos.Lector["Email"]);
                     medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
                     medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
-                    medico.DiasLaborales = stringToDias(datos.Lector["DiasLaborales"].ToString());
-                    medico.HoraEntrada = (TimeSpan)datos.Lector["HoraEntrada"];
-                    medico.HoraSalida = (TimeSpan)datos.Lector["HoraSalida"];
+                    if(datos.Lector["HoraEntrada"] != DBNull.Value)
+                    {
+                        medico.HoraEntrada = (TimeSpan)datos.Lector["HoraEntrada"];
+                    }
+                    if(datos.Lector["HoraSalida"] != DBNull.Value)
+                    {
+                        medico.HoraSalida = (TimeSpan)datos.Lector["HoraSalida"];
+                    }
+                    if(datos.Lector["DiasLaborales"] != DBNull.Value)
+                    {
+                    medico.DiasLaborales =  stringToDias(datos.Lector["DiasLaborales"].ToString());
+                    }
 
                     return medico;
                 }
@@ -273,6 +282,37 @@ namespace negocio
 
             var numeros = dias.Select(d => ((int)d).ToString());
             return "[" + string.Join(",", numeros) + "]";
+        }
+
+        public void modificarHorario(Medico medico)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta("UPDATE Medico SET HoraEntrada = @HoraEntrada, HoraSalida = @HoraSalida, DiasLaborales = @DiasLaborales WHERE IdMedico = @IdMedico");
+                datos.setearParametro("@IdMedico", medico.IdMedico);
+                datos.setearParametro("@HoraEntrada", medico.HoraEntrada);
+                datos.setearParametro("@HoraSalida", medico.HoraSalida);
+                if(medico.DiasLaborales == null)
+                {
+                    datos.setearParametro("@DiasLaborales", DBNull.Value);
+                }
+                else
+                {
+                datos.setearParametro("@DiasLaborales", diasToString(medico.DiasLaborales));
+                }
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
         }
 
         public void EliminarLogico(int id, bool Estado=false)
