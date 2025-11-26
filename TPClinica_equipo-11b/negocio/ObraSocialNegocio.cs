@@ -15,10 +15,10 @@ namespace negocio
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Estado FROM ObraSocial WHERE Estado = 1");
+            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial WHERE Estado = 1");
             //Si el ID no esta vacio, me traigo solamemte la os que mande por parametro
             if (id != "")
-                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Estado FROM ObraSocial where Estado = 1 and IdObraSocial = " + id);
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial where Estado = 1 and IdObraSocial = " + id);
 
             try
             {
@@ -30,6 +30,7 @@ namespace negocio
                     obra.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     obra.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     obra.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
+                    obra.Cobertura = datos.Lector["Cobertura"].ToString();
                     //  obra.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
                     lista.Add(obra);
@@ -52,9 +53,10 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Estado) VALUES (@Nombre, @Descripcion, 1)");
+                datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Cobertura,  Estado) VALUES (@Nombre, @Descripcion, @Cobertura, 1)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
+                datos.setearParametro("@Cobertura", nueva.Cobertura);
 
                 datos.ejecutarAccion();
             }
@@ -74,10 +76,11 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("UPDATE ObraSocial SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IdObraSocial = @IdObraSocial");
+                datos.SetearConsulta("UPDATE ObraSocial SET Nombre = @Nombre, Descripcion = @Descripcion, Cobertura = @Cobertura WHERE IdObraSocial = @IdObraSocial");
                 datos.setearParametro("@IdObraSocial", obra.IdObraSocial);
                 datos.setearParametro("@Nombre", obra.Nombre);
                 datos.setearParametro("@Descripcion", obra.Descripcion);
+                datos.setearParametro("@Cobertura", obra.Cobertura);
 
                 datos.ejecutarAccion();
             }

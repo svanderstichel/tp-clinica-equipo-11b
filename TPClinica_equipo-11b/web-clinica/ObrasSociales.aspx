@@ -48,6 +48,7 @@
                     <%--                    <asp:BoundField HeaderText="Id" DataField="IdObraSocial" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />--%>
                     <asp:BoundField HeaderText="Nombre de la Obra Social" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                    <asp:BoundField DataField="Cobertura" HeaderText="Cobertura" />
                     <asp:CheckBoxField HeaderText="Estado" DataField="Estado" />
                     <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                 </Columns>
