@@ -85,18 +85,3 @@ CREATE TABLE Usuario (
     Pass VARCHAR(20) NOT NULL,
     Tipo INT NOT NULL
 );
-
-CREATE TABLE Cobertura (
-    IdCobertura INT PRIMARY KEY IDENTITY(1,1),
-    IdObraSocial INT NOT NULL,
-    Nombre VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(200),
-    Estado BIT NOT NULL DEFAULT 1,
-    FOREIGN KEY (IdObraSocial) REFERENCES ObraSocial(IdObraSocial)
-);
-
-ALTER TABLE Paciente
-ADD IdCobertura INT NULL;
-
-ALTER TABLE Paciente
-ADD FOREIGN KEY (IdCobertura) REFERENCES Cobertura(IdCobertura);

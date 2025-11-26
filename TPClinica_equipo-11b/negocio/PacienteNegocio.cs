@@ -19,8 +19,7 @@ namespace negocio
                 datos.setearParametro("@IdPaciente", idPaciente);
                 datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
                                  " FROM Paciente as p " +
-                                 "INNER JOIN ObraSocial as os  ON p.IdObraSocial = os.IdObraSocial " +
-                                 "WHERE IdPaciente = @IdPaciente");
+                                 "INNER JOIN ObraSocial as os  ON p.IdObraSocial = os.IdObraSocial WHERE IdPaciente = @IdPaciente");
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read())
@@ -54,19 +53,14 @@ namespace negocio
             List<Paciente> lista = new List<Paciente>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.IdObraSocial, os.Nombre as NombreOS, " +
-                                "c.IdCobertura, c.Nombre AS NombreCobertura " +
+            datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
                                  " FROM Paciente as p " +
-                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
-                                 "INNER JOIN Cobertura c ON p.IdCobertura = c.IdCobertura" +
-                                 " WHERE p.Estado = 1");
+                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE p.Estado = 1");
             if (id != "")
             {
-                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS, " +
-                                "c.IdCobertura, c.Nombre AS NombreCobertura " +
-                                " FROM Paciente as p " +
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                                 " FROM Paciente as p " +
                                  "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
-                                 "INNER JOIN Cobertura c ON p.IdCobertura = c.IdCobertura" +
                                  "WHERE p.Estado = 1 and p.IdPaciente =  " + id);
             }
             try
@@ -83,14 +77,8 @@ namespace negocio
                     paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
                     paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
                     paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-
                     paciente.ObraSocial = new ObraSocial();
-                    paciente.ObraSocial.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
-
-                    paciente.Cobertura = new Cobertura();
-                    paciente.Cobertura.IdCobertura = (int)datos.Lector["IdCobertura"];
-                    paciente.Cobertura.Nombre = datos.Lector["NombreCobertura"].ToString();
 
                     lista.Add(paciente);
                 }
@@ -113,7 +101,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, IdCobertura, Estado) VALUES (@Nombre, @Apellido, @Email, @DNI, @Telefono, @FechaNacimiento, @IdObraSocial, @IdCobertura, 1)");
+                datos.SetearConsulta("INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Estado) VALUES (@Nombre, @Apellido, @Email, @DNI, @Telefono, @FechaNacimiento, @IdObraSocial, 1)");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
                 datos.setearParametro("@Email", nuevo.Email);
@@ -121,7 +109,6 @@ namespace negocio
                 datos.setearParametro("@Telefono", nuevo.Telefono);
                 datos.setearParametro("@FechaNacimiento", nuevo.FechaNacimiento);
                 datos.setearParametro("@IdObraSocial", nuevo.ObraSocial.IdObraSocial);
-                datos.setearParametro("@IdCobertura", nuevo.Cobertura.IdCobertura);
 
                 datos.ejecutarAccion();
             }
@@ -141,7 +128,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("UPDATE Paciente SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, DNI = @DNI, Telefono = @Telefono, FechaNacimiento = @FechaNacimiento, IdObraSocial = @IdObraSocial, IdCobertura = @IdCobertura " +
+                datos.SetearConsulta("UPDATE Paciente SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, DNI = @DNI, Telefono = @Telefono, FechaNacimiento = @FechaNacimiento, IdObraSocial = @IdObraSocial " +
                     "WHERE IdPaciente = @IdPaciente");
 
                 datos.setearParametro("@IdPaciente", paciente.IdPaciente);
@@ -152,7 +139,6 @@ namespace negocio
                 datos.setearParametro("@Telefono", paciente.Telefono);
                 datos.setearParametro("@FechaNacimiento", paciente.FechaNacimiento);
                 datos.setearParametro("@IdObraSocial", paciente.ObraSocial.IdObraSocial);
-                datos.setearParametro("@IdCobertura", paciente.Cobertura.IdCobertura);
 
                 datos.ejecutarAccion();
             }
@@ -267,28 +253,28 @@ namespace negocio
             try
             {
 
-                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
-                                 " FROM Paciente as p " +
-                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
-                                 "WHERE p.Estado = 1 and p.Email =  @email");
-                datos.setearParametro("@Email", email);
-                datos.ejecutarLectura();
+                    datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                                     " FROM Paciente as p " +
+                                     "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
+                                     "WHERE p.Estado = 1 and p.Email =  @email");
+                    datos.setearParametro("@Email", email);
+                    datos.ejecutarLectura();
 
-                while (datos.Lector.Read())
-                {
-                    Paciente paciente = new Paciente();
-                    paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
-                    paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
-                    paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
-                    paciente.Email = Convert.ToString(datos.Lector["Email"]);
-                    paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
-                    paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
-                    paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    paciente.ObraSocial = new ObraSocial();
-                    paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
-                    lista.Add(paciente);
-                }
-                return lista;
+                    while (datos.Lector.Read())
+                    {
+                        Paciente paciente = new Paciente();
+                        paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
+                        paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                        paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                        paciente.Email = Convert.ToString(datos.Lector["Email"]);
+                        paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
+                        paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                        paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                        paciente.ObraSocial = new ObraSocial();
+                        paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+                        lista.Add(paciente);
+                    }
+                    return lista;
             }
             catch (Exception ex)
             {
