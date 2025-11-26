@@ -48,10 +48,7 @@
                             <a class="nav-link active" href="Medicos.aspx">Médicos</a>
                             <% } %>
 
-                            <% if (usuario.Tipo.ToString() == "Recepcionista" || usuario.Tipo.ToString() == "Administrador")
-                                { %>
-                            <a class="nav-link active" href="ObrasSociales.aspx">Obras Sociales</a>
-                            <% } %>
+
 
 
                             <% } %>
