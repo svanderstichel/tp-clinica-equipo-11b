@@ -69,12 +69,12 @@ namespace web_clinica
             Session.Add("Turno", turno);
             Response.Redirect("CrearTurno.aspx", false);
         }
-        //eliminar turno
+        //cancelar turno
         protected void dgvTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int idTurno = (int)dgvTurnos.DataKeys[e.RowIndex].Value;
             TurnoNegocio datos = new TurnoNegocio();
-            datos.EliminarTurno(idTurno);
+            datos.CancelarTurno(idTurno);
             Response.Redirect("Turnos.aspx", false);
         }
         //crear turno
