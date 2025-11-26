@@ -1,6 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="web_clinica.Registro" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+        <style>
+    body {
+        position: relative; /*  posicionar el elemento */
+        min-height: 25vh; /* Asegura que cubra al menos toda la ventana */
+    }
+
+        /* Crear la capa de fondo animada usando ::before */
+        body::before {
+            content: ''; /* Obligatorio para pseudo-elementos */
+            position: fixed; /* Lo fija en el viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Mueve la capa detrás de todo el contenido */
+            /* Estilos del GIF y Opacidad */
+            background-image: url('https://media.istockphoto.com/id/2195046490/pt/foto/smiling-male-doctor-using-a-tablet-in-a-modern-office-environment.jpg?s=612x612&w=0&k=20&c=meIupnDc0qTSv7f4_7lq2PyAPc-XYmxf5Px-pEnKQfA=');
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: cover;
+            opacity: 0.99;
+        }
+
+    /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+    .table-dark {
+        background-color: rgba(33, 37, 41, 0.9);
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="d-flex justify-content-center align-items-start pt-5">

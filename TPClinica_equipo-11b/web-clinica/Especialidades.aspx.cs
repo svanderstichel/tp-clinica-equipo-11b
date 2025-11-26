@@ -25,7 +25,8 @@ namespace web_clinica
 
             if (!IsPostBack)
             {
-                dgvEspecialidad.DataSource = negocio.ListarEspecialidadesDos();
+                Session.Add("Lista Especialidad", negocio.ListarEspecialidadesDos());
+                dgvEspecialidad.DataSource = Session["Lista Especialidad"];
                 dgvEspecialidad.DataBind();
             }
         }
@@ -71,6 +72,14 @@ namespace web_clinica
                 // Redirigir a la página de modificación.
                 Response.Redirect("CrearEspecialidad.aspx?id=" + id, false);
             }
+        }
+
+        protected void txtFiltroEspecialidad_TextChanged(object sender, EventArgs e)
+        {
+            List<Especialidad> lista = (List<Especialidad>)Session["Lista Especialidad"];
+            List<Especialidad> listaFiltrar = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltroEspecialidad.Text.ToUpper()));
+            dgvEspecialidad.DataSource = listaFiltrar;
+            dgvEspecialidad.DataBind();
         }
     }
 }
