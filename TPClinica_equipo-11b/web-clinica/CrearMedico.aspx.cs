@@ -50,8 +50,6 @@ namespace web_clinica
             catch (Exception ex)
             {
                     Session.Add("Error", "Ocurrió un error al guardar los datos del médico: " + ex.Message);
-                    //Session.Add("Error", ex);
-                    //throw;
                     //redirigir a pantalla de error
                     Response.Redirect("Error.aspx", false);
                 }
@@ -96,9 +94,13 @@ namespace web_clinica
             catch (Exception ex)
 
             {
-                
-                Session.Add("Error", ex);
-                throw;
+                if (ex is System.Threading.ThreadAbortException)
+                {
+                    // No hacemos nada, permitimos que la redirección original continúe.
+                    return;
+                }
+
+                Session.Add("Error", "Ocurrió un error al guardar los datos del médico: " + ex.Message);
                 //redirigir a pantalla de error
                 Response.Redirect("Error.aspx", false);
             }
@@ -121,9 +123,12 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex);
-                throw;
+                if (ex is System.Threading.ThreadAbortException)
+                {
+                    // No hacemos nada, permitimos que la redirección original continúe.
+                    return;
+                }
+                Session.Add("Error", "Ocurrió un error al eliminar los datos del médico: " + ex.Message);
                 //redirigir a pantalla de error
                 Response.Redirect("Error.aspx", false);
             }
@@ -141,9 +146,12 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex);
-                throw;
+                if (ex is System.Threading.ThreadAbortException)
+                {
+                    // No hacemos nada, permitimos que la redirección original continúe.
+                    return;
+                }
+                Session.Add("Error", "Ocurrió un error al inactivar los datos del médico: " + ex.Message);
                 //redirigir a pantalla de error
                 Response.Redirect("Error.aspx", false);
             }
@@ -164,9 +172,12 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex);
-                throw;
+                if (ex is System.Threading.ThreadAbortException)
+                {
+                    // No hacemos nada, permitimos que la redirección original continúe.
+                    return;
+                }
+                Session.Add("Error", "Ocurrió un error al activar los datos del médico: " + ex.Message);
                 //redirigir a pantalla de error
                 Response.Redirect("Error.aspx", false);
             }

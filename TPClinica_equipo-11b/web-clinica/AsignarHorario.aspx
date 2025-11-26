@@ -1,6 +1,36 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarHorario.aspx.cs" Inherits="web_clinica.AsignarHorario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+       <style>
+   
+    body {
+        position: relative; /*  posicionar el elemento */
+        min-height: 100vh; /* Asegura que cubra al menos toda la ventana */
+    }
+
+    /* Crear la capa de fondo animada usando ::before */
+    body::before {
+        content: ''; /* Obligatorio para pseudo-elementos */
+        position: fixed; /* Lo fija en el viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Mueve la capa detrás de todo el contenido */
+
+        /* Estilos del GIF y Opacidad */
+        background-image: url('https://image.slidesdocs.com/responsive-images/background/back-to-school-reminder-extreme-close-up-of-3d-rendered-calendar-with-notable-red-marker-and-sign-powerpoint-background_23c4742734__960_540.jpg'); 
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: cover;
+        opacity: 0.50; 
+    }
+
+    /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+    .table-dark {
+        background-color: rgba(33, 37, 41, 0.9); 
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="d-flex justify-content-center mt-4">
@@ -67,8 +97,11 @@
                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-outline-danger" Text="Cancelar" OnClick="btnCancelar_Click" />
                 <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnGuardar_Click" />
             </div>
-
+            <br />
+            <br />
         </div>
+        <br />
+        <br />
     </div>
 
 

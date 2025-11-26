@@ -23,7 +23,8 @@ namespace web_clinica
                 return;
             }
             MedicoNegocio negocio = new MedicoNegocio();
-            dgvMedicos.DataSource = negocio.ListarMedicos();
+            Session.Add("Lista medicos", negocio.ListarMedicos());
+            dgvMedicos.DataSource = Session["Lista medicos"];
             dgvMedicos.DataBind();
         }
 
@@ -69,7 +70,16 @@ namespace web_clinica
                     break;
             }
             
-        }     
+        }
+
+        protected void txtFiltroMedico_TextChanged(object sender, EventArgs e)
+        {
+            List<Medico> lista = (List < Medico >) Session["Lista medicos"];
+            List<Medico> listaFiltrar = lista.FindAll(x => x.Apellido.ToUpper().Contains(txtFiltroMedico.Text.ToUpper()));
+            dgvMedicos.DataSource=listaFiltrar;
+            dgvMedicos.DataBind();
+
+        }
     }
 }
         

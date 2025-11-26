@@ -1,6 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="web_clinica.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <style>
+     body {
+         position: relative; /*  posicionar el elemento */
+         min-height: 25vh; /* Asegura que cubra al menos toda la ventana */
+     }
+
+         /* Crear la capa de fondo animada usando ::before */
+         body::before {
+             content: ''; /* Obligatorio para pseudo-elementos */
+             position: fixed; /* Lo fija en el viewport */
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -1; /* Mueve la capa detrás de todo el contenido */
+             /* Estilos del GIF y Opacidad */
+             background-image: url('https://plus.unsplash.com/premium_photo-1681842883882-b5c1c9f37869?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2xpbmljYSUyMG1lZGljYXxlbnwwfHwwfHx8MA%3D%3D');
+             background-repeat: no-repeat;
+             background-position: center bottom;
+             background-size: cover;
+             opacity: 0.99;
+         }
+
+     /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+     .table-dark {
+         background-color: rgba(33, 37, 41, 0.9);
+     }
+ </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <% if (Session["Usuario"] == null)
@@ -24,45 +52,62 @@
     </div>
     <%}
         else
-        {  dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"]; %>
+    {  dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"]; %>
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Bienvenido <%= usuario.Apellido %>, <%= usuario.Nombre %></h5>
-                        <p class="card-text">
-                            Bienvenidos a la aplicación web dedicada a gestionar los turnos de esta clínica médica. Desde su rol de <%= usuario.Tipo.ToString() %> tiene acceso a las siguientes funcionalidades:
-         
+            <div class="col-md-8 col-lg-6"> <div class="card shadow-lg border-primary border-3"> <div class="card-body p-5"> <h1 class="card-title text-primary mb-4 border-bottom pb-2">
+                            👋 ¡Hola, <%= usuario.Nombre %>!
+                        </h1>
+
+                        <h4 class="card-subtitle mb-4 text-secondary">
+                            <span class="badge bg-info text-dark me-2">
+                                🏅 Rol: <%= usuario.Tipo.ToString() %>
+                            </span>
+                        </h4>
+
+                        <p class="card-text lead"> Estamos encantados de tenerte en **C-Medic WebApp**. Como **<%= usuario.Tipo.ToString() %>**, tienes acceso a las siguientes funcionalidades.
                         </p>
-                        <ul>
-                            <li>Panel de perfil</li>
-                            <li>Gestión de turnos</li>
-                            <% 
-                                if (usuario.Tipo == dominio.TipoUsuario.Recepcionista || usuario.Tipo == dominio.TipoUsuario.Administrador)
+                        
+                        <h5 class="mt-4 mb-3 text-success">
+                            🎯 Funcionalidades Disponibles:
+                        </h5>
+                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-warning">⭐</span> Panel de perfil
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-primary">📅</span> Gestión de turnos
+                            </li>
+                            
+                            <% if (usuario.Tipo == dominio.TipoUsuario.Recepcionista || usuario.Tipo == dominio.TipoUsuario.Administrador)
                                 {
                             %>
-                            <li>Administrar Médicos</li>
-                            <li>Administrar Pacientes</li>
-                            <% 
-                                }
-                            %>
-                            <% 
-                                if (usuario.Tipo == dominio.TipoUsuario.Administrador)
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-info">🩺</span> Administrar Médicos
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-success">🧑‍🤝‍🧑</span> Administrar Pacientes
+                            </li>
+                            <% } %>
+                            
+                            <% if (usuario.Tipo == dominio.TipoUsuario.Administrador)
                                 {
                             %>
-                            <li>Gestión de Especialidades</li>
-                            <li>Gestión de Obras Sociales</li>
-                            <% 
-                                }
-                            %>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-danger">📝</span> Gestión de Especialidades
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2 text-warning">🏥</span> Gestión de Obras Sociales
+                            </li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <%} %>
+<%} %>
                 <div class="toast-container position-fixed bottom-0 end-0 p-5 mb-5">
                 <asp:Panel ID="panelToast" runat="server" CssClass="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">

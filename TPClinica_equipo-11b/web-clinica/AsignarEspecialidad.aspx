@@ -1,6 +1,36 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarEspecialidad.aspx.cs" Inherits="web_clinica.AsignarEspecialidad" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+       <style>
+   
+    body {
+        position: relative; /*  posicionar el elemento */
+        min-height: 100vh; /* Asegura que cubra al menos toda la ventana */
+    }
+
+    /* Crear la capa de fondo animada usando ::before */
+    body::before {
+        content: ''; /* Obligatorio para pseudo-elementos */
+        position: fixed; /* Lo fija en el viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Mueve la capa detrás de todo el contenido */
+
+        /* Estilos del GIF y Opacidad */
+        background-image: url('https://www.animaker.com/hub/wp-content/uploads/2022/10/Screenshot-2022-10-19-at-3.52.30-PM-751x450.png'); 
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: cover;
+        opacity: 0.50; 
+    }
+
+    /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+    .table-dark {
+        background-color: rgba(33, 37, 41, 0.9); 
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container mt-4">
