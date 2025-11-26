@@ -14,7 +14,7 @@ namespace web_clinica
         public bool ConfirmaEliminacion { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        
+
         {
             if (Session["Usuario"] == null)
             {
@@ -36,6 +36,9 @@ namespace web_clinica
                     ddlObraSocial.DataValueField = "IdObraSocial";
                     ddlObraSocial.DataTextField = "Nombre";
                     ddlObraSocial.DataBind();
+
+                    ddlCobertura.DataSource = new List<Cobertura>();
+                    ddlCobertura.DataBind();
                 }
 
                 // Configuracion si estamos modificando
@@ -53,7 +56,18 @@ namespace web_clinica
                     txbTelefono.Text = seleccionado.Telefono.ToString();
                     txbEmail.Text = seleccionado.Email;
                     txtFechaNacimiento.Text = seleccionado.FechaNacimiento.ToString("yyyy-MM-dd");
+
                     ddlObraSocial.SelectedValue = seleccionado.ObraSocial.IdObraSocial.ToString();
+
+                    CoberturaNegocio cobNegocio = new CoberturaNegocio();
+                    var coberturas = cobNegocio.ListarPorObraSocial(seleccionado.ObraSocial.IdObraSocial);
+                    ddlCobertura.DataSource = coberturas;
+                    ddlCobertura.DataValueField = "IdCobertura";
+                    ddlCobertura.DataTextField = "Nombre";
+                    ddlCobertura.DataBind();
+
+                    ddlCobertura.SelectedValue = seleccionado.Cobertura.IdCobertura.ToString();
+
                 }
                 // Configuracion si un paciente se da de alta
                 /*Si del objeto Request estoy trayendo el id*/
@@ -93,8 +107,12 @@ namespace web_clinica
                 nuevo.DNI = txbDNI.Text;
                 nuevo.Telefono = txbTelefono.Text;
                 nuevo.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+
                 nuevo.ObraSocial = new ObraSocial();
                 nuevo.ObraSocial.IdObraSocial = int.Parse(ddlObraSocial.SelectedValue);
+
+                nuevo.Cobertura = new Cobertura();
+                nuevo.Cobertura.IdCobertura = int.Parse(ddlCobertura.SelectedValue);
 
                 if (Request.QueryString["idPaciente"] != null)
                 {
@@ -150,6 +168,27 @@ namespace web_clinica
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void ddlObraSocial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int idOS = int.Parse(ddlObraSocial.SelectedValue);
+                CoberturaNegocio negocio = new CoberturaNegocio();
+                var listaCob = negocio.ListarPorObraSocial(idOS);
+
+                ddlCobertura.DataSource = listaCob;
+                ddlCobertura.DataValueField = "IdCobertura";
+                ddlCobertura.DataTextField = "Nombre";
+                ddlCobertura.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+
         }
     }
 }
