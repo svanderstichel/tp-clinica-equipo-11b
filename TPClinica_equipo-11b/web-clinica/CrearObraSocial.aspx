@@ -20,6 +20,12 @@
                     TextMode="MultiLine" Rows="4" placeholder="Ingrese una descripción..."></asp:TextBox>
             </div>
 
+            <div class="mb-3">
+                <label for="txtCobertura" class="form-label">Cobertura</label>
+                <asp:TextBox runat="server" ID="txtCobertura" CssClass="form-control"
+                    placeholder="Cobertura"></asp:TextBox>
+            </div>
+
             <div class="mb-3 d-grid gap-2">
                 <asp:Button runat="server" ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary w-100" OnClick="btnGuardar_Click" />
             </div>

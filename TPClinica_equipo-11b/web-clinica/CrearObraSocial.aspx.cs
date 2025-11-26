@@ -33,6 +33,7 @@ namespace web_clinica
                 //Precargo todos los campos
                 txtNombre.Text = seleccionada.Nombre;
                 txtDescripcion.Text = seleccionada.Descripcion;
+                txtCobertura.Text = seleccionada.Cobertura;
             }
         }
 
@@ -45,6 +46,7 @@ namespace web_clinica
 
                 nueva.Nombre = txtNombre.Text;
                 nueva.Descripcion = txtDescripcion.Text;
+                nueva.Cobertura = txtCobertura.Text;
 
                 //si vino un id estoy modificando
                 if (Request.QueryString["id"] != null)
