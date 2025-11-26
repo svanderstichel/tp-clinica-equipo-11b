@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class ObraSocial
+    public class Cobertura
     {
+        public int IdCobertura { get; set; }
         public int IdObraSocial { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-   //     public string IdCobertura { get; set; } 
-        public bool Estado { get; set; }
 
-        public override string ToString()
-        {
-            return Nombre;
-        }
+        public bool Estado { get; set; }
     }
 }
