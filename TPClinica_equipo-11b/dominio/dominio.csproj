@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cobertura.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="MedicoEspecialidad.cs" />
     <Compile Include="ObraSocial.cs" />

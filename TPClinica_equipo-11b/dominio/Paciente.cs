@@ -17,7 +17,6 @@ namespace dominio
         public string Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public ObraSocial ObraSocial { get; set; }
-        public Cobertura Cobertura { get; set; }
         public bool Estado { get; set; }
     }
 }
