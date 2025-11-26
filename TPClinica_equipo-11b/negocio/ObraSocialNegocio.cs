@@ -106,5 +106,69 @@ namespace negocio
                 throw ex;
             }
         }
-    }
+        public List<ObraSocial> ListarNombresObraSocial()
+        {
+            List<ObraSocial> lista = new List<ObraSocial>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.SetearConsulta("SELECT DISTINCT Nombre FROM ObraSocial WHERE Estado = 1");
+            try
+            {
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    ObraSocial os = new ObraSocial();
+                    os.Nombre = datos.Lector["Nombre"].ToString();
+                    lista.Add(os);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<ObraSocial> ListarCoberturas(string nombre)
+        {
+            List<ObraSocial> lista = new List<ObraSocial>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.SetearConsulta("SELECT IdObraSocial, Cobertura FROM ObraSocial WHERE Estado = 1 AND Nombre = @Nombre");
+            datos.setearParametro("@Nombre", nombre);
+            try
+            {
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    ObraSocial os = new ObraSocial();
+                    os.IdObraSocial = (int)datos.Lector["IdObraSocial"];
+                    os.Cobertura = datos.Lector["Cobertura"].ToString();
+                    lista.Add(os);
+                }
+
+                datos.CerrarConexion();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+            }
+        }
 }
+
+
+        
+    

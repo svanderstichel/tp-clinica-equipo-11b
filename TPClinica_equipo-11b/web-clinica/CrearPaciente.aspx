@@ -48,7 +48,13 @@
 
             <div class="mb-3">
                 <label from="txtObraSocial" class="form-label">Obra Social</label>
-                <asp:DropDownList ID="ddlObraSocial" CssClass="form-select" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlObraSocial" CssClass="form-select" runat="server" AutoPostBack="true"
+                    OnSelectedIndexChanged="ddlObraSocial_SelectedIndexChanged"></asp:DropDownList>
+            </div>
+
+            <div class="mb-3">
+                <label from="txtCobertura" class="form-label">Cobertura</label>
+                <asp:DropDownList ID="ddlCobertura" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
 
             <div class="mb-3 d-grid gap-2">

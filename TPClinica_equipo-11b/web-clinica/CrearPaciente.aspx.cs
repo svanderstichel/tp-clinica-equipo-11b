@@ -31,9 +31,9 @@ namespace web_clinica
                 {
                     ObraSocialNegocio negocio = new ObraSocialNegocio();
                     List<ObraSocial> lista = negocio.ListarObrasSociales();
-                    //desplegable desde db
+                    //cargo el desplegable desde db
                     ddlObraSocial.DataSource = lista;
-                    ddlObraSocial.DataValueField = "IdObraSocial";
+                    ddlObraSocial.DataValueField = "Nombre";
                     ddlObraSocial.DataTextField = "Nombre";
                     ddlObraSocial.DataBind();
                 }
@@ -94,7 +94,7 @@ namespace web_clinica
                 nuevo.Telefono = txbTelefono.Text;
                 nuevo.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
                 nuevo.ObraSocial = new ObraSocial();
-                nuevo.ObraSocial.IdObraSocial = int.Parse(ddlObraSocial.SelectedValue);
+                nuevo.ObraSocial.IdObraSocial = int.Parse(ddlCobertura.SelectedValue);
 
                 if (Request.QueryString["idPaciente"] != null)
                 {
@@ -150,6 +150,20 @@ namespace web_clinica
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void ddlObraSocial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //me guardo el id del valor seleccionado
+            string nombreOS = ddlObraSocial.SelectedValue;
+
+            ObraSocialNegocio negocio = new ObraSocialNegocio();
+            var lista = negocio.ListarCoberturas(nombreOS);
+
+            ddlCobertura.DataSource = lista;
+            ddlCobertura.DataValueField = "IdObraSocial";
+            ddlCobertura.DataTextField = "Cobertura";
+            ddlCobertura.DataBind();
         }
     }
 }
