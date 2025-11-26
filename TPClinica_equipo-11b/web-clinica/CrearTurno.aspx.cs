@@ -185,7 +185,7 @@ namespace web_clinica
                 // verificar que el medico trabaje ese dia
                 DayOfWeek dia = fecha.DayOfWeek;
                 DiaSemana diaMedico = (DiaSemana)((int)dia);
-                if (dia != DayOfWeek.Sunday && dia != DayOfWeek.Saturday && medico.DiasLaborales.Contains(diaMedico))
+                if (dia != DayOfWeek.Sunday && dia != DayOfWeek.Saturday && medico.DiasLaborales != null && medico.DiasLaborales.Contains(diaMedico) )
                 {
                     //se filtran los horarios con turnos ocupados
                     TurnoNegocio datosTurnos = new TurnoNegocio();
