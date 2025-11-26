@@ -1,12 +1,47 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Especialidades.aspx.cs" Inherits="web_clinica.ListaEspecialidad" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        body {
+            position: relative; /*  posicionar el elemento */
+            min-height: 100vh; /* Asegura que cubra al menos toda la ventana */
+        }
+
+            /* Crear la capa de fondo animada usando ::before */
+            body::before {
+                content: ''; /* Obligatorio para pseudo-elementos */
+                position: fixed; /* Lo fija en el viewport */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1; /* Mueve la capa detrás de todo el contenido */
+                /* Estilos del GIF y Opacidad */
+                background-image: url('https://www.animaker.com/hub/wp-content/uploads/2022/10/Screenshot-2022-10-19-at-3.52.30-PM-751x450.png');
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                background-size: cover;
+                opacity: 0.50;
+            }
+
+        /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+        .table-dark {
+            background-color: rgba(33, 37, 41, 0.9);
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <hr />
     <div class="row">
         <div class="col">
-            <h1>Lista de especialidades</h1>
+            <h1>🩺 Lista de especialidades</h1>
+            <div class="input-group mb-3" style="width: 25rem;">
+                <span class="input-group-text text-bg-primary">
+                    <asp:Label Text="Filtro Nombre Especialidades" runat="server" />
+                </span>
+                <asp:TextBox runat="server" ID="txtFiltroEspecialidad" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroEspecialidad_TextChanged" />
+            </div>
             <asp:GridView runat="server" ID="dgvEspecialidad" CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
                 DataKeyNames="IdEspecialidad" OnSelectedIndexChanged="dgvEspecialidad_SelectedIndexChanged"
                 OnPageIndexChanging="dgvEspecialidad_PageIndexChanging" OnRowCommand="dgvEspecialidad_RowCommand"

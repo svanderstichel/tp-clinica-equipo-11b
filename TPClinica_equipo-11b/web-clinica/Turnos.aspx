@@ -1,6 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Turnos.aspx.cs" Inherits="web_clinica.Turnos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <style>
+     body {
+         position: relative; /*  posicionar el elemento */
+         min-height: 100vh; /* Asegura que cubra al menos toda la ventana */
+     }
+
+         /* Crear la capa de fondo animada usando ::before */
+         body::before {
+             content: ''; /* Obligatorio para pseudo-elementos */
+             position: fixed; /* Lo fija en el viewport */
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -1; /* Mueve la capa detrás de todo el contenido */
+             /* Estilos del GIF y Opacidad */
+             background-image: url('https://plus.unsplash.com/premium_photo-1681996569472-2f9a3a7da29a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y3VpZGFkb3xlbnwwfHwwfHx8MA%3D%3D');
+             background-repeat: no-repeat;
+             background-position: center bottom;
+             background-size: cover;
+             opacity: 0.70;
+         }
+
+     /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+     .table-dark {
+         background-color: rgba(33, 37, 41, 0.9);
+     }
+ </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container d-flex justify-content-center mt-5">
