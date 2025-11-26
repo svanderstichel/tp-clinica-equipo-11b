@@ -96,13 +96,13 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-        public void EliminarTurno(int idTurno)
+        public void CancelarTurno(int idTurno)
         {
 
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("DELETE FROM Turno WHERE IdTurno =  @IdTurno");
+                datos.SetearConsulta("UPDATE Turno SET Estado = 3 WHERE IdTurno =  @IdTurno");
                 datos.setearParametro("@IdTurno", idTurno);
                 datos.ejecutarAccion();
             }
@@ -190,7 +190,8 @@ namespace negocio
                     "IdEspecialidad = @IdEspecialidad," +
                     "Fecha = @Fecha," +
                     "Hora = @Hora," +
-                    "Observaciones = @Observaciones" +
+                    "Observaciones = @Observaciones," +
+                    "Estado = 2" +
                     " WHERE IdTurno = @IdTurno");
                 datos.ejecutarAccion();
             }

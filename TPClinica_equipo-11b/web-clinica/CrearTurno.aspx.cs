@@ -43,10 +43,10 @@ namespace web_clinica
                     Turno turno = (Turno)Session["Turno"];
 
                     PacienteNegocio datosPacientes = new PacienteNegocio();
-                    Paciente paciente = datosPacientes.LeerPaciente(turno.IdPaciente);
+                    Paciente paciente = datosPacientes.LeerPacienteTurno(turno.IdPaciente);
 
                     // Datos de paciente
-                    List<Paciente> pacientes = datosPacientes.ListarPacientes();
+                    List<Paciente> pacientes = datosPacientes.ListarPacientesTurno();
                     txtEmail.Text = paciente.Email;
                     txtApellido.Text = paciente.Apellido;
                     txtNombre.Text = paciente.Nombre;
@@ -268,7 +268,7 @@ namespace web_clinica
             string email = txtEmail.Text;
             PacienteNegocio datos = new PacienteNegocio();
 
-            Paciente paciente = datos.LeerPacienteEmail(email);
+            Paciente paciente = datos.LeerPacienteEmailTurno(email);
             if (paciente.Apellido != null)
             {
                 txtApellido.Text = paciente.Apellido;
