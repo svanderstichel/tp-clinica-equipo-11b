@@ -67,6 +67,49 @@
 
 
                 </Columns>
+                                               <PagerTemplate>
+               <nav>
+                   <nav>
+                       <ul class="pagination justify-content-center mb-0">
+                           <!-- validar si es la primera pagina: disabled -->
+                           <li class='<%# ((GridView)Container.NamingContainer).PageIndex == 0 
+                   ? "page-item disabled" 
+                   : "page-item" %>'>
+                               <!-- boton anterior -->
+                               <asp:LinkButton
+                                   runat="server"
+                                   CommandName="Page"
+                                   CommandArgument="Prev"
+                                   CssClass="page-link bg-dark text-light border-secondary"> ◀
+                               </asp:LinkButton>
+                           </li>
+
+                           <!-- Indica página actual -->
+                           <li class="page-item disabled">
+                               <span class="page-link bg-dark text-light border-secondary">
+                                   <!-- pagina actual = index+1 / paginas totales -->
+                                   <%# ((GridView)Container.NamingContainer).PageIndex + 1 %> /
+               <%# ((GridView)Container.NamingContainer).PageCount %>
+                               </span>
+                           </li>
+
+                           <!-- validar si es la última página: disabled -->
+                           <li class='<%# ((GridView)Container.NamingContainer).PageIndex 
+                   == ((GridView)Container.NamingContainer).PageCount - 1
+                   ? "page-item disabled" 
+                   : "page-item" %>'>
+
+                               <!-- boton siguiente -->
+                               <asp:LinkButton
+                                   runat="server"
+                                   CommandName="Page"
+                                   CommandArgument="Next"
+                                   CssClass="page-link bg-dark text-light border-secondary"> ▶
+                               </asp:LinkButton>
+                           </li>
+                       </ul>
+                   </nav>
+           </PagerTemplate>
             </asp:GridView>
             <asp:Button Text="Agregar" runat="server" ID="btnAgregarEsp" CssClass="btn btn-primary" OnClick="btnAgregarEsp_Click" />
 

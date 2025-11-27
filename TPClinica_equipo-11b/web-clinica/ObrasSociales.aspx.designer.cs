@@ -15,17 +15,16 @@ namespace web_clinica
     {
 
         /// <summary>
-        /// Control dgvObraSocial.
-        /// txtFiltroOS control.
+        /// Control txtFiltroOS.
         /// </summary>
         /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFiltroOS;
 
         /// <summary>
-        /// dgvObraSocial control.
+        /// Control dgvObraSocial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
