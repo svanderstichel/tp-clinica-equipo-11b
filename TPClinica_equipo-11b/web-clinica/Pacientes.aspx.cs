@@ -82,9 +82,28 @@ namespace web_clinica
         protected void filtro_TextChanged(object sender, EventArgs e)
         {
             List<Paciente> lista = (List<Paciente>)Session["listaPacientes"];
-            List<Paciente> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            List<Paciente> listaFiltrada = lista.FindAll(x => x.Apellido.ToUpper().Contains(txtFiltro.Text.ToUpper()));
             dgvPaciente.DataSource = listaFiltrada;
             dgvPaciente.DataBind();
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PacienteNegocio negocio = new PacienteNegocio();
+                string apellido = txtFiltro.Text.Trim();
+                string estado = ddlEstado.SelectedValue;
+
+                List<Paciente> listaFiltrada = negocio.filtrar(apellido, estado);
+
+                dgvPaciente.DataSource = listaFiltrada;
+                dgvPaciente.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
         protected void dgvPaciente_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -100,6 +119,5 @@ namespace web_clinica
                     lt.Text = "<span class='badge bg-danger'>Inactivo</span>";
             }
         }
-
     }
 }

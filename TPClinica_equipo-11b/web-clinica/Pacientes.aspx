@@ -50,6 +50,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <asp:Label Text="Estado" runat="server" />
+                        <asp:DropDownList runat="server" ID="ddlEstado" CssClass="form-control">
+                            <asp:ListItem Text="Todos" />
+                            <asp:ListItem Text="Activo" />
+                            <asp:ListItem Text="Inactivo" />
+                        </asp:DropDownList>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" ID="btnBuscar" OnClick="btnBuscar_Click" />
+                        </div>
+                    </div>
+                </div>
 
                 <asp:GridView runat="server" ID="dgvPaciente" DataKeyNames="IdPaciente"
                     OnSelectedIndexChanged="dgvPaciente_SelectedIndexChanged"
