@@ -98,6 +98,53 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public List<Medico> ListarMedicoDos(string id = "")
+        {
+            List<Medico> lista = new List<Medico>();
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado, M.DiasLaborales, M.HoraEntrada, M.HoraSalida FROM Medico M  ");
+            if (id != "")
+            {
+
+                datos.SetearConsulta("SELECT M.IdMedico, M.Nombre, M.Apellido, M.Matricula, M.Email, M.Telefono, M.Estado, M.DiasLaborales, M.HoraEntrada, M.HoraSalida FROM Medico M WHERE IdMedico = @IdMedico ");
+                datos.setearParametro("@IdMedico", id);
+            }
+
+
+            try
+            {
+                datos.ejecutarLectura();
+
+
+
+                while (datos.Lector.Read())
+                {
+                    Medico medico = new Medico();
+                    medico.IdMedico = (int)datos.Lector["IdMedico"];
+                    medico.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    medico.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    medico.Matricula = Convert.ToString(datos.Lector["Matricula"]);
+                    medico.Email = Convert.ToString(datos.Lector["Email"]);
+                    medico.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    medico.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    lista.Add(medico);
+
+                    
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        
         public List<Medico> ListarMedicosEspecialidad(int idEspecialidad)
         {
             List<Medico> lista = new List<Medico>();

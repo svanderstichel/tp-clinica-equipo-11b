@@ -81,7 +81,6 @@ namespace negocio
                     esp.IdEspecialidad = (int)datos.Lector["IdEspecialidad"];
                     esp.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     esp.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
-                    //esp.Estado = bool.Parse (datos.Lector["Estado"].ToString()); no se muestra el estado en la web
                     esp.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(esp);
