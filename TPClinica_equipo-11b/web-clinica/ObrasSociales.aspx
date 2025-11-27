@@ -57,19 +57,20 @@
             <asp:GridView runat="server" ID="dgvObraSocial" DataKeyNames="IdObraSocial"
                 OnSelectedIndexChanged="dgvObraSocial_SelectedIndexChanged"
                 OnPageIndexChanging="dgvObraSocial_PageIndexChanging" AllowPaging="true" PageSize="5"
-                CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+                CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
+                OnRowDataBound="dgvObraSocial_RowDataBound">
                 <Columns>
                     <%--                    <asp:BoundField HeaderText="Id" DataField="IdObraSocial" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />--%>
                     <asp:BoundField HeaderText="Nombre de la Obra Social" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                     <asp:BoundField DataField="Cobertura" HeaderText="Cobertura" />
                     <%--<asp:CheckBoxField HeaderText="Estado" DataField="Estado" />--%>
-                    <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" Enabled="false" Checked='<%# Eval("Estado") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
+                    <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center">
+    <ItemTemplate>
+        <asp:Literal ID="ltEstado" runat="server"></asp:Literal>
+    </ItemTemplate>
+</asp:TemplateField>
+                    <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Modificar" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                 </Columns>
                                                <PagerTemplate>
                <nav>

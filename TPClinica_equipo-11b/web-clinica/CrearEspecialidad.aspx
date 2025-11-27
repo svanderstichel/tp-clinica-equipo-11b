@@ -57,7 +57,7 @@
 
                 <asp:Button Text="Guardar" runat="server" ID="btnGuardar2" CssClass="btn btn-primary w-100" OnClick="btnGuardar2_Click" />
                 <asp:Button Text="Cancelar" runat="server" ID="btnCancelar" CssClass="btn btn-outline-secondary w-100" OnClick="btnCancelar_Click" CausesValidation="false" />
-                <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-secondary" OnClick="btnInactivar_Click" runat="server" />
+                <asp:Button Text="Inactivar" ID="btnInactivar"  CssClass="btn btn-danger" OnClick="btnInactivar_Click" runat="server" />
                 <asp:Button Text="Activar" runat="server" ID="btnActivar" CssClass="btn btn-success" onClick="btnActivar_Click"  />
             </div>
 

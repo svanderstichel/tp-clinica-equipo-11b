@@ -50,24 +50,27 @@
             <asp:GridView runat="server" ID="dgvEspecialidad" CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
                 DataKeyNames="IdEspecialidad" OnSelectedIndexChanged="dgvEspecialidad_SelectedIndexChanged"
                 OnPageIndexChanging="dgvEspecialidad_PageIndexChanging" OnRowCommand="dgvEspecialidad_RowCommand"
-                AllowPaging="true" PageSize="5">
+                AllowPaging="true" PageSize="5"
+                OnRowDataBound="dgvEspecialidades_RowDataBound">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre de la Especialidad" DataField="Nombre" />
                     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
-                    <asp:ButtonField
-                        HeaderText="Accion"
-                        CommandName="Accion"
-                        Text="✍️"
-                        ButtonType="Button"
-                        ControlStyle-CssClass="btn btn-outline-info"
-                        ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-HorizontalAlign="Center" />
+                    
 
-                    <asp:TemplateField HeaderText="Estado Activo" ItemStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <asp:CheckBox runat="server" ID="chkEstado" Enabled="false" Checked='<%# Eval("Estado") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+<asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+    <ItemTemplate>
+        <asp:Literal ID="ltEstadoEspecialidad" runat="server"></asp:Literal>
+    </ItemTemplate>
+</asp:TemplateField>
+                    <asp:ButtonField
+    HeaderText="Modificar"
+    CommandName="Accion"
+    Text="✍️"
+    ButtonType="Button"
+    ControlStyle-CssClass="btn btn-outline-info"
+    ItemStyle-HorizontalAlign="Center"
+    HeaderStyle-HorizontalAlign="Center" />
+
 
 
 
