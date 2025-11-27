@@ -32,10 +32,15 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <hr />
     <div class="row">
         <div class="col">
-            <h1>🩺 Lista de especialidades</h1>
+                                                                   <div class="container d-flex justify-content-center mt-5">
+    <div class="w-100">
+        <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
+            <h2 class="fw-bold">Especialidades 🩺</h2>
+        </div>
+    </div>
+</div>
             <div class="input-group mb-3" style="width: 25rem;">
                 <span class="input-group-text text-bg-primary">
                     <asp:Label Text="Filtro Nombre Especialidades" runat="server" />
@@ -67,6 +72,49 @@
 
 
                 </Columns>
+                                               <PagerTemplate>
+               <nav>
+                   <nav>
+                       <ul class="pagination justify-content-center mb-0">
+                           <!-- validar si es la primera pagina: disabled -->
+                           <li class='<%# ((GridView)Container.NamingContainer).PageIndex == 0 
+                   ? "page-item disabled" 
+                   : "page-item" %>'>
+                               <!-- boton anterior -->
+                               <asp:LinkButton
+                                   runat="server"
+                                   CommandName="Page"
+                                   CommandArgument="Prev"
+                                   CssClass="page-link bg-dark text-light border-secondary"> ◀
+                               </asp:LinkButton>
+                           </li>
+
+                           <!-- Indica página actual -->
+                           <li class="page-item disabled">
+                               <span class="page-link bg-dark text-light border-secondary">
+                                   <!-- pagina actual = index+1 / paginas totales -->
+                                   <%# ((GridView)Container.NamingContainer).PageIndex + 1 %> /
+               <%# ((GridView)Container.NamingContainer).PageCount %>
+                               </span>
+                           </li>
+
+                           <!-- validar si es la última página: disabled -->
+                           <li class='<%# ((GridView)Container.NamingContainer).PageIndex 
+                   == ((GridView)Container.NamingContainer).PageCount - 1
+                   ? "page-item disabled" 
+                   : "page-item" %>'>
+
+                               <!-- boton siguiente -->
+                               <asp:LinkButton
+                                   runat="server"
+                                   CommandName="Page"
+                                   CommandArgument="Next"
+                                   CssClass="page-link bg-dark text-light border-secondary"> ▶
+                               </asp:LinkButton>
+                           </li>
+                       </ul>
+                   </nav>
+           </PagerTemplate>
             </asp:GridView>
             <asp:Button Text="Agregar" runat="server" ID="btnAgregarEsp" CssClass="btn btn-primary" OnClick="btnAgregarEsp_Click" />
 

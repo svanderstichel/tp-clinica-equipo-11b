@@ -15,17 +15,16 @@ namespace web_clinica
     {
 
         /// <summary>
-        /// Control dgvPaciente.
-        /// txtFiltro control.
+        /// Control txtFiltro.
         /// </summary>
         /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFiltro;
 
         /// <summary>
-        /// dgvPaciente control.
+        /// Control dgvPaciente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

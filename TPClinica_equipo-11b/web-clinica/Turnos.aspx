@@ -33,7 +33,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container d-flex justify-content-center mt-5">
         <div class="w-100">
-            <h3 class="text-center mb-3">Lista de Turnos</h3>
+            <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
+    <h2 class="fw-bold"> Panel de turnos 📅</h2>
+</div>
             <asp:GridView ID="dgvTurnos" OnRowDeleting="dgvTurnos_RowDeleting" OnSelectedIndexChanged="dgvTurnos_SelectedIndexChanged" DataKeyNames="Id" runat="server" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvTurnos_PageIndexChanging" OnRowDataBound="dgvTurnos_RowDataBound">
                 <Columns>
                     <asp:BoundField DataField="Estado" HeaderText="Estado" HtmlEncode="false" />

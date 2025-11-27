@@ -45,17 +45,22 @@ namespace web_clinica
         protected void dgvMedicos_PageIndexChanging1(object sender, GridViewPageEventArgs e)
         {
             dgvMedicos.PageIndex = e.NewPageIndex;
+            dgvMedicos.DataSource = Session["Lista medicos"];
             dgvMedicos.DataBind();
         }
 
-        protected void btnEspecialidades_Click(object sender, EventArgs e)
+        protected void btnEspecialidades_Click(object sender, EventArgs  e)
         {
             Response.Redirect("Especialidades.aspx", false);
         }
 
         protected void dgvMedicos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-             int index = Convert.ToInt32(e.CommandArgument);
+            // Si el comando viene del paginador se ignora el rowcommand
+            if (e.CommandName == "Page")
+                return;
+
+            int index = Convert.ToInt32(e.CommandArgument);
             string id = dgvMedicos.DataKeys[index].Value.ToString();
             switch (e.CommandName)
             {

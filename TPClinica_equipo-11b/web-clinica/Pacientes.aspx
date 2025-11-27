@@ -32,12 +32,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <hr />
-
     <div class="row">
         <div class="col">
             <div class="w-100">
-                <h3 class="text-center mb-3">Lista de Pacientes</h3>
+                <div class="container d-flex justify-content-center mt-5">
+                    <div class="w-100">
+                        <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
+                            <h2 class="fw-bold">Panel de pacientes 👥</h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
@@ -69,6 +73,49 @@
                         <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" /> La baja lógica no esta implementada--%>
                         <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                     </Columns>
+                                    <PagerTemplate>
+                    <nav>
+                        <nav>
+                            <ul class="pagination justify-content-center mb-0">
+                                <!-- validar si es la primera pagina: disabled -->
+                                <li class='<%# ((GridView)Container.NamingContainer).PageIndex == 0 
+                        ? "page-item disabled" 
+                        : "page-item" %>'>
+                                    <!-- boton anterior -->
+                                    <asp:LinkButton
+                                        runat="server"
+                                        CommandName="Page"
+                                        CommandArgument="Prev"
+                                        CssClass="page-link bg-dark text-light border-secondary"> ◀
+                                    </asp:LinkButton>
+                                </li>
+
+                                <!-- Indica página actual -->
+                                <li class="page-item disabled">
+                                    <span class="page-link bg-dark text-light border-secondary">
+                                        <!-- pagina actual = index+1 / paginas totales -->
+                                        <%# ((GridView)Container.NamingContainer).PageIndex + 1 %> /
+                    <%# ((GridView)Container.NamingContainer).PageCount %>
+                                    </span>
+                                </li>
+
+                                <!-- validar si es la última página: disabled -->
+                                <li class='<%# ((GridView)Container.NamingContainer).PageIndex 
+                        == ((GridView)Container.NamingContainer).PageCount - 1
+                        ? "page-item disabled" 
+                        : "page-item" %>'>
+
+                                    <!-- boton siguiente -->
+                                    <asp:LinkButton
+                                        runat="server"
+                                        CommandName="Page"
+                                        CommandArgument="Next"
+                                        CssClass="page-link bg-dark text-light border-secondary"> ▶
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </nav>
+                </PagerTemplate>
                 </asp:GridView>
                 <div class="d-flex justify-content-between mt-3">
                     <div>

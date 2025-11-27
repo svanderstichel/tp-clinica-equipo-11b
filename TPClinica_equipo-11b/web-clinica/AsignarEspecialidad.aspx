@@ -34,14 +34,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container mt-4">
-        <h3 class="text-center mb-4">🩺 Asignar Especialidades al Médico </h3>
+                                                                           <div class="container d-flex justify-content-center mt-5">
+    <div class="w-100">
+        <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
+            <h2 class="fw-bold">Asignar especialidades 🩺</h2>
+        </div>
     </div>
-    <hr />
+</div>
+    </div>
     <div class="row">
         <div class="col">
             <div class="w-100">
 
-                <asp:GridView runat="server" ID="dgvEspeciliadadMedico" CssClass="table table-dark  table-bordered" AutoGenerateColumns="false" DataKeyNames="IdMedico" OnPageIndexChanging="dgvEspeciliadadMedico_PageIndexChanging" AllowPaging="true" PageSize="10" OnRowDataBound="dgvEspeciliadadMedico_RowDataBound">
+                <asp:GridView runat="server" ID="dgvEspeciliadadMedico" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" DataKeyNames="IdMedico" OnPageIndexChanging="dgvEspeciliadadMedico_PageIndexChanging" AllowPaging="true" PageSize="10" OnRowDataBound="dgvEspeciliadadMedico_RowDataBound">
 
 
                     <Columns>
