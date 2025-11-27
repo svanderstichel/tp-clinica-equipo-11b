@@ -98,8 +98,7 @@
     <%  if (Session["Usuario"] != null)
         {
             dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];
-            if (usuario.Tipo.ToString() == "Medico"
-            || usuario.Tipo.ToString() == "Recepcionista"
+            if (usuario.Tipo.ToString() == "Recepcionista"
             || usuario.Tipo.ToString() == "Administrador")
             { %>
     <div class="d-flex justify-content-between align-items-center mt-3">
@@ -141,7 +140,7 @@
 
     </div>
     <%}
-        if (usuario.Tipo.ToString() == "Paciente")
+        if (usuario.Tipo.ToString() == "Paciente" || usuario.Tipo.ToString() == "Medico")
         { %>
     <div class="d-flex justify-content-end mt-3">
         <asp:Button ID="Button1" runat="server" Text="Solicitar turno" CssClass="btn btn-primary" OnClick="BtnCrearTurno_Click" />
