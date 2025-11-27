@@ -281,7 +281,7 @@ namespace negocio
                     "SELECT p.IdPaciente " +
                     "FROM Paciente AS p " +
                     "INNER JOIN ObraSocial AS os ON p.IdObraSocial = os.IdObraSocial " +
-                    "WHERE p.Email = @Email AND p.Estado = 1"
+                    "WHERE p.Email = @Email"
                 );
                 datos.setearParametro("@Email", email);
                 datos.ejecutarLectura();
@@ -382,26 +382,28 @@ namespace negocio
             try
             {
 
-                    datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.Nombre as NombreOS" +
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, p.Estado, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS" +
                                      " FROM Paciente as p " +
-                                     "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
-                                     "WHERE p.Estado = 1 and p.Email =  @email");
-                    datos.setearParametro("@Email", email);
+                                     "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE p.Email = @Email");
+                datos.setearParametro("@Email", email);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
                     {
-                        Paciente paciente = new Paciente();
-                        paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
-                        paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
-                        paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
-                        paciente.Email = Convert.ToString(datos.Lector["Email"]);
-                        paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
-                        paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
-                        paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                        paciente.ObraSocial = new ObraSocial();
-                        paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
-                        lista.Add(paciente);
+                    Paciente paciente = new Paciente();
+                    paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
+                    paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    paciente.Email = Convert.ToString(datos.Lector["Email"]);
+                    paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
+                    paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    paciente.ObraSocial = new ObraSocial();
+                    paciente.ObraSocial.IdObraSocial = (int)datos.Lector["IdObraSocial"];
+                    paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+                    paciente.ObraSocial.Cobertura = datos.Lector["CoberturaOS"].ToString();
+                    paciente.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
+                    lista.Add(paciente);
                     }
                     return lista;
             }

@@ -42,6 +42,11 @@
                         </div>
                     </div>
                 </div>
+                <% if (Session["Usuario"] != null)
+                    {
+                        dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];
+                        if (usuario.Tipo.ToString() != "Paciente")
+                        { %>
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
@@ -68,10 +73,11 @@
                         </div>
                     </div>
                 </div>
-
+                <% }
+                    }%>
                 <asp:GridView runat="server" ID="dgvPaciente" DataKeyNames="IdPaciente"
                     OnSelectedIndexChanged="dgvPaciente_SelectedIndexChanged"
-                    OnPageIndexChanging="dgvPaciente_PageIndexChanging" AllowPaging="true" PageSize="10"
+                    OnPageIndexChanging="dgvPaciente_PageIndexChanging" AllowPaging="true" PageSize="7"
                     CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
                     OnRowDataBound="dgvPaciente_RowDataBound">
                     <Columns>
