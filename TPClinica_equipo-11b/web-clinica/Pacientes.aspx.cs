@@ -24,6 +24,8 @@ namespace web_clinica
                     return;
                 }
 
+
+
                 Usuario usuario = (Usuario)Session["Usuario"];
                 PacienteNegocio negocio = new PacienteNegocio();
 
@@ -34,7 +36,10 @@ namespace web_clinica
                 }   
                 if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
                 {
-                    dgvPaciente.DataSource = negocio.ListarPacientes();
+                    // dgvPaciente.DataSource = negocio.ListarPacientes();
+                    ///
+                    Session.Add("listaPacientes", negocio.ListarPacientes());
+                    dgvPaciente.DataSource = Session["listaPacientes"];
                     dgvPaciente.DataBind();
                 }
             }
@@ -72,6 +77,14 @@ namespace web_clinica
         protected void btnObraSocial_Click(object sender, EventArgs e)
         {
             Response.Redirect("ObrasSociales.aspx", false);
+        }
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            List<Paciente> lista = (List<Paciente>)Session["listaPacientes"];
+            List<Paciente> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvPaciente.DataSource = listaFiltrada;
+            dgvPaciente.DataBind();
         }
     }
 }

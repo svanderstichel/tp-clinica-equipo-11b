@@ -38,6 +38,15 @@
         <div class="col">
             <div class="w-100">
                 <h3 class="text-center mb-3">Lista de Pacientes</h3>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <asp:Label Text="Filtrar" runat="server" />
+                            <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
+                        </div>
+                    </div>
+                </div>
+
                 <asp:GridView runat="server" ID="dgvPaciente" DataKeyNames="IdPaciente"
                     OnSelectedIndexChanged="dgvPaciente_SelectedIndexChanged"
                     OnPageIndexChanging="dgvPaciente_PageIndexChanging" AllowPaging="true" PageSize="10"
@@ -48,7 +57,8 @@
                         <asp:BoundField HeaderText="Email" DataField="Email" />
                         <asp:BoundField HeaderText="DNI" DataField="DNI" />
                         <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
-                        <asp:BoundField HeaderText="Fecha de Naciemiento" DataField="FechaNacimiento" />
+                        <asp:BoundField HeaderText="Fecha de Naciemiento" DataField="FechaNacimiento" DataFormatString="{0:dd/MM/yyyy}"
+                            HtmlEncode="false" />
                         <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
                         <asp:BoundField HeaderText="Cobertura" DataField="ObraSocial.Cobertura" />
                         <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
