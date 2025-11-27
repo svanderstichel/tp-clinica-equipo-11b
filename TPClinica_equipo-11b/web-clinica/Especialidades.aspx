@@ -32,10 +32,15 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <hr />
     <div class="row">
         <div class="col">
-            <h1>🩺 Lista de especialidades</h1>
+                                                                   <div class="container d-flex justify-content-center mt-5">
+    <div class="w-100">
+        <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
+            <h2 class="fw-bold">Especialidades 🩺</h2>
+        </div>
+    </div>
+</div>
             <div class="input-group mb-3" style="width: 25rem;">
                 <span class="input-group-text text-bg-primary">
                     <asp:Label Text="Filtro Nombre Especialidades" runat="server" />

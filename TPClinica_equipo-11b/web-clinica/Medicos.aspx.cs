@@ -49,7 +49,7 @@ namespace web_clinica
             dgvMedicos.DataBind();
         }
 
-        protected void btnEspecialidades_Click(object sender, EventArgs e)
+        protected void btnEspecialidades_Click(object sender, EventArgs  e)
         {
             Response.Redirect("Especialidades.aspx", false);
         }
