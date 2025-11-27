@@ -21,6 +21,21 @@ namespace web_clinica
                 Response.Redirect("Error.aspx", false);
                 return;
             }
+            //precarga informacion de usuario si esta registrado como paciente
+            if (!IsPostBack && ((Usuario)Session["Usuario"]).Tipo == TipoUsuario.Paciente && Session["Turno"] == null)
+            {
+                PacienteNegocio datos = new PacienteNegocio(); 
+                Paciente paciente = datos.LeerPacienteEmail(((Usuario)Session["Usuario"]).Email);
+                txtEmail.Text = paciente.Email;
+                txtApellido.Text = paciente.Apellido;
+                txtNombre.Text = paciente.Nombre;
+                txtDNI.Text = paciente.DNI;
+                txtFechaNacimiento.Text = paciente.FechaNacimiento.ToShortDateString();
+                txtObraSocial.Text = paciente.ObraSocial.Nombre;
+                txtTelefono.Text = paciente.Telefono;
+                Session.Add("IdPacienteSeleccionado", paciente.IdPaciente);
+            }
+
             //precarga de formulario para crear turno
             if (!IsPostBack && Session["Turno"] == null)
             {
@@ -77,7 +92,10 @@ namespace web_clinica
                     //Datos del turno (Fecha, Hora y Observaciones)
                     txtFechaTurno.Text = turno.Fecha.ToString("yyyy-MM-dd");
                     txtObservaciones.Text = turno.Observaciones;
+                    if(((Usuario)Session["Usuario"]).Tipo != TipoUsuario.Medico)
+                    {
                     txtFechaTurno.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
 
                     //guardan en sesion los datos del turno a modificar
                     Session.Add("IdMedicoSeleccionado", turno.IdMedico);
