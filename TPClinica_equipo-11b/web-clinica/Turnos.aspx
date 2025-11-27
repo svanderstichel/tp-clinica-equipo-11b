@@ -17,7 +17,7 @@
              height: 100%;
              z-index: -1; /* Mueve la capa detrás de todo el contenido */
              /* Estilos del GIF y Opacidad */
-             background-image: url('https://plus.unsplash.com/premium_photo-1681996569472-2f9a3a7da29a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y3VpZGFkb3xlbnwwfHwwfHx8MA%3D%3D');
+             background-image: url('https://cdn.pixabay.com/photo/2024/01/11/06/27/ai-generated-8500900_640.jpg');
              background-repeat: no-repeat;
              background-position: center bottom;
              background-size: cover;

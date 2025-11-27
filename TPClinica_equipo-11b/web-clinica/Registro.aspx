@@ -18,7 +18,7 @@
             height: 100%;
             z-index: -1; /* Mueve la capa detrás de todo el contenido */
             /* Estilos del GIF y Opacidad */
-            background-image: url('https://media.istockphoto.com/id/2195046490/pt/foto/smiling-male-doctor-using-a-tablet-in-a-modern-office-environment.jpg?s=612x612&w=0&k=20&c=meIupnDc0qTSv7f4_7lq2PyAPc-XYmxf5Px-pEnKQfA=');
+            background-image: url('https://cdn.pixabay.com/photo/2024/04/28/09/27/dentist-8725155_640.jpg');
             background-repeat: no-repeat;
             background-position: center bottom;
             background-size: cover;

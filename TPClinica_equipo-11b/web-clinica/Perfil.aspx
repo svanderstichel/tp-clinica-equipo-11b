@@ -16,7 +16,7 @@
             height: 100%;
             z-index: -1; /* Mueve la capa detrás de todo el contenido */
             /* Estilos del GIF y Opacidad */
-            background-image: url('https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fENPTlRSQVNFJUMzJTkxQXxlbnwwfHwwfHx8MA%3D%3D');
+            background-image: url('https://cdn.pixabay.com/photo/2024/04/28/09/27/dentist-8725155_640.jpg');
             background-repeat: no-repeat;
             background-position: center bottom;
             background-size: cover;
