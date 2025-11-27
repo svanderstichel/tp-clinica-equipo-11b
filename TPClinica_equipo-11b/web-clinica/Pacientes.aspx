@@ -84,57 +84,57 @@
                             HtmlEncode="false" />
                         <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
                         <asp:BoundField HeaderText="Cobertura" DataField="ObraSocial.Cobertura" />
-                            <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center">
-    <ItemTemplate>
-        <asp:Literal ID="ltEstado" runat="server"></asp:Literal>
-    </ItemTemplate>
-</asp:TemplateField>
+                        <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <asp:Literal ID="ltEstado" runat="server"></asp:Literal>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" /> La baja lógica no esta implementada--%>
                         <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Modificar" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                     </Columns>
-                                    <PagerTemplate>
-                    <nav>
+                    <PagerTemplate>
                         <nav>
-                            <ul class="pagination justify-content-center mb-0">
-                                <!-- validar si es la primera pagina: disabled -->
-                                <li class='<%# ((GridView)Container.NamingContainer).PageIndex == 0 
+                            <nav>
+                                <ul class="pagination justify-content-center mb-0">
+                                    <!-- validar si es la primera pagina: disabled -->
+                                    <li class='<%# ((GridView)Container.NamingContainer).PageIndex == 0 
                         ? "page-item disabled" 
                         : "page-item" %>'>
-                                    <!-- boton anterior -->
-                                    <asp:LinkButton
-                                        runat="server"
-                                        CommandName="Page"
-                                        CommandArgument="Prev"
-                                        CssClass="page-link bg-dark text-light border-secondary"> ◀
-                                    </asp:LinkButton>
-                                </li>
+                                        <!-- boton anterior -->
+                                        <asp:LinkButton
+                                            runat="server"
+                                            CommandName="Page"
+                                            CommandArgument="Prev"
+                                            CssClass="page-link bg-dark text-light border-secondary"> ◀
+                                        </asp:LinkButton>
+                                    </li>
 
-                                <!-- Indica página actual -->
-                                <li class="page-item disabled">
-                                    <span class="page-link bg-dark text-light border-secondary">
-                                        <!-- pagina actual = index+1 / paginas totales -->
-                                        <%# ((GridView)Container.NamingContainer).PageIndex + 1 %> /
+                                    <!-- Indica página actual -->
+                                    <li class="page-item disabled">
+                                        <span class="page-link bg-dark text-light border-secondary">
+                                            <!-- pagina actual = index+1 / paginas totales -->
+                                            <%# ((GridView)Container.NamingContainer).PageIndex + 1 %> /
                     <%# ((GridView)Container.NamingContainer).PageCount %>
-                                    </span>
-                                </li>
+                                        </span>
+                                    </li>
 
-                                <!-- validar si es la última página: disabled -->
-                                <li class='<%# ((GridView)Container.NamingContainer).PageIndex 
+                                    <!-- validar si es la última página: disabled -->
+                                    <li class='<%# ((GridView)Container.NamingContainer).PageIndex 
                         == ((GridView)Container.NamingContainer).PageCount - 1
                         ? "page-item disabled" 
                         : "page-item" %>'>
 
-                                    <!-- boton siguiente -->
-                                    <asp:LinkButton
-                                        runat="server"
-                                        CommandName="Page"
-                                        CommandArgument="Next"
-                                        CssClass="page-link bg-dark text-light border-secondary"> ▶
-                                    </asp:LinkButton>
-                                </li>
-                            </ul>
-                        </nav>
-                </PagerTemplate>
+                                        <!-- boton siguiente -->
+                                        <asp:LinkButton
+                                            runat="server"
+                                            CommandName="Page"
+                                            CommandArgument="Next"
+                                            CssClass="page-link bg-dark text-light border-secondary"> ▶
+                                        </asp:LinkButton>
+                                    </li>
+                                </ul>
+                            </nav>
+                    </PagerTemplate>
                 </asp:GridView>
                 <div class="d-flex justify-content-between mt-3">
                     <div>

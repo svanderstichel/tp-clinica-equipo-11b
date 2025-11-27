@@ -53,6 +53,11 @@ namespace negocio
 
             try
             {
+                if (ExisteObraSocial(nueva.Nombre, nueva.Cobertura))
+                {
+                    throw new Exception("Ya existe una obra social con ese nombre y cobertura.");
+                }
+
                 datos.SetearConsulta("INSERT INTO ObraSocial (Nombre, Descripcion, Cobertura,  Estado) VALUES (@Nombre, @Descripcion, @Cobertura, 1)");
                 datos.setearParametro("@Nombre", nueva.Nombre);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
@@ -219,6 +224,27 @@ namespace negocio
                 datos.CerrarConexion();
             }
 
+        }
+        public bool ExisteObraSocial(string nombre, string cobertura)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("SELECT 1 FROM ObraSocial WHERE Nombre = @Nombre AND Cobertura = @Cobertura");
+                datos.setearParametro("@Nombre", nombre);
+                datos.setearParametro("@Cobertura", cobertura);
+
+                datos.ejecutarLectura();
+                return datos.Lector.Read(); // Devuelve true si encontró un registro
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
         }
     }
 }

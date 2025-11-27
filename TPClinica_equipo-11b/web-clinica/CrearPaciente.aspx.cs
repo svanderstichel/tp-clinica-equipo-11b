@@ -15,7 +15,7 @@ namespace web_clinica
         public bool ConfirmaEliminacion { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        
+
         {
             if (Session["Usuario"] == null)
             {
@@ -31,7 +31,8 @@ namespace web_clinica
                 if (!IsPostBack)
                 {
                     ObraSocialNegocio negocio = new ObraSocialNegocio();
-                    List<ObraSocial> lista = negocio.ListarObrasSociales();
+                    List<ObraSocial> lista = negocio.ListarNombresObraSocial();
+                 
                     //cargo el desplegable desde db
                     ddlObraSocial.DataSource = lista;
                     ddlObraSocial.DataValueField = "Nombre";
@@ -80,8 +81,8 @@ namespace web_clinica
                         btnActivar.Visible = true;
                         btnInactivar.Visible = false;
                     }
-                
-            }
+
+                }
                 // Configuracion si un paciente se da de alta
                 /*Si del objeto Request estoy trayendo el id*/
                 Usuario usuario = (Usuario)Session["Usuario"];
@@ -146,38 +147,7 @@ namespace web_clinica
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Pacientes.aspx", false);
-
-
         }
-
-        //protected void btnEliminarPaciente_Click(object sender, EventArgs e)
-        //{
-        //    ConfirmaEliminacion = true;
-        //}
-
-        //protected void btnConfirmaEliminarPaciente_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (chkConfirmarEliminarPaciente.Checked)
-        //        {
-        //            PacienteNegocio negocio = new PacienteNegocio();
-
-        //            //recupero el id de la sesion
-        //            int id = int.Parse(Request.QueryString["idPaciente"].ToString());
-
-        //            negocio.EliminarLogico(id, false);
-
-        //            Response.Redirect("Pacientes.aspx", false);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        Session.Add("error", ex);
-        //        Response.Redirect("Error.aspx");
-        //    }
-        //}
 
         protected void ddlObraSocial_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -209,11 +179,11 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
         }
-        
+
 
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
@@ -226,9 +196,9 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
-                
+
             }
 
         }

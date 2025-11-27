@@ -13,18 +13,26 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null)
+            try
             {
-                Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
-                Response.Redirect("Error.aspx", false);
-                return;
+                if (Session["Usuario"] == null)
+                {
+                    Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                    Response.Redirect("Error.aspx", false);
+                    return;
+                }
+                if (!IsPostBack)
+                {
+                    ObraSocialNegocio negocio = new ObraSocialNegocio();
+                    Session.Add("listaOS", negocio.ListarObrasSociales());
+                    dgvObraSocial.DataSource = Session["listaOS"];
+                    dgvObraSocial.DataBind();
+                }
             }
-            if (!IsPostBack)
+            catch (Exception ex)
             {
-                ObraSocialNegocio negocio = new ObraSocialNegocio();
-                Session.Add("listaOS", negocio.ListarObrasSociales());
-                dgvObraSocial.DataSource = Session["listaOS"];
-                dgvObraSocial.DataBind();
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
