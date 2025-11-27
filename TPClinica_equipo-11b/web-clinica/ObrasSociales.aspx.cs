@@ -1,4 +1,5 @@
-﻿using negocio;
+﻿using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace web_clinica
             if (!IsPostBack)
             {
                 ObraSocialNegocio negocio = new ObraSocialNegocio();
-                dgvObraSocial.DataSource = negocio.ListarObrasSociales();
+                Session.Add("listaOS", negocio.ListarObrasSociales());
+                dgvObraSocial.DataSource = Session["listaOS"];
                 dgvObraSocial.DataBind();
             }
         }
@@ -49,6 +51,14 @@ namespace web_clinica
             ObraSocialNegocio negocio = new ObraSocialNegocio();
             dgvObraSocial.PageIndex = e.NewPageIndex;
             dgvObraSocial.DataSource = negocio.ListarObrasSociales();
+            dgvObraSocial.DataBind();
+        }
+
+        protected void txtFiltroOS_TextChanged(object sender, EventArgs e)
+        {
+            List<ObraSocial> lista = (List<ObraSocial>)Session["listaOS"];
+            List<ObraSocial> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltroOS.Text.ToUpper()));
+            dgvObraSocial.DataSource = listaFiltrada;
             dgvObraSocial.DataBind();
         }
     }
