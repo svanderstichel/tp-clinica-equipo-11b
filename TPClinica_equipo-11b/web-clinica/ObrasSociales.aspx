@@ -40,6 +40,14 @@
     <hr />
     <div class="row">
         <div class="col">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <asp:Label Text="Filtrar" runat="server" />
+                        <asp:TextBox runat="server" ID="txtFiltroOS" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroOS_TextChanged" />
+                    </div>
+                </div>
+            </div>
             <asp:GridView runat="server" ID="dgvObraSocial" DataKeyNames="IdObraSocial"
                 OnSelectedIndexChanged="dgvObraSocial_SelectedIndexChanged"
                 OnPageIndexChanging="dgvObraSocial_PageIndexChanging" AllowPaging="true" PageSize="5"
