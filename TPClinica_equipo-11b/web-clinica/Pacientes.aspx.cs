@@ -86,7 +86,6 @@ namespace web_clinica
             dgvPaciente.DataSource = listaFiltrada;
             dgvPaciente.DataBind();
         }
-
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
@@ -104,6 +103,20 @@ namespace web_clinica
             {
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx", false);
+            }
+        }
+        protected void dgvPaciente_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //evalua el valor del campo Estado, si es true asigna un badge success si  no asigna el badge danger.
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Estado"));
+                Literal lt = (Literal)e.Row.FindControl("ltEstado");
+
+                if (activo)
+                    lt.Text = "<span class='badge bg-success'>Activo</span>";
+                else
+                    lt.Text = "<span class='badge bg-danger'>Inactivo</span>";
             }
         }
     }

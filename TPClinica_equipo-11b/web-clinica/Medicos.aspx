@@ -55,7 +55,8 @@
                 <asp:GridView runat="server" ID="dgvMedicos"
                     CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
                     DataKeyNames="IdMedico" OnRowCommand="dgvMedicos_RowCommand"
-                    OnPageIndexChanging="dgvMedicos_PageIndexChanging1" AllowPaging="true" PageSize="8">
+                    OnPageIndexChanging="dgvMedicos_PageIndexChanging1" AllowPaging="true" PageSize="8"
+                    OnRowDataBound="dgvMedicos_RowDataBound">
 
                     <Columns>
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -82,21 +83,22 @@
                             ItemStyle-HorizontalAlign="Center"
                             HeaderStyle-HorizontalAlign="Center" />
 
+                        
+
+                        <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center">
+    <ItemTemplate>
+        <asp:Literal ID="ltEstado" runat="server"></asp:Literal>
+    </ItemTemplate>
+</asp:TemplateField>
                         <asp:ButtonField
-                            HeaderText="Datos"
-                            CommandName="Datos"
-                            Text="✍️"
-                            ButtonType="Button"
-                            ControlStyle-CssClass="btn btn-outline-info"
-                            ItemStyle-HorizontalAlign="Center"
-                            HeaderStyle-HorizontalAlign="Center" />
+    HeaderText="Modificar"
+    CommandName="Datos"
+    Text="✍️"
+    ButtonType="Button"
+    ControlStyle-CssClass="btn btn-outline-info"
+    ItemStyle-HorizontalAlign="Center"
+    HeaderStyle-HorizontalAlign="Center" />
 
-                        <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <asp:CheckBox runat="server" ID="chkEstado" Enabled="false" Checked='<%# Eval("Estado") %>' />
-
-                            </ItemTemplate>
-                        </asp:TemplateField>
 
 
 

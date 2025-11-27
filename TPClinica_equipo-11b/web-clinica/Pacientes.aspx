@@ -72,7 +72,8 @@
                 <asp:GridView runat="server" ID="dgvPaciente" DataKeyNames="IdPaciente"
                     OnSelectedIndexChanged="dgvPaciente_SelectedIndexChanged"
                     OnPageIndexChanging="dgvPaciente_PageIndexChanging" AllowPaging="true" PageSize="10"
-                    CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+                    CssClass="table table-dark table-bordered" AutoGenerateColumns="false"
+                    OnRowDataBound="dgvPaciente_RowDataBound">
                     <Columns>
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                         <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
@@ -83,13 +84,13 @@
                             HtmlEncode="false" />
                         <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
                         <asp:BoundField HeaderText="Cobertura" DataField="ObraSocial.Cobertura" />
-                        <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <asp:CheckBox Enabled="false" Checked='<%# Eval("Estado") %>' runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Center">
+    <ItemTemplate>
+        <asp:Literal ID="ltEstado" runat="server"></asp:Literal>
+    </ItemTemplate>
+</asp:TemplateField>
                         <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" /> La baja lógica no esta implementada--%>
-                        <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
+                        <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Modificar" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                     </Columns>
                                     <PagerTemplate>
                     <nav>
