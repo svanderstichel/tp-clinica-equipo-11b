@@ -17,7 +17,7 @@ namespace negocio
             try
             {
                 datos.setearParametro("@IdPaciente", idPaciente);
-                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS\r\n" +
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, p.Estado, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS\r\n" +
                                  " FROM Paciente as p " +
                                  "INNER JOIN ObraSocial as os  ON p.IdObraSocial = os.IdObraSocial WHERE IdPaciente = @IdPaciente");
                 datos.ejecutarLectura();
@@ -35,6 +35,7 @@ namespace negocio
                     paciente.ObraSocial.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     paciente.ObraSocial.Cobertura = datos.Lector["CoberturaOS"].ToString();
                     paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+                    paciente.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
 
                     return paciente;
                 }
@@ -94,15 +95,15 @@ namespace negocio
             List<Paciente> lista = new List<Paciente>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS" +
+            datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, p.Estado, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS" +
                                  " FROM Paciente as p " +
-                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE p.Estado = 1");
+                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial ");
             if (id != "")
             {
-                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS " +
+                datos.SetearConsulta("SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, p.Estado, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS " +
                                  " FROM Paciente as p " +
                                  "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial " +
-                                 "WHERE p.Estado = 1 and p.IdPaciente =  " + id);
+                                 "WHERE  p.IdPaciente =  " + id);
             }
             try
             {
@@ -122,6 +123,7 @@ namespace negocio
                     paciente.ObraSocial.IdObraSocial = (int)datos.Lector["IdObraSocial"];
                     paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
                     paciente.ObraSocial.Cobertura = datos.Lector["CoberturaOS"].ToString();
+                    paciente.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
 
                     lista.Add(paciente);
                 }

@@ -9,7 +9,8 @@ using System.Web.UI.WebControls;
 
 namespace web_clinica
 {
-    public partial class ObrasSociales : System.Web.UI.Page
+    //  public partial class ObrasSociales : System.Web.UI.Page
+    public partial class CrearObraSocial : System.Web.UI.Page
     {
         public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -34,7 +35,26 @@ namespace web_clinica
                 txtNombre.Text = seleccionada.Nombre;
                 txtDescripcion.Text = seleccionada.Descripcion;
                 txtCobertura.Text = seleccionada.Cobertura;
+
+
+                if (seleccionada.Estado)
+                {
+                    btnInactivar.Visible = true;   // Está activa puedo desactivarla
+                    btnActivar.Visible = false;
+                }
+                else
+                {
+                    btnActivar.Visible = true;     // Está inactiva puedo activarla
+                    btnInactivar.Visible = false;
+                }
             }
+            else
+            {
+                //si es alta
+                btnActivar.Visible = false;
+                btnInactivar.Visible = false;
+            }
+
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -64,7 +84,7 @@ namespace web_clinica
             catch (Exception ex)
             {
                 Session.Add("Error", ex);
-                throw;
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -73,33 +93,66 @@ namespace web_clinica
             Response.Redirect("ObrasSociales.aspx", false);
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            ConfirmaEliminacion = true;
-        }
+        //protected void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    ConfirmaEliminacion = true;
+        //}
 
-        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        //protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (chkConfirmarEliminacion.Checked)
+        //        {
+        //            ObraSocialNegocio negocio = new ObraSocialNegocio();
+
+        //            //recupero el id de la sesion
+        //            int id = int.Parse(Request.QueryString["id"].ToString());
+
+        //            negocio.EliminarLogico(id);
+
+        //            //actualizo la sesion
+        //        //    Session["listaOS"] = negocio.ListarObrasSociales();
+        //            Response.Redirect("ObrasSociales.aspx", false);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Session.Add("error", ex);
+        //    }
+        //}
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (chkConfirmarEliminacion.Checked)
-                {
-                    ObraSocialNegocio negocio = new ObraSocialNegocio();
-
-                    //recupero el id de la sesion
-                    int id = int.Parse(Request.QueryString["id"].ToString());
-
-                    negocio.EliminarLogico(id);
-
-                    //actualizo la sesion
-                //    Session["listaOS"] = negocio.ListarObrasSociales();
-                    Response.Redirect("ObrasSociales.aspx", false);
-                }
+                ObraSocialNegocio negocio = new ObraSocialNegocio();
+                int id = int.Parse(Request.QueryString["id"]);
+                negocio.EliminarLogico(id, false);
+                Response.Redirect("ObrasSociales.aspx", false);
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+
+        }
+
+        protected void btnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ObraSocialNegocio negocio = new ObraSocialNegocio();
+                int id = int.Parse(Request.QueryString["id"]);
+                negocio.EliminarLogico(id, true);
+                Response.Redirect("ObrasSociales.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
             }
         }
     }

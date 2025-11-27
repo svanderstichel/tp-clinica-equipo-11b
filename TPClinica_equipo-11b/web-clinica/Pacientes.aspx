@@ -1,34 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Pacientes.aspx.cs" Inherits="web_clinica.Pacientes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <style>
-    body {
-        position: relative; /*  posicionar el elemento */
-        min-height: 25vh; /* Asegura que cubra al menos toda la ventana */
-    }
-
-        /* Crear la capa de fondo animada usando ::before */
-        body::before {
-            content: ''; /* Obligatorio para pseudo-elementos */
-            position: fixed; /* Lo fija en el viewport */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Mueve la capa detrás de todo el contenido */
-            /* Estilos del GIF y Opacidad */
-            background-image: url('https://media.istockphoto.com/id/2205410030/pt/foto/smiling-woman-using-cell-phone-while-waiting-for-doctors-appointment-at-the-clinic.jpg?s=612x612&w=0&k=20&c=kn4ez0mMVbxzjG4riqhiRRI5zhq5s3FDHA9_pZFSPFQ=');
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            background-size: cover;
-            opacity: 0.99;
+    <style>
+        body {
+            position: relative; /*  posicionar el elemento */
+            min-height: 25vh; /* Asegura que cubra al menos toda la ventana */
         }
 
-    /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
-    .table-dark {
-        background-color: rgba(33, 37, 41, 0.9);
-    }
-</style>
+            /* Crear la capa de fondo animada usando ::before */
+            body::before {
+                content: ''; /* Obligatorio para pseudo-elementos */
+                position: fixed; /* Lo fija en el viewport */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1; /* Mueve la capa detrás de todo el contenido */
+                /* Estilos del GIF y Opacidad */
+                background-image: url('https://media.istockphoto.com/id/2205410030/pt/foto/smiling-woman-using-cell-phone-while-waiting-for-doctors-appointment-at-the-clinic.jpg?s=612x612&w=0&k=20&c=kn4ez0mMVbxzjG4riqhiRRI5zhq5s3FDHA9_pZFSPFQ=');
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                background-size: cover;
+                opacity: 0.99;
+            }
+
+        /* Si la tabla oscura se ve afectada, le damos un fondo sólido */
+        .table-dark {
+            background-color: rgba(33, 37, 41, 0.9);
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -51,6 +51,11 @@
                         <asp:BoundField HeaderText="Fecha de Naciemiento" DataField="FechaNacimiento" />
                         <asp:BoundField HeaderText="Obra Social" DataField="ObraSocial.Nombre" />
                         <asp:BoundField HeaderText="Cobertura" DataField="ObraSocial.Cobertura" />
+                        <asp:TemplateField HeaderText="Activo" ItemStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <asp:CheckBox Enabled="false" Checked='<%# Eval("Estado") %>' runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <%--<asp:CheckBoxField HeaderText ="Estado" DataField="Estado" /> La baja lógica no esta implementada--%>
                         <asp:CommandField ShowSelectButton="true" SelectText="✍️" HeaderText="Accion" />
                     </Columns>
@@ -66,7 +71,7 @@
                             if (usuario.Tipo == dominio.TipoUsuario.Recepcionista || usuario.Tipo == dominio.TipoUsuario.Administrador)
                             { %>
                     <div>
-                        <asp:Button runat="server" ID="btnObraSocial" Text="Administrar obras sociales" CssClass="btn btn-success" OnClick="btnObraSocial_Click"/>
+                        <asp:Button runat="server" ID="btnObraSocial" Text="Administrar obras sociales" CssClass="btn btn-success" OnClick="btnObraSocial_Click" />
                     </div>
                     <% }
                         } %>

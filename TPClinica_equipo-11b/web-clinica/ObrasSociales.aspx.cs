@@ -41,7 +41,7 @@ namespace web_clinica
             //guardo el id seleccionado
             var id = dgvObraSocial.SelectedDataKey.Value.ToString();
             //envio el id como parametro en la URL
-            Response.Redirect("CrearObraSocial.aspx?id=" + id);
+            Response.Redirect("CrearObraSocial.aspx?id=" + id, false);
         }
 
         protected void dgvObraSocial_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using dominio;
-using negocio;
+using static System.Collections.Specialized.BitVector32;
 
 namespace web_clinica
 {
@@ -36,6 +37,8 @@ namespace web_clinica
                     ddlObraSocial.DataValueField = "Nombre";
                     ddlObraSocial.DataTextField = "Nombre";
                     ddlObraSocial.DataBind();
+
+
                 }
 
                 // Configuracion si estamos modificando
@@ -53,8 +56,32 @@ namespace web_clinica
                     txbTelefono.Text = seleccionado.Telefono.ToString();
                     txbEmail.Text = seleccionado.Email;
                     txtFechaNacimiento.Text = seleccionado.FechaNacimiento.ToString("yyyy-MM-dd");
-                    ddlObraSocial.SelectedValue = seleccionado.ObraSocial.IdObraSocial.ToString();
-                }
+                    // ddlObraSocial.SelectedValue = seleccionado.ObraSocial.IdObraSocial.ToString();
+                    ddlObraSocial.SelectedValue = seleccionado.ObraSocial.Nombre;
+
+                    ObraSocialNegocio negocioOS = new ObraSocialNegocio();
+                    var listaCobertura = negocioOS.ListarCoberturas(seleccionado.ObraSocial.Nombre);
+
+                    ddlCobertura.DataSource = listaCobertura;
+                    ddlCobertura.DataValueField = "IdObraSocial";
+                    ddlCobertura.DataTextField = "Cobertura";
+                    ddlCobertura.DataBind();
+
+                    ddlCobertura.SelectedValue = seleccionado.ObraSocial.IdObraSocial.ToString();
+
+
+                    if (seleccionado.Estado)
+                    {
+                        btnInactivar.Visible = true;
+                        btnActivar.Visible = false;
+                    }
+                    else
+                    {
+                        btnActivar.Visible = true;
+                        btnInactivar.Visible = false;
+                    }
+                
+            }
                 // Configuracion si un paciente se da de alta
                 /*Si del objeto Request estoy trayendo el id*/
                 Usuario usuario = (Usuario)Session["Usuario"];
@@ -123,34 +150,34 @@ namespace web_clinica
 
         }
 
-        protected void btnEliminarPaciente_Click(object sender, EventArgs e)
-        {
-            ConfirmaEliminacion = true;
-        }
+        //protected void btnEliminarPaciente_Click(object sender, EventArgs e)
+        //{
+        //    ConfirmaEliminacion = true;
+        //}
 
-        protected void btnConfirmaEliminarPaciente_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (chkConfirmarEliminarPaciente.Checked)
-                {
-                    PacienteNegocio negocio = new PacienteNegocio();
+        //protected void btnConfirmaEliminarPaciente_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (chkConfirmarEliminarPaciente.Checked)
+        //        {
+        //            PacienteNegocio negocio = new PacienteNegocio();
 
-                    //recupero el id de la sesion
-                    int id = int.Parse(Request.QueryString["idPaciente"].ToString());
+        //            //recupero el id de la sesion
+        //            int id = int.Parse(Request.QueryString["idPaciente"].ToString());
 
-                    negocio.Eliminar(id);
+        //            negocio.EliminarLogico(id, false);
 
-                    Response.Redirect("Pacientes.aspx", false);
-                }
-            }
-            catch (Exception ex)
-            {
+        //            Response.Redirect("Pacientes.aspx", false);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                Session.Add("error", ex);
-                Response.Redirect("Error.aspx");
-            }
-        }
+        //        Session.Add("error", ex);
+        //        Response.Redirect("Error.aspx");
+        //    }
+        //}
 
         protected void ddlObraSocial_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -165,5 +192,47 @@ namespace web_clinica
             ddlCobertura.DataTextField = "Cobertura";
             ddlCobertura.DataBind();
         }
+
+        protected void btnCancelar_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PacienteNegocio negocio = new PacienteNegocio();
+                int id = int.Parse(Request.QueryString["idPaciente"]);
+                negocio.EliminarLogico(id, true);
+                Response.Redirect("Pacientes.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+        }
+        
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PacienteNegocio negocio = new PacienteNegocio();
+                int id = int.Parse(Request.QueryString["idPaciente"]);
+                negocio.EliminarLogico(id, false);
+                Response.Redirect("Pacientes.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+                
+            }
+
+        }
     }
 }
+
+

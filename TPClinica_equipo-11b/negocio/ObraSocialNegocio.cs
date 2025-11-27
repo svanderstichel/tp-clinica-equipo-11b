@@ -15,10 +15,10 @@ namespace negocio
             List<ObraSocial> lista = new List<ObraSocial>();
             AccesoDatos datos = new AccesoDatos();
 
-            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial WHERE Estado = 1");
+            datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial");
             //Si el ID no esta vacio, me traigo solamemte la os que mande por parametro
             if (id != "")
-                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial where Estado = 1 and IdObraSocial = " + id);
+                datos.SetearConsulta("SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial where IdObraSocial = " + id);
 
             try
             {
@@ -31,7 +31,7 @@ namespace negocio
                     obra.Nombre = Convert.ToString(datos.Lector["Nombre"]);
                     obra.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
                     obra.Cobertura = datos.Lector["Cobertura"].ToString();
-                    //  obra.Estado = bool.Parse(datos.Lector["Estado"].ToString());
+                    obra.Estado = bool.Parse(datos.Lector["Estado"].ToString());
 
                     lista.Add(obra);
                 }
