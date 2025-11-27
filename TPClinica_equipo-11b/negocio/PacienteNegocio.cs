@@ -414,5 +414,62 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+        public List<Paciente> filtrar(string apellido, string estado)
+        {
+            List<Paciente> lista = new List<Paciente>();
+            AccesoDatos datos = new AccesoDatos();
+            string consulta = "SELECT p.IdPaciente, p.Nombre, p.Apellido, p.Email, p.DNI, p.Telefono, p.FechaNacimiento, p.Estado, os.IdObraSocial, os.Nombre as NombreOS, os.Cobertura AS CoberturaOS " +
+                                 " FROM Paciente as p " +
+                                 "INNER JOIN ObraSocial as os ON p.IdObraSocial = os.IdObraSocial WHERE 1 = 1";
+
+            if(apellido != "")
+            {
+                consulta += " AND p.Apellido LIKE @apellido ";
+                datos.setearParametro("@apellido", "%" + apellido + "%");
+            }
+
+
+                if(estado == "Activo")
+                {
+                    consulta += " AND p.Estado = 1";
+                }
+                else if(estado == "Inactivo"){
+                    consulta += " AND p.Estado = 0";
+                 }
+            try { 
+            datos.SetearConsulta(consulta);
+                   datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Paciente paciente = new Paciente();
+                    paciente.IdPaciente = (int)datos.Lector["IdPaciente"];
+                    paciente.Nombre = Convert.ToString(datos.Lector["Nombre"]);
+                    paciente.Apellido = Convert.ToString(datos.Lector["Apellido"]);
+                    paciente.Email = Convert.ToString(datos.Lector["Email"]);
+                    paciente.DNI = Convert.ToString(datos.Lector["DNI"]);
+                    paciente.Telefono = Convert.ToString(datos.Lector["Telefono"]);
+                    paciente.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    paciente.ObraSocial = new ObraSocial();
+                    paciente.ObraSocial.IdObraSocial = (int)datos.Lector["IdObraSocial"];
+                    paciente.ObraSocial.Nombre = Convert.ToString(datos.Lector["NombreOS"]);
+                    paciente.ObraSocial.Cobertura = datos.Lector["CoberturaOS"].ToString();
+                    paciente.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
+
+                    lista.Add(paciente);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+
+            }
+        }
     }
 }
