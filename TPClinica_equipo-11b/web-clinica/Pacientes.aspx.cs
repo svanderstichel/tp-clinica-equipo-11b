@@ -14,34 +14,42 @@ namespace web_clinica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //mostrar el dgv
-            if (!IsPostBack)
+            try
             {
-                if (Session["Usuario"] == null)
+                //mostrar el dgv
+                if (!IsPostBack)
                 {
-                    Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
-                    Response.Redirect("Error.aspx", false);
-                    return;
+                    if (Session["Usuario"] == null)
+                    {
+                        Session.Add("Error", "No se ha logeado correctamente, no tiene permiso para ingresar.");
+                        Response.Redirect("Error.aspx", false);
+                        return;
+                    }
+
+
+
+                    Usuario usuario = (Usuario)Session["Usuario"];
+                    PacienteNegocio negocio = new PacienteNegocio();
+
+                    if (usuario.Tipo == TipoUsuario.Paciente && negocio.LeerPaciente(usuario.Email))
+                    {
+                        dgvPaciente.DataSource = negocio.ListarUsuarioTipoPaciente(usuario.Email);
+                        dgvPaciente.DataBind();
+                    }
+                    if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
+                    {
+                        // dgvPaciente.DataSource = negocio.ListarPacientes();
+                        ///
+                        Session.Add("listaPacientes", negocio.ListarPacientes());
+                        dgvPaciente.DataSource = Session["listaPacientes"];
+                        dgvPaciente.DataBind();
+                    }
                 }
-
-
-
-                Usuario usuario = (Usuario)Session["Usuario"];
-                PacienteNegocio negocio = new PacienteNegocio();
-
-                if (usuario.Tipo == TipoUsuario.Paciente && negocio.LeerPaciente(usuario.Email))
-                {
-                    dgvPaciente.DataSource = negocio.ListarUsuarioTipoPaciente(usuario.Email);
-                    dgvPaciente.DataBind();
-                }   
-                if (usuario.Tipo == TipoUsuario.Administrador || usuario.Tipo == TipoUsuario.Recepcionista)
-                {
-                    // dgvPaciente.DataSource = negocio.ListarPacientes();
-                    ///
-                    Session.Add("listaPacientes", negocio.ListarPacientes());
-                    dgvPaciente.DataSource = Session["listaPacientes"];
-                    dgvPaciente.DataBind();
-                }
+            }
+            catch(Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -101,7 +109,7 @@ namespace web_clinica
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }
