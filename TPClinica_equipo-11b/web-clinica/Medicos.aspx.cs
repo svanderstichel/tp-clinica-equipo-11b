@@ -23,9 +23,13 @@ namespace web_clinica
                 return;
             }
             MedicoNegocio negocio = new MedicoNegocio();
-            Session.Add("Lista medicos", negocio.ListarMedicos());
-            dgvMedicos.DataSource = Session["Lista medicos"];
-            dgvMedicos.DataBind();
+
+            if (!IsPostBack)
+            {
+                Session.Add("Lista medicos", negocio.ListarMedicoDos());
+                dgvMedicos.DataSource = Session["Lista medicos"];
+                dgvMedicos.DataBind();
+            }
         }
 
         protected void btnAgregarMedicos_Click(object sender, EventArgs e)
