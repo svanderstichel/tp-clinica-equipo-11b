@@ -142,11 +142,20 @@
                             </nav>
                     </PagerTemplate>
                 </asp:GridView>
+                <% if (Session["Usuario"] != null)
+                    {
+                        dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];
+                        negocio.PacienteNegocio datos = new negocio.PacienteNegocio();
+                        if (usuario.Tipo == dominio.TipoUsuario.Paciente && datos.LeerPaciente(usuario.Email))
+                        {%>
+                <%}
+                    else {  %>
                 <div class="d-flex justify-content-between mt-3">
                     <div>
                         <asp:Button runat="server" ID="btnAgregarPaciente" Text="Agregar" CssClass="btn btn-primary me-2" OnClick="btnAgregarPaciente_Click" />
                         <asp:Button runat="server" ID="btnRegresar" Text="Cancelar" CssClass="btn btn-secondary" OnClick="btnRegresar_Click" />
                     </div>
+                    <% } } %>
                     <% if (Session["Usuario"] != null)
                         {
                             dominio.Usuario usuario = (dominio.Usuario)Session["Usuario"];

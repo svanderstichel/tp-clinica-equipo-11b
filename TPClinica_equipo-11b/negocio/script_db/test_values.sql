@@ -16,7 +16,7 @@ VALUES
 ('IOMA', 'Instituto Obra Médico Asistencial', 'Plan A', 1),
 ('IOMA', 'Instituto Obra Médico Asistencial', 'Plan B', 1),
 ('PAMI', 'Programa de Atención Médica Integral', 'Afiliados mayores', 1),
-('Particular', 'Particular', 'No aplica', 1);
+('Particular', 'El paciente no tiene obra social', 'No aplica', 1);
 
 ---------------------------------------------------------
 -- ESPECIALIDADES
