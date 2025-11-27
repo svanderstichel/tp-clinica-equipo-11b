@@ -6,14 +6,16 @@ GO
 ---------------------------------------------------------
 INSERT INTO ObraSocial (Nombre, Descripcion, Cobertura, Estado)
 VALUES
-('OSDE', 'Plan 310', 'Alta', 1),
-('Swiss Medical', 'Plan SMG20', 'Media', 1),
-('PAMI', 'Afiliados mayores', 'Baja', 1),
-('Medifé', 'Plan Oro', 'Alta', 1),
-('Galeno', 'Plan 220', 'Media', 1),
-('IOMA', 'Instituto Obra Medica', 'Baja', 1),
-('Sancor Salud', 'Plan 3000', 'Media', 1),
-('Federada', 'Plan Premium', 'Alta', 1);
+('Swiss Medical', 'Cobertura médica privada', 'Plan SMG20', 1),
+('Swiss Medical', 'Cobertura médica privada', 'Plan SMG30', 1),
+('Medifé', 'Medicina prepaga nacional', 'Plan Plata', 1),
+('Medifé', 'Medicina prepaga nacional', 'Plan Oro', 1),
+('Galeno', 'Cobertura médica integral', 'Plan 220', 1),
+('Galeno', 'Cobertura médica integral', 'Plan 330', 1),
+('OSPJN', 'Obra social del Poder Judicial', 'Plan Básico', 1),
+('IOMA', 'Instituto Obra Médico Asistencial', 'Plan A', 1),
+('IOMA', 'Instituto Obra Médico Asistencial', 'Plan B', 1),
+('PAMI', 'Programa de Atención Médica Integral', 'Afiliados mayores', 1);
 
 ---------------------------------------------------------
 -- ESPECIALIDADES
@@ -37,6 +39,7 @@ VALUES
 INSERT INTO Medico
 (Nombre, Apellido, Matricula, Email, Telefono, DiasLaborales, HoraEntrada, HoraSalida, Estado)
 VALUES
+('AdminMedico', 'Test', 'MAT-999', 'admin@gmail.com', '2236001888', '[1,2,3,4,5]', '08:00', '14:00', 1),
 ('Juan', 'Pérez', 'MAT-001', 'jperez@clinica.com', '2235123456', '[1,2,3,4,5]', '08:00', '14:00', 1),
 ('María', 'García', 'MAT-002', 'mgarcia@clinica.com', '2235987654', '[1,3,5]', '10:00', '16:00', 1),
 ('Carlos', 'López', 'MAT-003', 'clopez@clinica.com', '2235543210', '[2,4]', '09:00', '13:00', 1),
@@ -64,6 +67,7 @@ VALUES
 ---------------------------------------------------------
 INSERT INTO Paciente (Nombre, Apellido, Email, DNI, Telefono, FechaNacimiento, IdObraSocial, Estado)
 VALUES
+('AdminPaciente', 'Test', 'admin@gmail.com', '50000111', '2236001999', '1990-01-01', 1, 1),
 ('Santiago','Vander','sv1@mail.com','40111221','2236001001','1995-03-10',1,1),
 ('Lucía','Martínez','lm1@mail.com','38999441','2236001002','1988-07-21',2,1),
 ('Pablo','Ramírez','pr@mail.com','35555112','2236001003','1990-11-02',3,1),
@@ -83,7 +87,17 @@ VALUES
 ('Franco','Alvarez','fa@mail.com','37011222','2236001017','1993-12-31',1,1),
 ('Josefina','Roldán','jr@mail.com','41112222','2236001018','2002-05-15',2,1),
 ('Milena','Suarez','ms@mail.com','39999111','2236001019','1990-09-09',3,1),
-('Agustín','Bravo','ab@mail.com','35111222','2236001020','1996-08-18',4,1);
+('Agustín','Bravo','ab@mail.com','35111222','2236001020','1996-08-18',4,1),
+('Valeria','Dominguez','vd@mail.com','33222444','2236001021','1987-04-22',5,1),
+('Martín','Cano','mcano@mail.com','36555111','2236001022','1992-08-09',6,1),
+('Belén','Soria','bsoria@mail.com','40111333','2236001023','1999-01-19',7,1),
+('Gonzalo','Montes','gmontes@mail.com','38911222','2236001024','1985-03-14',8,1),
+('Nicolás','Bustos','nbustos@mail.com','37777888','2236001025','1994-06-27',1,1),
+('Carolina','De Luca','cdl@mail.com','31111444','2236001026','2001-02-02',2,1),
+('Ramiro','Ferreyra','rferreyra@mail.com','35555666','2236001027','1990-09-20',3,1),
+('Ailén','Sosa','asosa@mail.com','32222555','2236001028','1996-11-11',4,1),
+('Emanuel','Vera','evera@mail.com','34444333','2236001029','1983-10-30',5,1),
+('Julieta','Funes','jfunes@mail.com','40222111','2236001030','1998-08-01',6,1);
 
 ---------------------------------------------------------
 -- TURNOS (40 registros)
@@ -130,7 +144,27 @@ VALUES
 (17,8,9,'2025-03-21','12:00',1,NULL),
 (18,7,8,'2025-03-21','13:00',1,NULL),
 (19,6,7,'2025-03-21','14:00',5,'Finalizado'),
-(20,5,1,'2025-03-21','15:00',1,NULL);
+(20,5,1,'2025-03-21','15:00',1,NULL),
+(21,3,3,'2025-03-22','09:00',1,NULL),
+(22,4,4,'2025-03-22','10:15',5,'Cerrado'),
+(23,5,1,'2025-03-22','11:30',3,'Cancelado'),
+(24,6,7,'2025-03-22','12:45',1,NULL),
+(25,7,8,'2025-03-23','08:00',1,NULL),
+(26,8,9,'2025-03-23','08:45',4,'Ausente'),
+(27,9,10,'2025-03-23','09:30',1,NULL),
+(28,10,6,'2025-03-23','10:15',2,'Reprogramado por paciente'),
+(29,11,4,'2025-03-24','09:00',1,NULL),
+(30,12,7,'2025-03-24','10:00',5,'Finalizado'),
+(21,1,1,'2025-03-24','11:00',1,NULL),
+(22,2,2,'2025-03-24','12:00',1,NULL),
+(23,3,3,'2025-03-25','09:00',3,'Cancelado'),
+(24,4,4,'2025-03-25','10:30',1,NULL),
+(25,5,1,'2025-03-25','11:15',1,NULL),
+(26,6,7,'2025-03-25','12:00',4,'Ausente'),
+(27,7,8,'2025-03-26','08:30',1,NULL),
+(28,8,9,'2025-03-26','09:45',2,'Reprogramado'),
+(29,9,10,'2025-03-26','11:00',1,NULL),
+(30,10,6,'2025-03-26','12:15',1,NULL);
 
 ---------------------------------------------------------
 -- USUARIOS (15 registros)
@@ -141,14 +175,12 @@ VALUES
 ('admin@clinica.com','Admin','Root','admin123',1),
 ('recepcion1@clinica.com','Laura','Ríos','r1',2),
 ('recepcion2@clinica.com','Marcos','Bello','r2',2),
-
 ('jperez@clinica.com','Juan','Pérez','m1',3),
 ('mgarcia@clinica.com','María','García','m2',3),
 ('clopez@clinica.com','Carlos','López','m3',3),
 ('atorres@clinica.com','Ana','Torres','m4',3),
 ('jmena@clinica.com','Javier','Mena','m5',3),
-
-('sv1@mail.com','Santiago','Vander','p1',4),
+('admin@gmail.com','Santiago','Vanderstichel','admin',1),
 ('lm1@mail.com','Lucía','Martínez','p2',4),
 ('pr@mail.com','Pablo','Ramírez','p3',4),
 ('md@mail.com','Marina','Díaz','p4',4),
