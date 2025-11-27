@@ -81,6 +81,23 @@ namespace web_clinica
             dgvEspecialidad.DataSource = listaFiltrar;
             dgvEspecialidad.DataBind();
         }
+        protected void dgvEspecialidades_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Estado"));
+
+                Literal lt = (Literal)e.Row.FindControl("ltEstadoEspecialidad");
+
+                if (lt != null)
+                {
+                    lt.Text = activo
+                        ? "<span class='badge bg-success'>Activo</span>"
+                        : "<span class='badge bg-danger'>Inactivo</span>";
+                }
+            }
+        }
+
     }
 }
 

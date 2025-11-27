@@ -36,7 +36,7 @@
             <div class="py-4 mb-3 bg-dark text-light rounded shadow text-center">
     <h2 class="fw-bold"> Panel de turnos 📅</h2>
 </div>
-            <asp:GridView ID="dgvTurnos" OnRowDeleting="dgvTurnos_RowDeleting" OnSelectedIndexChanged="dgvTurnos_SelectedIndexChanged" DataKeyNames="Id" runat="server" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvTurnos_PageIndexChanging" OnRowDataBound="dgvTurnos_RowDataBound">
+            <asp:GridView ID="dgvTurnos" OnRowDeleting="dgvTurnos_RowDeleting" OnSelectedIndexChanged="dgvTurnos_SelectedIndexChanged" DataKeyNames="Id" runat="server" CssClass="table table-dark table-bordered" AutoGenerateColumns="false" AllowPaging="true" PageSize="7" OnPageIndexChanging="dgvTurnos_PageIndexChanging" OnRowDataBound="dgvTurnos_RowDataBound">
                 <Columns>
                     <asp:BoundField DataField="Estado" HeaderText="Estado" HtmlEncode="false" />
                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
@@ -132,7 +132,7 @@
 
         <div class="d-flex">
             <asp:Button ID="BtnLimpiarFiltro" runat="server" Text="Limpiar filtros"
-                CssClass="btn btn-outline-secondary me-2"
+                CssClass="btn btn-secondary me-2"
                 OnClick="BtnLimpiarFiltro_Click" />
             <asp:Button ID="BtnCrearTurno" runat="server" Text="Solicitar turno"
                 CssClass="btn btn-primary" OnClick="BtnCrearTurno_Click" />

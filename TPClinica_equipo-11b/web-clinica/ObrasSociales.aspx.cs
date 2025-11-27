@@ -61,5 +61,21 @@ namespace web_clinica
             dgvObraSocial.DataSource = listaFiltrada;
             dgvObraSocial.DataBind();
         }
+        protected void dgvObraSocial_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Estado"));
+
+                Literal lt = (Literal)e.Row.FindControl("ltEstado");
+                if (lt != null)
+                {
+                    lt.Text = activo
+                        ? "<span class='badge bg-success'>Activo</span>"
+                        : "<span class='badge bg-danger'>Inactivo</span>";
+                }
+            }
+        }
+
     }
 }
