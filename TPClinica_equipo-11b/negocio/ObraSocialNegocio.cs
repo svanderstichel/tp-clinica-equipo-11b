@@ -168,10 +168,60 @@ namespace negocio
             {
                 datos.CerrarConexion();
             }
-            }
         }
+
+        public List<ObraSocial> filtrar(string nombre, string estado)
+        {
+            List<ObraSocial> lista = new List<ObraSocial>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT IdObraSocial, Nombre, Descripcion, Cobertura, Estado FROM ObraSocial WHERE 1=1";
+
+                if (nombre != "")
+                {
+                    consulta += " AND Nombre LIKE @nombre";
+                    datos.setearParametro("@nombre", "%" + nombre + "%");
+
+                }
+
+                if (estado == "Activo")
+                {
+                    consulta += " AND Estado = 1";
+                }
+                if (estado == "Inactivo")
+                {
+                    consulta += " AND Estado = 0";
+                }
+
+                datos.SetearConsulta(consulta);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    ObraSocial os = new ObraSocial();
+                    os.IdObraSocial = (int)datos.Lector["IdObraSocial"];
+                    os.Nombre = datos.Lector["Nombre"].ToString();
+                    os.Descripcion = datos.Lector["Descripcion"].ToString();
+                    os.Cobertura = datos.Lector["Cobertura"].ToString();
+                    os.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
+
+                    lista.Add(os);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+    }
 }
 
 
-        
-    
+

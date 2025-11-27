@@ -77,5 +77,23 @@ namespace web_clinica
             }
         }
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ObraSocialNegocio negocio = new ObraSocialNegocio();
+                string nombre = txtFiltroOS.Text.Trim();
+                string estado = ddlEstado.SelectedValue;
+
+                dgvObraSocial.DataSource = negocio.filtrar(nombre, estado);
+                dgvObraSocial.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+
+        }
     }
 }
