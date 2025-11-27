@@ -17,7 +17,7 @@
              height: 100%;
              z-index: -1; /* Mueve la capa detrás de todo el contenido */
              /* Estilos del GIF y Opacidad */
-             background-image: url('https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TUVESUNPU3xlbnwwfHwwfHx8MA%3D%3D');
+             background-image: url('https://cdn.pixabay.com/photo/2021/10/11/17/37/doctor-6701410_640.jpg');
              background-repeat: no-repeat;
              background-position: center bottom;
              background-size: cover;

@@ -19,7 +19,7 @@
         z-index: -1; /* Mueve la capa detrás de todo el contenido */
 
         /* Estilos del GIF y Opacidad */
-        background-image: url('https://www.animaker.com/hub/wp-content/uploads/2022/10/Screenshot-2022-10-19-at-3.52.30-PM-751x450.png'); 
+        background-image: url('https://cdn.pixabay.com/photo/2024/07/08/16/28/ai-generated-8881549_640.jpg'); 
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: cover;

@@ -17,7 +17,7 @@
                 height: 100%;
                 z-index: -1; /* Mueve la capa detrás de todo el contenido */
                 /* Estilos del GIF y Opacidad */
-                background-image: url('https://media.istockphoto.com/id/2205410030/pt/foto/smiling-woman-using-cell-phone-while-waiting-for-doctors-appointment-at-the-clinic.jpg?s=612x612&w=0&k=20&c=kn4ez0mMVbxzjG4riqhiRRI5zhq5s3FDHA9_pZFSPFQ=');
+                background-image: url('https://cdn.pixabay.com/photo/2023/12/19/22/46/woman-8458561_640.jpg');
                 background-repeat: no-repeat;
                 background-position: center bottom;
                 background-size: cover;

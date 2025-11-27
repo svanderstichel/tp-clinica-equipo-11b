@@ -19,7 +19,7 @@
         z-index: -1; /* Mueve la capa detrás de todo el contenido */
 
         /* Estilos del GIF y Opacidad */
-        background-image: url('https://image.slidesdocs.com/responsive-images/background/back-to-school-reminder-extreme-close-up-of-3d-rendered-calendar-with-notable-red-marker-and-sign-powerpoint-background_23c4742734__960_540.jpg'); 
+        background-image: url('https://cdn.pixabay.com/photo/2024/09/16/08/57/ai-generated-9050757_640.jpg'); 
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: cover;
