@@ -77,6 +77,7 @@ namespace web_clinica
                     //Datos del turno (Fecha, Hora y Observaciones)
                     txtFechaTurno.Text = turno.Fecha.ToString("yyyy-MM-dd");
                     txtObservaciones.Text = turno.Observaciones;
+                    txtFechaTurno.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd")
 
                     //guardan en sesion los datos del turno a modificar
                     Session.Add("IdMedicoSeleccionado", turno.IdMedico);
